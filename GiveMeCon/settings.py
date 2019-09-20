@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'drf_yasg', # API 문서화
     'video', # video App
     'channel', # channel App
+    'word_count', # word_count App
 ]
 
 MIDDLEWARE = [
