@@ -136,6 +136,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Frontend
+frontend/node_modules
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
