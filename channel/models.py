@@ -6,3 +6,6 @@ class Channel(models.Model):
     keyword = models.CharField(max_length=30, null=True, blank=True)
     url = models.CharField(max_length=255, null=True, blank=True)
     subscribers = models.IntegerField()
+
+    def __str__(self):
+        return self.name 
