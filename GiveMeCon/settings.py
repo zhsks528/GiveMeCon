@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework', # djangorestframework
-    'video', # video App
     'drf_yasg', # API 문서화
+    'video', # video App
+    'channel', # channel App
 ]
 
 MIDDLEWARE = [
