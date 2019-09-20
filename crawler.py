@@ -6,7 +6,7 @@ import datetime
 import json
 import urllib.request
 import os, django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "chws.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GiveMeCon.settings")
 django.setup()
 
 from video.models import Video
