@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'video', # video App
     'channel', # channel App
     'word_count', # word_count App
+    'corsheaders', # CORS
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'GiveMeCon.urls'
@@ -130,3 +132,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS' : 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE' : 10
 } 
+
+CORS_ALLOW_CREDENTILS=True
+
+CORS_ORIGIN_ALLOW_ALL=True 
