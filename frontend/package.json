@@ -4,6 +4,10 @@
   "proxy": "http://127.0.0.1:8000",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.24",
+    "@fortawesome/free-brands-svg-icons": "^5.11.1",
+    "@fortawesome/free-solid-svg-icons": "^5.11.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "cross-env": "^6.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
