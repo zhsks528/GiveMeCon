@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import Logo from "components/asset/images/logo.png";
 
@@ -8,6 +9,9 @@ const HeaderWrapper = styled.div`
   align-items: center;
   height: 60px;
   background-color: white;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 `;
 
 const MainContainer = styled.div`
@@ -49,14 +53,17 @@ const ListItem = styled.li`
   padding: 0 20px;
   color: #6b6b6b;
   cursor: pointer;
+`;
 
+const LinkItem = styled(Link)`
+  color: #6b6b6b;
+  text-decoration : none;
   &:hover {
     color: #f7323f;
   }
-`;
-
+`
 const HeaderPresenter = () => {
-  const listItem = ["트렌드", "프로듀싱", "소개", "로그인"];
+  
   return (
     <HeaderWrapper>
       <MainContainer>
@@ -66,9 +73,26 @@ const HeaderPresenter = () => {
         </LogoContainer>
 
         <HeaderList>
-          {listItem.map(item => (
-            <ListItem>{item}</ListItem>
-          ))}
+            <ListItem>
+              <LinkItem to="/">
+                트렌드
+              </LinkItem>
+            </ListItem>
+            <ListItem>
+              <LinkItem to="/produce">
+                프로듀싱
+              </LinkItem>
+            </ListItem>
+            <ListItem>
+              <LinkItem to="/introduce">
+                소개
+              </LinkItem>
+            </ListItem>
+            <ListItem>
+              <LinkItem to="/login">
+                로그인
+              </LinkItem>
+            </ListItem>
         </HeaderList>
       </MainContainer>
     </HeaderWrapper>
