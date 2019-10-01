@@ -7,40 +7,29 @@ import {
   faHeart,
   faGift
 } from "@fortawesome/free-solid-svg-icons";
-
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import Header from "components/Header";
 
-const Wrapper = styled.div`
-  background: linear-gradient(to left, #8942a8, #ba382f);
+const IntroduceWrapper = styled.div`
+  width: 100%;
+`;
+
+const Introduce = styled.div`
   width: 100%;
   height: 100vh;
+  position: relative;
+  background: #f7323f;
+  margin-bottom: 40px;
 `;
 
-const Main = styled.div`
-  width: 1024px;
-  height: 100vh;
-  margin: 0 auto;
-`;
-const IntroHeader = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const MenuItem = styled.li`
-  display: inline-block;
-  padding: 40px 15px;
-  text-transform: uppercase;
-  color: white;
-  font-size: 20px;
-`;
-
-const IntroTitleContainer = styled.div`
+const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 30%;
-  left: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 `;
 
 const Title = styled.h2`
@@ -54,22 +43,7 @@ const SubTitle = styled(Title)`
   font-size: 36px;
 `;
 
-const Btn = styled.button`
-  width: 150px;
-  height: 50px;
-  border: 2px solid;
-  border-radius: 10px;
-  background: #c4302b;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
-  margin: 60px auto 0px;
-`;
-
-const IntroAniContainer = styled.div``;
-
-const IntroAniBox = styled.ul`
+const AniBox = styled.ul`
     width : 100%
     height : 100%;
     margin: 0;
@@ -77,7 +51,7 @@ const IntroAniBox = styled.ul`
     position : absolute;
     top : 0;
     left : 0;
-    overflow : hidden
+    overflow : hidden;
 `;
 
 const animate = keyframes`
@@ -156,39 +130,39 @@ const AnimateItem = styled.li`
   }
 `;
 
+const Main = styled.div`
+  width: 1024px;
+  margin: 0 auto;
+`;
 const IntroducePresenter = () => {
-  const menuItem = ["Home", "About", "Services", "Contact"];
   const icon = [faThumbsUp, faBell, faHeart, faYoutube, faGift];
 
   return (
-    <Wrapper>
-      <Main>
-        <IntroHeader>
-          <ul>
-            {menuItem.map(item => (
-              <MenuItem>{item}</MenuItem>
-            ))}
-          </ul>
-        </IntroHeader>
+    <IntroduceWrapper>
+      <Header />
+      <Introduce>
+        <AniBox>
+          {icon.map(item => (
+            <AnimateItem>
+              <FontAwesomeIcon icon={item} />
+            </AnimateItem>
+          ))}
+        </AniBox>
 
-        <IntroTitleContainer>
+        <TitleContainer>
           <SubTitle>크리에이터를 위한</SubTitle>
           <SubTitle>소통의 공간</SubTitle>
           <Title>기브미콘</Title>
-          <Btn>함께하기</Btn>
-        </IntroTitleContainer>
-
-        <IntroAniContainer>
-          <IntroAniBox>
-            {icon.map(item => (
-              <AnimateItem>
-                <FontAwesomeIcon icon={item} />
-              </AnimateItem>
-            ))}
-          </IntroAniBox>
-        </IntroAniContainer>
+        </TitleContainer>
+      </Introduce>
+      <Main>
+        <div>기브미콘이란</div>
+        <div>
+          <span>Give Me Contents</span>를 줄인 말로 써 크리에이터에게 도움을
+          주는 플랫폼입니다.
+        </div>
       </Main>
-    </Wrapper>
+    </IntroduceWrapper>
   );
 };
 

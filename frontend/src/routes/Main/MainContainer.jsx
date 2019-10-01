@@ -1,6 +1,6 @@
 import React from "react";
-import IntroducePresenter from "./IntroducePresenter";
+import MainPresenter from "./MainPresenter";
 
-export default function IntroduceContainer() {
-  return <IntroducePresenter />;
+export default function MainContainer() {
+  return <MainPresenter />;
 }
