@@ -1,12 +1,12 @@
 import React from "react";
 import { Router, Route, Redirect, Switch } from "react-router-dom";
 
-import Main from "routes/Main";
+import Introduce from "routes/Introduce";
 
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/" exact component={Main} />
+      <Route path="/" exact component={Introduce} />
       <Redirect from="*" to="/" />
     </Switch>
   );

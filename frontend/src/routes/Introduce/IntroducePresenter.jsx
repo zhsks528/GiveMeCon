@@ -1,194 +1,164 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsUp,
-  faBell,
-  faHeart,
-  faGift
-} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import Header from "components/Header";
+import About from 'components/About';
 
-import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+// **** Images
+import FullLogo from 'components/asset/images/fullLogo.png'
+import Youtube from 'components/asset/images/Youtube.png'
+import Producing from 'components/asset/images/Producing.png'
+import Instargram from 'components/asset/images/Instargram.png'
+import Facebook from 'components/asset/images/Facebook.png'
+import Mail from 'components/asset/images/Mail.png'
 
-const Wrapper = styled.div`
-  background: linear-gradient(to left, #8942a8, #ba382f);
+const IntroduceWrapper = styled.div`
   width: 100%;
-  height: 100vh;
 `;
 
 const Main = styled.div`
   width: 1024px;
-  height: 100vh;
   margin: 0 auto;
 `;
-const IntroHeader = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-`;
 
-const MenuItem = styled.li`
-  display: inline-block;
-  padding: 40px 15px;
-  text-transform: uppercase;
-  color: white;
-  font-size: 20px;
-`;
+const ContentsContainer = styled.div`
+  margin-bottom: 60px;
+`
 
-const IntroTitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 30%;
-  left: 25%;
-`;
+const ContentsTitle = styled.h3`
+  font-size : 36px;
+  margin : 0 0 20px 0;
+`
 
-const Title = styled.h2`
-  color: gold;
-  font-size: 60px;
-  margin: 0;
-`;
+const Contents = styled.div`
+  padding-left : 40px;
+`
 
-const SubTitle = styled(Title)`
-  color: #eeeeee;
-  font-size: 36px;
-`;
+const Power = styled.span`
+  font-size : 24px;
+  color : #f7323f;
+`
 
-const Btn = styled.button`
-  width: 150px;
-  height: 50px;
-  border: 2px solid;
-  border-radius: 10px;
-  background: #c4302b;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
-  margin: 60px auto 0px;
-`;
+const StrongPower = styled(Power)`
+  font-size : 36px;
+`
 
-const IntroAniContainer = styled.div``;
+const LowerPower = styled(Power)`
+font-size : 16px;
+`
 
-const IntroAniBox = styled.ul`
-    width : 100%
-    height : 100%;
-    margin: 0;
-    padding: 0;
-    position : absolute;
-    top : 0;
-    left : 0;
-    overflow : hidden
-`;
+const ContentsItemLeft = styled.div`
+  margin-bottom : 40px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 20px;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 200px;
+`
 
-const animate = keyframes`
-  0%{
-      transform : translateY(0) rotate(0deg);
-      opacity: 1;
-  }
-  100%{
-    transform : translateY(-800px) rotate(360deg);
-    opacity: 0;
-}
-`;
+const ContentsItemRight = styled(ContentsItemLeft)`
+  grid-template-columns: 1fr 200px;
+  grid-template-rows: 200px;
+`
 
-const AnimateItem = styled.li`
-  position: absolute;
-  display: block;
-  list-style: none;
-  width: 25px;
-  height: 25px;
-  background: rgba(255, 255, 255, 0.2);
-  animation: ${animate} 20s linear infinite;
-  bottom: -100px;
+const ItemTitle = styled.div`
+  margin-bottom : 20px;
+`
 
-  color: white;
+const ContentsItem = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 36px;
+  width: 300px;
+  min-width: 300px;
+  margin-bottom : 20px;
+`
 
-  &:nth-child(1) {
-    left: 86%;
-    width: 80px;
-    height: 80px;
-    animation-delay: 0s;
-    border-radius: 20px;
-    color: #2f477a;
-  }
+const Icon = styled.img`
+  border-radius: 10px;
+  margin-right: 20px;
+`
 
-  &:nth-child(2) {
-    left: 12%;
-    width: 70px;
-    height: 70px;
-    animation-delay: 1.5s;
-    animation-duration: 10s;
-    border-radius: 20px;
-    color: gold;
-  }
+const SNSContainer = styled.div`
+  padding-left: 40px;
+  display: flex;
+`
 
-  &:nth-child(3) {
-    left: 70%;
-    width: 100px;
-    height: 100px;
-    animation-delay: 6.5s;
-    border-radius: 20px;
-    color: red;
-  }
+const ItemContainer = styled.div`
 
-  &:nth-child(4) {
-    left: 42%;
-    width: 150px;
-    height: 150px;
-    animation-duration: 15s;
-    border-radius: 20px;
-    font-size: 70px;
-    color: #c4302b;
-  }
-
-  &:nth-child(5) {
-    left: 25%;
-    width: 60px;
-    height: 60px;
-    animation-delay: 3s;
-    border-radius: 10px;
-    font-size: 26px;
-    color: orange;
-  }
-`;
-
+`
+const Logo = styled.img`
+  margin-left: 400px;
+`
 const IntroducePresenter = () => {
-  const menuItem = ["Home", "About", "Services", "Contact"];
-  const icon = [faThumbsUp, faBell, faHeart, faYoutube, faGift];
-
   return (
-    <Wrapper>
+    <IntroduceWrapper>
+      <Header />
+      <About />
+
       <Main>
-        <IntroHeader>
-          <ul>
-            {menuItem.map(item => (
-              <MenuItem>{item}</MenuItem>
-            ))}
-          </ul>
-        </IntroHeader>
+        <ContentsContainer>
+          <ContentsTitle>기브미콘이란</ContentsTitle>
+          <Contents>
+            <Power>Give Me Contents</Power> 를 줄인 말로 써 크리에이터에게 도움을
+            주는 플랫폼입니다.
+          </Contents>
+        </ContentsContainer>
 
-        <IntroTitleContainer>
-          <SubTitle>크리에이터를 위한</SubTitle>
-          <SubTitle>소통의 공간</SubTitle>
-          <Title>기브미콘</Title>
-          <Btn>함께하기</Btn>
-        </IntroTitleContainer>
+        <ContentsContainer>
+          <ContentsTitle>기브미콘의 <StrongPower>서비스</StrongPower></ContentsTitle>
+          <Contents>
+            <ContentsItemLeft>
+              <img src={Youtube} alt="유튜브 사진" />
+              <div>
+                <ItemTitle>컨텐츠 <LowerPower>추천 및 순위 서비스</LowerPower></ItemTitle>
+                <div>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                  when an unknown printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but also the leap 
+                  into electronic typesetting, remaining essentially unchanged.
+                </div>
+              </div>
+            </ContentsItemLeft>
 
-        <IntroAniContainer>
-          <IntroAniBox>
-            {icon.map(item => (
-              <AnimateItem>
-                <FontAwesomeIcon icon={item} />
-              </AnimateItem>
-            ))}
-          </IntroAniBox>
-        </IntroAniContainer>
+            <ContentsItemRight>
+              
+              <div>
+                <ItemTitle>컨텐츠 <LowerPower>프로듀싱 서비스</LowerPower></ItemTitle>
+                <div>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                  when an unknown printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but also the leap 
+                  into electronic typesetting, remaining essentially unchanged.
+                </div>
+              </div>
+              <img src={Producing} alt="프로듀싱 사진" />
+            </ContentsItemRight>
+          </Contents>
+        </ContentsContainer>
+
+        <ContentsContainer>
+          <ContentsTitle>기브미콘의 <StrongPower>연락수단</StrongPower></ContentsTitle>
+          <SNSContainer>
+            <ItemContainer>
+              <ContentsItem>
+                <Icon src={Instargram} alt="인스타그램 아이콘" />
+                <div>인스타그램@인스타그램</div>
+              </ContentsItem>
+              <ContentsItem>
+                <Icon src={Facebook} alt="페이스북 아이콘" />
+                <div>페이스북@페이스북</div>
+              </ContentsItem>
+              <ContentsItem>
+                <Icon src={Mail} alt="메일 아이콘" />
+                <div>메일메일메일@메일메일메일</div>
+              </ContentsItem>
+            </ItemContainer>
+            <Logo src={FullLogo} alt="풀로고 사진" />
+          </SNSContainer>
+        </ContentsContainer>
       </Main>
-    </Wrapper>
+    </IntroduceWrapper>
   );
 };
 
