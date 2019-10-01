@@ -14,7 +14,7 @@ const MainContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1000px;
+  width: 1024px;
   height: 60px;
   margin: 0 auto;
 `;
