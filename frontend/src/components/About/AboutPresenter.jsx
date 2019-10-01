@@ -25,9 +25,9 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-60%, -50%);
   text-align: center;
 `;
 
@@ -135,8 +135,8 @@ const AboutPresenter = () => {
     return (
       <Introduce>
         <AniBox>
-          {icon.map(item => (
-            <AnimateItem>
+          {icon.map((item,index) => (
+            <AnimateItem key={index}>
               <FontAwesomeIcon icon={item} />
             </AnimateItem>
           ))}
