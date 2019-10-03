@@ -1,15 +1,16 @@
-import React from 'react';
-import Header from 'components/Header';
-import ProduceMenu from 'components/ProduceMenu';
+import React from "react";
+import Header from "components/Header";
+import ProduceMenu from "components/ProduceMenu";
+import ProduceTotalList from "components/ProduceTotalList";
 
 const ProductionPresenter = () => {
   return (
     <>
-      <Header/>
-      <ProduceMenu/>
+      <Header />
+      <ProduceMenu />
+      <ProduceTotalList />
     </>
-  )
-}
+  );
+};
 
-export default ProductionPresenter
-
+export default ProductionPresenter;
