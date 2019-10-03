@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -30,17 +31,20 @@ const ListItem = styled.li`
 `;
 
 const ProduceMenuPresenter = () => {
-    const listItem = ["전체", "음악", "스포츠", "영화", "게임"];
-    return(
-        <MenuWrapper>
-          <HeaderList>
-            {listItem.map((item,index) => (
-              <ListItem key={index}>{item}</ListItem>
-            ))}
-          </HeaderList>
+  const listItem = ["전체", "음악", "스포츠", "영화", "게임"];
+  const urlList = ["", "music", "sport", "movie", "game"];
 
-        </MenuWrapper>
-    )
-}
+  return (
+    <MenuWrapper>
+      <HeaderList>
+        {listItem.map((item, index) => (
+          <ListItem key={index}>
+            <Link to={`/production/${urlList[index]}`}>{item}</Link>
+          </ListItem>
+        ))}
+      </HeaderList>
+    </MenuWrapper>
+  );
+};
 
 export default ProduceMenuPresenter;
