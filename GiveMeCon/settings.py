@@ -135,3 +135,10 @@ CORS_ALLOW_CREDENTILS = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+STATIC_URL = "/static/"
+# 각 media 파일에 대한 URL Prefix
+MEDIA_URL = "/media/"
+
+# 업로드된 파일을 저장할 디렉토리 경로
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
