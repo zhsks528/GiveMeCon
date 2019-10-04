@@ -74,7 +74,7 @@ const HeaderPresenter = () => {
 
         <HeaderList>
             <ListItem>
-              <LinkItem to="/">
+              <LinkItem to="/trend">
                 트렌드
               </LinkItem>
             </ListItem>
