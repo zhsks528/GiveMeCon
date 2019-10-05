@@ -12,6 +12,7 @@ django.setup()
 
 from video.models import Video
 from channel.models import Channel
+from category.models import Category
 
 # Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
 # tab of
@@ -37,16 +38,39 @@ def Video_info(video_id):
     json_url = urllib.request.urlopen(url)
     data = json.loads(json_url.read())
     # data=json.dumps(read_data, indent=4 ,sort_keys=True)
+    
+    channel_id = data["items"][0]["snippet"]["channelId"]
+    channel_title = data["items"][0]["snippet"]["channelTitle"]
+    category_id = data["items"][0]["snippet"]["categoryId"]
 
+
+    # 채널을 만든다.
+
+    category = Category.objects.get(category_id=category_id)
+
+    channel, created = Channel.objects.get_or_create(
+        channel_id=channel_id,
+    )
+
+    # 채널을 만들었으면 이름을 적어넣는다.
+    if created:
+        channel.name = channel_title
+        channel.category = category
+        channel.save()
+
+    # 비디오를 생성한다.
     Video.objects.create(
         title=data["items"][0]["snippet"]["title"],
         view=data["items"][0]["statistics"]["viewCount"],
         thumbnail=data["items"][0]["snippet"]["thumbnails"]["default"]["url"],
+        channel=channel
     )
 
-    print("제목:" + data["items"][0]["snippet"]["title"])
-    print("썸네일: " + data["items"][0]["snippet"]["thumbnails"]["default"]["url"])
-    print("조회수:" + data["items"][0]["statistics"]["viewCount"] + "\n\n")
+
+
+    # print("제목:" + data["items"][0]["snippet"]["title"])
+    # print("썸네일: " + data["items"][0]["snippet"]["thumbnails"]["default"]["url"])
+    # print("조회수:" + data["items"][0]["statistics"]["viewCount"] + "\n\n")
     # print("\n상세내용:\n"+data["items"][0]["snippet"]["description"])
 
 

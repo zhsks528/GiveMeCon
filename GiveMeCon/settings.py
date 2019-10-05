@@ -38,12 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'rest_framework', # djangorestframework
-    'drf_yasg', # API 문서화
-    'video', # video App
-    'channel', # channel App
-    'word_count', # word_count App
+    'rest_framework', # djangorestframework 다
+    'drf_yasg', # API 문서화다
+    'video', # video App 이다
+    'channel', # channel App ㅇㅣ다
+    'word_count', # word_count App 다
     'corsheaders', # CORS
+    'category', # 카테고리다
 ]
 
 MIDDLEWARE = [
