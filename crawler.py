@@ -21,7 +21,7 @@ from category.models import Category
 DEVELOPER_KEY = "AIzaSyBAEqG4C5JcGU8LW3WiQW19QbKWwHbpLOE"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
-keyword = "먹방"
+keyword = input("키워드 입력 : ")
 
 current = datetime.date.today()
 get_time = current - datetime.timedelta(days=7)
