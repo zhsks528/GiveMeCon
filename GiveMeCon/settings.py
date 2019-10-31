@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "channel",
     "word_count",
     "production",
+    "category",
 ]
 
 MIDDLEWARE = [
