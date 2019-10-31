@@ -30,18 +30,43 @@ const ListItem = styled.li`
   }
 `;
 
+const LinkItem = styled(Link)`
+  color: ${props => props.current ? "#f7323f": "#6b6b6b;"};
+  text-decoration : none;
+  &:hover {
+    color: #f7323f;
+  }
+`
+
 const ProduceMenuPresenter = () => {
   const listItem = ["전체", "음악", "스포츠", "영화", "게임"];
-  const urlList = ["", "music", "sport", "movie", "game"];
+  const urlList = ["", "music", "sports", "movie", "game"];
+
+  const {pathname} = window.location;
+  console.log(pathname)
+  const musicIndex = pathname.indexOf("music");
+  const sportsIndex = pathname.indexOf("sports");
+  const movieIndex = pathname.indexOf("movie");
+  const gameIndex = pathname.indexOf("game");
 
   return (
     <MenuWrapper>
       <HeaderList>
-        {listItem.map((item, index) => (
-          <ListItem key={index}>
-            <Link to={`/production/${urlList[index]}`}>{item}</Link>
-          </ListItem>
-        ))}
+          <ListItem>
+            <LinkItem to="/production" current={pathname === '/production'}>전체</LinkItem>
+          </ListItem> 
+          <ListItem>
+            <LinkItem to="/production/music" current={musicIndex > 0}>음악</LinkItem>
+          </ListItem> 
+          <ListItem>
+            <LinkItem to="/production/sports" current={sportsIndex > 0}>스포츠</LinkItem>
+          </ListItem> 
+          <ListItem>
+            <LinkItem to="/production/movie" current={movieIndex > 0}>영화</LinkItem>
+          </ListItem> 
+          <ListItem>
+            <LinkItem to="/production/game" current={gameIndex > 0}>게임</LinkItem>
+          </ListItem> 
       </HeaderList>
     </MenuWrapper>
   );

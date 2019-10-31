@@ -9,7 +9,11 @@ export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={Trend} />
-      <Route path="/Production" exact component={Production} />
+      <Route path="/production" exact component={Production} />
+      {/* <Route path="/production/music" exact component={Production} />
+      <Route path="/production/sports" exact component={Production} />
+      <Route path="/production/movie" exact component={Production} />
+      <Route path="/production/game" exact component={Production} /> */}
       <Route path="/introduce" exact component={Introduce} />
       <Redirect from="*" to="/" />
     </Switch>

@@ -56,18 +56,20 @@ const ListItem = styled.li`
 `;
 
 const LinkItem = styled(Link)`
-  color: #6b6b6b;
+  color: ${props => props.current ? "#f7323f": "#6b6b6b;"};
   text-decoration : none;
   &:hover {
     color: #f7323f;
   }
 `
 
-const LinkTitle = styled(Link)`
-text-decoration : none;
-`
-const HeaderPresenter = () => {
-  
+const HeaderPresenter = ()=> {
+  const {pathname} = window.location;
+
+  const productionIndex = pathname.indexOf("production");
+  const introduceIndex = pathname.indexOf("introduce");
+  const loginIndex = pathname.indexOf("login");
+
   return (
     <HeaderWrapper>
       <MainContainer>
@@ -78,22 +80,22 @@ const HeaderPresenter = () => {
 
         <HeaderList>
             <ListItem>
-              <LinkItem to="/trend">
+              <LinkItem to="/" current={pathname === '/'}>
                 트렌드
               </LinkItem>
             </ListItem>
             <ListItem>
-              <LinkItem to="/production">
+              <LinkItem to="/production" current={productionIndex === 1}>
                 프로듀싱
               </LinkItem>
             </ListItem>
             <ListItem>
-              <LinkItem to="/introduce">
+              <LinkItem to="/introduce" current={introduceIndex === 1}>
                 소개
               </LinkItem>
             </ListItem>
             <ListItem>
-              <LinkItem to="/login">
+              <LinkItem to="/login" current={loginIndex === 1}>
                 로그인
               </LinkItem>
             </ListItem>
