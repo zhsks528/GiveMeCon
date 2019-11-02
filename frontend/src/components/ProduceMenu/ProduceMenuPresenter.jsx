@@ -43,7 +43,7 @@ const ProduceMenuPresenter = () => {
   const urlList = ["", "music", "sports", "movie", "game"];
 
   const {pathname} = window.location;
-  console.log(pathname)
+  
   const musicIndex = pathname.indexOf("music");
   const sportsIndex = pathname.indexOf("sports");
   const movieIndex = pathname.indexOf("movie");
@@ -62,10 +62,10 @@ const ProduceMenuPresenter = () => {
             <LinkItem to="/production/sports" current={sportsIndex > 0}>스포츠</LinkItem>
           </ListItem> 
           <ListItem>
-            <LinkItem to="/production/movie" current={movieIndex > 0}>영화</LinkItem>
+            <LinkItem to="/production/movies" current={movieIndex > 0}>영화</LinkItem>
           </ListItem> 
           <ListItem>
-            <LinkItem to="/production/game" current={gameIndex > 0}>게임</LinkItem>
+            <LinkItem to="/production/games" current={gameIndex > 0}>게임</LinkItem>
           </ListItem> 
       </HeaderList>
     </MenuWrapper>
