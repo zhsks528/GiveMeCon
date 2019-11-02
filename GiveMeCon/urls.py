@@ -24,7 +24,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("video.urls", namespace="videos")),
     path("", include("channel.urls", namespace="channels")),
-    path("", include("production.urls", namespace="productions")),
+    path("production/", include("production.urls", namespace="productions")),
+    
     # Auto DRF API docs
     url(
         r"^swagger(?P<format>\.json|\.yaml)$",
