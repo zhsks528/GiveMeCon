@@ -8,7 +8,7 @@ import {
 import Test from "components/asset/images/Youtube.png";
 
 const TotalWrapper = styled.div`
-  width: 1024px;
+  width: 80%;
   margin: 0 auto;
 `;
 const TotalTitle = styled.div`

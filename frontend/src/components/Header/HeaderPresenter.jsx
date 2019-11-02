@@ -9,16 +9,13 @@ const HeaderWrapper = styled.div`
   align-items: center;
   height: 60px;
   background-color: white;
-  // position: fixed;
-  // z-index: 1;
-  // width: 100%;
 `;
 
 const MainContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1024px;
+  width: 80%;
   height: 60px;
   margin: 0 auto;
 `;
@@ -66,6 +63,7 @@ const LinkItem = styled(Link)`
 const HeaderPresenter = ()=> {
   const {pathname} = window.location;
 
+  const trendIndex = pathname.indexOf("trend");
   const productionIndex = pathname.indexOf("production");
   const introduceIndex = pathname.indexOf("introduce");
   const loginIndex = pathname.indexOf("login");
@@ -80,7 +78,7 @@ const HeaderPresenter = ()=> {
 
         <HeaderList>
             <ListItem>
-              <LinkItem to="/" current={pathname === '/'}>
+              <LinkItem to="/trend" current={trendIndex === 1}>
                 트렌드
               </LinkItem>
             </ListItem>

@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  width: 1024px;
+  width: 80%;
   margin: 0 auto;
 `;
 
@@ -16,7 +16,7 @@ const TitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1024px;
+  width: 80%;
   height: 60px;
   margin: 0 auto;
 `
@@ -37,7 +37,7 @@ const AddItem = styled.li`
 
 const ContentContainer = styled.div`
   display: flex;
-  width: 1024px;
+  width: 80%;
   height: 300px;
   margin: 0 auto;
   
@@ -47,7 +47,7 @@ const ContentBox = styled.div`
 `
 const SubTitleContainer = styled.div`
   display: flex;
-  width: 1024px;
+  width: 80%;
   margin: 0 auto;
 `
 
@@ -79,7 +79,7 @@ const RankBox = styled.div`
 `
 const VideoContainer = styled.div`
   display: flex;
-  width: 1024px;
+  width: 80%;
   height: 180px;
   margin: 0 auto;
 `
