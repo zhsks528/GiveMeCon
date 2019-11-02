@@ -14,3 +14,18 @@ class Production(models.Model):
     def __str__(self):
         return self.title
 
+
+class ProduceMusic(Production):
+    pass
+
+
+class ProduceSports(Production):
+    pass
+
+
+class ProduceMovies(Production):
+    pass
+
+
+class ProduceGame(Production):
+    pass
