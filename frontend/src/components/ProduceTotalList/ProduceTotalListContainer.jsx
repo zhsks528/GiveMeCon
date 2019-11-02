@@ -11,13 +11,13 @@ export default function ProduceTotalListContainer() {
 
   const callApi = () => {
     axios
-      .get("http://127.0.0.1:8000/production/")
+      .get("http://127.0.0.1:8000/production/total/")
       .then(response => {
         const { data } = response;
         setList(data);
       })
       .catch(error => console.log(error));
   };
-  console.log(list);
+  
   return <ProduceTotalListPresenter list={list} />;
 }
