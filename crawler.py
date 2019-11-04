@@ -68,10 +68,10 @@ def Video_info(video_id):
 
 
 
-    # print("제목:" + data["items"][0]["snippet"]["title"])
-    # print("썸네일: " + data["items"][0]["snippet"]["thumbnails"]["default"]["url"])
-    # print("조회수:" + data["items"][0]["statistics"]["viewCount"] + "\n\n")
-    # print("\n상세내용:\n"+data["items"][0]["snippet"]["description"])
+    print("제목:" + data["items"][0]["snippet"]["title"])
+    print("썸네일: " + data["items"][0]["snippet"]["thumbnails"]["default"]["url"])
+    print("조회수:" + data["items"][0]["statistics"]["viewCount"] + "\n\n")
+    print("\n상세내용:\n"+data["items"][0]["snippet"]["description"])
 
 
 def youtube_search(options):
