@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path, include
 from rest_framework import permissions
+from django.conf.urls.static import static
+from django.conf import settings
 
 # API 문서화
 from drf_yasg.views import get_schema_view
@@ -24,6 +26,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("video.urls", namespace="videos")),
     path("", include("channel.urls", namespace="channels")),
+    path("category/", include("category.urls", namespace="category")),
     path("production/", include("production.urls", namespace="productions")),
     
     # Auto DRF API docs
@@ -40,4 +43,4 @@ urlpatterns = [
     url(
         r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
