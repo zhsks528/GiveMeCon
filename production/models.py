@@ -1,8 +1,8 @@
 from django.db import models
-
+from category.models import Category
 
 class Production(models.Model):
-
+    
     title = models.CharField(max_length=255)
     content = models.TextField()
     thumnail = models.ImageField(upload_to="images", null=True, blank=True)
@@ -10,7 +10,8 @@ class Production(models.Model):
     tag = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True,)
+    
     def __str__(self):
         return self.title
 
