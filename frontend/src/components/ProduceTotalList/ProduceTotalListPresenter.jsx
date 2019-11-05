@@ -53,8 +53,7 @@ const WatchBtn = styled.div`
 
 const TotalList = styled.div`
   display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 200px;
+  grid-template-columns: repeat(auto-fill,200px);
   grid-template-rows: 200px;
   grid-auto-columns: 200px;
   grid-auto-rows: 200px;
@@ -107,7 +106,7 @@ const ProduceTotalListPresenter = ({ list }) => {
       <TotalWrapper>
         <TotalTitle>
           <TitleIcon icon={faGuitar} />
-          <div>음악</div>
+          <div>전체</div>
         </TotalTitle>
         <TotalSubTitleContainer>
           <SubTitleContainer>
