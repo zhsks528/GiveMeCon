@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import ProduceMoviesListPresenter from './ProduceMoviesListPresenter';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import ProduceMoviesListPresenter from "./ProduceMoviesListPresenter";
+import axios from "axios";
 
-export default function ProduceMoviesListContainer(){
-  const [list, setList] = useState([])
+export default function ProduceMoviesListContainer() {
+  const [list, setList] = useState([]);
   useEffect(() => {
     callApi();
   }, []);
@@ -17,8 +17,6 @@ export default function ProduceMoviesListContainer(){
       })
       .catch(error => console.log(error));
   };
-  
-  return (
-    <ProduceMoviesListPresenter list={list}/>
-  )
+
+  return <ProduceMoviesListPresenter list={list} />;
 }

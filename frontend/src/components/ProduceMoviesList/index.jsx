@@ -1,3 +1,3 @@
-import ProduceMoviesListContainer from './ProduceMoviesListContainer';
+import ProduceMoviesListContainer from "./ProduceMoviesListContainer";
 
 export default ProduceMoviesListContainer;

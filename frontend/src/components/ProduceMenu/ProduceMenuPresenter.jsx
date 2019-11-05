@@ -31,19 +31,19 @@ const ListItem = styled.li`
 `;
 
 const LinkItem = styled(Link)`
-  color: ${props => props.current ? "#f7323f": "#6b6b6b;"};
-  text-decoration : none;
+  color: ${props => (props.current ? "#f7323f" : "#6b6b6b;")};
+  text-decoration: none;
   &:hover {
     color: #f7323f;
   }
-`
+`;
 
 const ProduceMenuPresenter = () => {
   const listItem = ["전체", "음악", "스포츠", "영화", "게임"];
   const urlList = ["", "music", "sports", "movie", "game"];
 
-  const {pathname} = window.location;
-  
+  const { pathname } = window.location;
+
   const musicIndex = pathname.indexOf("music");
   const sportsIndex = pathname.indexOf("sports");
   const movieIndex = pathname.indexOf("movie");
@@ -52,21 +52,31 @@ const ProduceMenuPresenter = () => {
   return (
     <MenuWrapper>
       <HeaderList>
-          <ListItem>
-            <LinkItem to="/production" current={pathname === '/production'}>전체</LinkItem>
-          </ListItem> 
-          <ListItem>
-            <LinkItem to="/production/music" current={musicIndex > 0}>음악</LinkItem>
-          </ListItem> 
-          <ListItem>
-            <LinkItem to="/production/sports" current={sportsIndex > 0}>스포츠</LinkItem>
-          </ListItem> 
-          <ListItem>
-            <LinkItem to="/production/movies" current={movieIndex > 0}>영화</LinkItem>
-          </ListItem> 
-          <ListItem>
-            <LinkItem to="/production/games" current={gameIndex > 0}>게임</LinkItem>
-          </ListItem> 
+        <ListItem>
+          <LinkItem to="/production" current={pathname === "/production"}>
+            전체
+          </LinkItem>
+        </ListItem>
+        <ListItem>
+          <LinkItem to="/production/music" current={musicIndex > 0}>
+            음악
+          </LinkItem>
+        </ListItem>
+        <ListItem>
+          <LinkItem to="/production/sports" current={sportsIndex > 0}>
+            스포츠
+          </LinkItem>
+        </ListItem>
+        <ListItem>
+          <LinkItem to="/production/movies" current={movieIndex > 0}>
+            영화
+          </LinkItem>
+        </ListItem>
+        <ListItem>
+          <LinkItem to="/production/games" current={gameIndex > 0}>
+            게임
+          </LinkItem>
+        </ListItem>
       </HeaderList>
     </MenuWrapper>
   );
