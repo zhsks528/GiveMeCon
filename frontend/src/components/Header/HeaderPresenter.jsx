@@ -9,16 +9,13 @@ const HeaderWrapper = styled.div`
   align-items: center;
   height: 60px;
   background-color: white;
-  position: fixed;
-  z-index: 1;
-  width: 100%;
 `;
 
 const MainContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1024px;
+  width: 80%;
   height: 60px;
   margin: 0 auto;
 `;
@@ -56,40 +53,47 @@ const ListItem = styled.li`
 `;
 
 const LinkItem = styled(Link)`
-  color: #6b6b6b;
+  color: ${props => props.current ? "#f7323f": "#6b6b6b;"};
   text-decoration : none;
   &:hover {
     color: #f7323f;
   }
 `
-const HeaderPresenter = () => {
-  
+
+const HeaderPresenter = ()=> {
+  const {pathname} = window.location;
+
+  const trendIndex = pathname.indexOf("trend");
+  const productionIndex = pathname.indexOf("production");
+  const introduceIndex = pathname.indexOf("introduce");
+  const loginIndex = pathname.indexOf("login");
+
   return (
     <HeaderWrapper>
       <MainContainer>
         <LogoContainer>
-          <LogoIcon src={Logo} alt="로고" />
+          <LogoIcon src={Logo} alt="로고" /> 
           <Title>기브미콘</Title>
         </LogoContainer>
 
         <HeaderList>
             <ListItem>
-              <LinkItem to="/trend">
+              <LinkItem to="/trend" current={trendIndex === 1}>
                 트렌드
               </LinkItem>
             </ListItem>
             <ListItem>
-              <LinkItem to="/produce">
+              <LinkItem to="/production" current={productionIndex === 1}>
                 프로듀싱
               </LinkItem>
             </ListItem>
             <ListItem>
-              <LinkItem to="/introduce">
+              <LinkItem to="/introduce" current={introduceIndex === 1}>
                 소개
               </LinkItem>
             </ListItem>
             <ListItem>
-              <LinkItem to="/login">
+              <LinkItem to="/login" current={loginIndex === 1}>
                 로그인
               </LinkItem>
             </ListItem>

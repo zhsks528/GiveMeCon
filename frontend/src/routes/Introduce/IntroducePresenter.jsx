@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "components/Header";
 import About from 'components/About';
+import Header from 'components/Header';
 
 // **** Images
 import FullLogo from 'components/asset/images/fullLogo.png'
@@ -16,7 +16,7 @@ const IntroduceWrapper = styled.div`
 `;
 
 const Main = styled.div`
-  width: 1024px;
+  width: 80%;
   margin: 0 auto;
 `;
 

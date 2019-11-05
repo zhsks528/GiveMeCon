@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import { Route } from 'react-router-dom';
+import TrendMenu from "components/TrendMenu";
 import Header from 'components/Header';
-
 
 const Wrapper = styled.div`
   width: 100%;
@@ -10,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  width: 1024px;
+  width: 80%;
   margin: 0 auto;
 `;
 
@@ -50,7 +51,7 @@ const TitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1024px;
+  width: 80%;
   height: 60px;
   margin: 0 auto;
 `
@@ -82,43 +83,11 @@ const Category = styled.div`
   margin: 0 20px 20px 30px;
   box-sizing: border-box;
 `
-const TrendPresenter = () => {
 
-
+const Post = () => {
   return (
-    <Wrapper>
-      <Header/>
-
+   <Wrapper>
       <Main>
-        <SubTitleContainer>
-          <SubTitleBox>
-          <ListItem>
-              <LinkItem to="/">
-                전체
-              </LinkItem>
-          </ListItem>
-          <ListItem>
-              <LinkItem to="/">
-                음악
-              </LinkItem>
-          </ListItem>
-          <ListItem>
-              <LinkItem to="/">
-                스포츠
-              </LinkItem>
-          </ListItem>
-          <ListItem>
-              <LinkItem to="/">
-                영화
-              </LinkItem>
-          </ListItem>
-          <ListItem>
-              <LinkItem to="/">
-                게임
-              </LinkItem>
-          </ListItem>
-          </SubTitleBox>
-        </SubTitleContainer>
 
         <Title>카테고리</Title>
 
@@ -167,6 +136,39 @@ const TrendPresenter = () => {
 
       </Main>
     </Wrapper>
+  )
+}
+
+const Post2 = () => {
+  return (
+    <div>b</div>
+  )
+}
+
+const Post3 = () => {
+  return (
+    <div>c</div>
+  )
+}
+
+
+const Post4 = () => {
+  return (
+    <div>d</div>
+  )
+}
+const TrendPresenter = ({match}) => {
+  return (
+    <>
+      <Header />
+      <TrendMenu />
+      <Route exact path={match.url} component={Post}/>
+      <Route path={`${match.url}/music`} component={Post}/>
+      <Route path={`${match.url}/sports`} component={Post2}/>
+      <Route path={`${match.url}/movies`} component={Post3}/>
+      <Route path={`${match.url}/games`} component={Post4}/>
+    </>
+
   );
 };
 
