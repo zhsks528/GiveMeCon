@@ -5,7 +5,7 @@ import {
   faGuitar,
   faExclamationTriangle
 } from "@fortawesome/free-solid-svg-icons";
-import Test from "components/asset/images/Youtube.png";
+import { Link } from "react-router-dom";
 
 const TotalWrapper = styled.div`
   width: 80%;
@@ -43,7 +43,7 @@ const Count = styled.div`
   text-align: center;
 `;
 
-const WatchBtn = styled.div`
+const WatchBtn = styled(Link)`
   cursor: pointer;
   border-radius: 10px;
   padding: 5px;
@@ -53,7 +53,7 @@ const WatchBtn = styled.div`
 
 const TotalList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill,200px);
+  grid-template-columns: repeat(auto-fill, 200px);
   grid-template-rows: 200px;
   grid-auto-columns: 200px;
   grid-auto-rows: 200px;
@@ -117,7 +117,7 @@ const ProduceTotalListPresenter = ({ list }) => {
               <Count>{count}</Count>
             </CountBox>
           </SubTitleContainer>
-          <WatchBtn>둘러보기</WatchBtn>
+          <WatchBtn to="production/write">글쓰기</WatchBtn>
         </TotalSubTitleContainer>
         <TotalList>
           {data

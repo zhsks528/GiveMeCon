@@ -1,5 +1,5 @@
-import React from 'react'
-import {Link} from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,9 +7,8 @@ import {
   faExclamationTriangle
 } from "@fortawesome/free-solid-svg-icons";
 
-
 const TotalWrapper = styled.div`
-    width: 80%;
+  width: 80%;
   margin: 0 auto;
 `;
 const TotalTitle = styled.div`
@@ -54,8 +53,7 @@ const WatchBtn = styled(Link)`
 
 const TotalList = styled.div`
   display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 200px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-template-rows: 200px;
   grid-auto-columns: 200px;
   grid-auto-rows: 200px;
@@ -75,12 +73,12 @@ const ThumbnailBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  width: 100%;
   height: 118px;
 `;
 
 const Thumbnail = styled.img`
-  width: 200px;
+  width: 100%;
   height: 118px;
 `;
 
@@ -100,52 +98,52 @@ const NoIcon = styled(FontAwesomeIcon)`
   font-size: 40px;
 `;
 
-const ProduceMusicListPresenter = ({list}) => {
+const ProduceMusicListPresenter = ({ list }) => {
   const count = list.count;
   const data = list.results;
   return (
     <>
-    <TotalWrapper>
-      <TotalTitle>
-        <TitleIcon icon={faGuitar} />
-        <div>음악</div>
-      </TotalTitle>
-      <TotalSubTitleContainer>
-        <SubTitleContainer>
-          <SubTitle>
-            등록된 <Power>컨텐츠</Power>
-          </SubTitle>
-          <CountBox>
-            <Count>{count}</Count>
-          </CountBox>
-        </SubTitleContainer>
-        <WatchBtn to="/production/music/write">글쓰기</WatchBtn>
-      </TotalSubTitleContainer>
-      <TotalList>
-        {data
-          ? data.map(item => (
-              <div key={item.id}>
-                {item.thumnail ? (
-                  <ThumbnailBox>
-                    <Thumbnail src={item.thumnail} alt="사진" />
-                  </ThumbnailBox>
-                ) : (
-                  <NoImageBox>
-                    <NoImage>
-                      <NoIcon icon={faExclamationTriangle} />
-                      <div>No Image</div>
-                    </NoImage>
-                  </NoImageBox>
-                )}
-                <div>{item.title}</div>
-                <div>By {item.author}</div>
-              </div>
-            ))
-          : null}
-      </TotalList>
-    </TotalWrapper>
-  </>
-  )
-}
+      <TotalWrapper>
+        <TotalTitle>
+          <TitleIcon icon={faGuitar} />
+          <div>음악</div>
+        </TotalTitle>
+        <TotalSubTitleContainer>
+          <SubTitleContainer>
+            <SubTitle>
+              등록된 <Power>컨텐츠</Power>
+            </SubTitle>
+            <CountBox>
+              <Count>{count}</Count>
+            </CountBox>
+          </SubTitleContainer>
+          <WatchBtn to="write">글쓰기</WatchBtn>
+        </TotalSubTitleContainer>
+        <TotalList>
+          {data
+            ? data.map(item => (
+                <div key={item.id}>
+                  {item.thumnail ? (
+                    <ThumbnailBox>
+                      <Thumbnail src={item.thumnail} alt="사진" />
+                    </ThumbnailBox>
+                  ) : (
+                    <NoImageBox>
+                      <NoImage>
+                        <NoIcon icon={faExclamationTriangle} />
+                        <div>No Image</div>
+                      </NoImage>
+                    </NoImageBox>
+                  )}
+                  <div>{item.title}</div>
+                  <div>By {item.author}</div>
+                </div>
+              ))
+            : null}
+        </TotalList>
+      </TotalWrapper>
+    </>
+  );
+};
 
-export default ProduceMusicListPresenter
+export default ProduceMusicListPresenter;
