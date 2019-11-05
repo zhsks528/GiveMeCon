@@ -26,6 +26,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("video.urls", namespace="videos")),
     path("", include("channel.urls", namespace="channels")),
+    path("category/", include("category.urls", namespace="category")),
     path("production/", include("production.urls", namespace="productions")),
     
     # Auto DRF API docs
