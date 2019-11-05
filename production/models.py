@@ -1,4 +1,5 @@
 from django.db import models
+from category.models import Category
 
 
 class Production(models.Model):
@@ -10,12 +11,13 @@ class Production(models.Model):
     tag = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
-    class Meta:
-        ordering = ['-created_at']
-        
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ["-created_at"]
 
 
 class ProduceMusic(Production):

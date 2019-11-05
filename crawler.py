@@ -6,6 +6,7 @@ import datetime
 import json
 import urllib.request
 import os, django
+import requests
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GiveMeCon.settings")
 django.setup()
@@ -21,7 +22,7 @@ from category.models import Category
 DEVELOPER_KEY = "AIzaSyBAEqG4C5JcGU8LW3WiQW19QbKWwHbpLOE"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
-keyword = "먹방"
+keyword = input("키워드 입력 : ")
 
 current = datetime.date.today()
 get_time = current - datetime.timedelta(days=7)
@@ -33,45 +34,52 @@ print(insert_day)
 
 
 def Video_info(video_id):
+    
     url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id={video_id}&key={DEVELOPER_KEY}"
-
     json_url = urllib.request.urlopen(url)
-    data = json.loads(json_url.read())
+    video_data = json.loads(json_url.read())
     # data=json.dumps(read_data, indent=4 ,sort_keys=True)
     
-    channel_id = data["items"][0]["snippet"]["channelId"]
-    channel_title = data["items"][0]["snippet"]["channelTitle"]
-    category_id = data["items"][0]["snippet"]["categoryId"]
+    channel_id = video_data["items"][0]["snippet"]["channelId"]
+    channel_title = video_data["items"][0]["snippet"]["channelTitle"]
+    category_id = video_data["items"][0]["snippet"]["categoryId"]
 
+    channel_url = f"https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + channel_id + "&key=" + DEVELOPER_KEY
+    json_url = urllib.request.urlopen(channel_url).read()
+    channel_data = json.loads(json_url)
 
-    # 채널을 만든다.
+    # 구독자수
+    subscribeCount = channel_data["items"][0]["statistics"]["subscriberCount"]
+    print("채널 구독자수: ", subscribeCount)
 
+    # # 채널을 만든다.
     category = Category.objects.get(category_id=category_id)
 
     channel, created = Channel.objects.get_or_create(
         channel_id=channel_id,
     )
 
-    # 채널을 만들었으면 이름을 적어넣는다.
+    # # 채널을 만들었으면 이름을 적어넣는다.
     if created:
         channel.name = channel_title
         channel.category = category
+        channel.subscribers = subscribeCount
         channel.save()
 
-    # 비디오를 생성한다.
+    # # 비디오를 생성한다.
     Video.objects.create(
-        title=data["items"][0]["snippet"]["title"],
-        view=data["items"][0]["statistics"]["viewCount"],
-        thumbnail=data["items"][0]["snippet"]["thumbnails"]["default"]["url"],
+        title=video_data["items"][0]["snippet"]["title"],
+        view=video_data["items"][0]["statistics"]["viewCount"],
+        thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["default"]["url"],
         channel=channel
     )
 
 
 
-    print("제목:" + data["items"][0]["snippet"]["title"])
-    print("썸네일: " + data["items"][0]["snippet"]["thumbnails"]["default"]["url"])
-    print("조회수:" + data["items"][0]["statistics"]["viewCount"] + "\n\n")
-    print("\n상세내용:\n"+data["items"][0]["snippet"]["description"])
+    print("제목:" + video_data["items"][0]["snippet"]["title"])
+    print("썸네일: " + video_data["items"][0]["snippet"]["thumbnails"]["default"]["url"])
+    print("조회수:" + video_data["items"][0]["statistics"]["viewCount"] + "\n\n")
+    print("\n상세내용:\n"+video_data["items"][0]["snippet"]["description"])
 
 
 def youtube_search(options):
