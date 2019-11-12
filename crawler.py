@@ -35,7 +35,7 @@ print(insert_day)
 
 def Video_info(video_id):
     
-    url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id={video_id}&key={DEVELOPER_KEY}"
+    url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet,topicDetails,statistics&id={video_id}&key={DEVELOPER_KEY}"
     json_url = urllib.request.urlopen(url)
     video_data = json.loads(json_url.read())
     # data=json.dumps(read_data, indent=4 ,sort_keys=True)
@@ -68,6 +68,7 @@ def Video_info(video_id):
 
     # # 비디오를 생성한다.
     Video.objects.create(
+        topic=video_data["items"][0]["topicDetails"]["topicIds"],
         title=video_data["items"][0]["snippet"]["title"],
         view=video_data["items"][0]["statistics"]["viewCount"],
         thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["default"]["url"],
