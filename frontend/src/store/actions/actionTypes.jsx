@@ -1,0 +1,6 @@
+export const SAVE_TOKEN = "SAVE_TOKEN";
+export const LOGOUT = "LOGOUT";
+export const SET_PRODUCTION = "SET_PRODUCTION";
+export const LIKE_PRODUCTION = "LIKE_PRODUCTION";
+export const UNLIKE_PRODUCTION = "UNLIKE_PRODUCTION";
+export const ADD_COMMENT = "ADD_COMMENT";
