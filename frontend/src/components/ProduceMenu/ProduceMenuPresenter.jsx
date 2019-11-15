@@ -39,8 +39,8 @@ const LinkItem = styled(Link)`
 `;
 
 const ProduceMenuPresenter = () => {
-  const listItem = ["전체", "음악", "스포츠", "영화", "게임"];
-  const urlList = ["", "music", "sports", "movie", "game"];
+  // const listItem = ["전체", "음악", "스포츠", "영화", "게임"];
+  // const urlList = ["", "music", "sports", "movie", "game"];
 
   const { pathname } = window.location;
 
@@ -49,6 +49,7 @@ const ProduceMenuPresenter = () => {
   const movieIndex = pathname.indexOf("movie");
   const gameIndex = pathname.indexOf("game");
 
+  console.log(pathname);
   return (
     <MenuWrapper>
       <HeaderList>

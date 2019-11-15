@@ -44,7 +44,8 @@ const WritePresenter = ({
   setTag,
   handleImageChange,
   files,
-  imgUrl
+  imgUrl,
+  setTags
 }) => {
   return (
     <Wrapper>
@@ -53,7 +54,7 @@ const WritePresenter = ({
           <Title>유형</Title>
           <select onChange={event => setCategory(event.target.value)}>
             {categoryList.map(item => (
-              <option key={item.category_id} value={item.category_name}>
+              <option key={item.category_id} value={item.category_id}>
                 {item.category_name}
               </option>
             ))}
@@ -105,7 +106,7 @@ const WritePresenter = ({
           <input
             name="tag"
             type="text"
-            onChange={event => setTag(event.target.value)}
+            onChange={event => setTags(event.target.value)}
           />
         </ColumnContainer>
         <input type="submit" value="작성" />

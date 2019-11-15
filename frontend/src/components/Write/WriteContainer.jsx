@@ -12,7 +12,7 @@ export default function WriteContainer() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
-  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState([]);
   const [files, setFiles] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
 
@@ -27,27 +27,15 @@ export default function WriteContainer() {
     event.preventDefault();
 
     let form = new FormData();
-    form.append("title", title);
-    form.append("author", author);
-    form.append("content", content);
 
-    if (category === "음악") {
-      api
-        .post("production/music/", form)
-        .then(response => console.log(response));
-    } else if (category === "스포츠") {
-      api
-        .post("production/sports/", form)
-        .then(response => console.log(response));
-    } else if (category === "영화") {
-      api
-        .post("production/movies/", form)
-        .then(response => console.log(response));
-    } else if (category === "게임") {
-      api
-        .post("production/games/", form)
-        .then(response => console.log(response));
-    }
+    form.append("title", title);
+    form.append("category", category);
+    form.append("thumbnail", files[0]);
+    form.append("creator", author);
+    form.append("content", content);
+    form.append("tags", tags.split(","));
+
+    api.post("/production/", form).then(response => console.log(response));
   };
 
   const handleImageChange = event => {
@@ -56,10 +44,12 @@ export default function WriteContainer() {
     let fileList = Array.from(event.target.files);
     fileList.forEach(file => {
       let reader = new FileReader();
+
       reader.onloadend = () => {
         setFiles(files => files.concat(file));
         setImgUrl(imgUrl => imgUrl.concat(reader.result));
       };
+
       reader.readAsDataURL(file);
     });
   };
@@ -72,10 +62,10 @@ export default function WriteContainer() {
       setTitle={setTitle}
       setContent={setContent}
       setAuthor={setAuthor}
-      setTag={setTag}
       handleImageChange={handleImageChange}
       files={files}
       imgUrl={imgUrl}
+      setTags={setTags}
     />
   );
 }

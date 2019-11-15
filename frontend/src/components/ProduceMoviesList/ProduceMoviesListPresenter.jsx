@@ -135,7 +135,7 @@ const ProduceMoviesListPresenter = ({ list }) => {
                       </NoImage>
                     </NoImageBox>
                   )}
-                  <div>{item.title}</div>
+                  <Link to={`/production/movies/${item.id}`}>{item.title}</Link>
                   <div>By {item.author}</div>
                 </div>
               ))
