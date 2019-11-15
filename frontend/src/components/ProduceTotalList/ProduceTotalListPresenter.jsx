@@ -6,11 +6,14 @@ import {
   faExclamationTriangle
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import Loading from "components/Loading";
+import ProduceFeed from "components/ProduceFeed";
 
 const TotalWrapper = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
+
 const TotalTitle = styled.div`
   display: flex;
   align-items: center;
@@ -53,11 +56,12 @@ const WatchBtn = styled(Link)`
 
 const TotalList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
-  grid-template-rows: 200px;
+  grid-template-columns: repeat(auto-fill, 300px);
+  // grid-template-rows: 400px;
   grid-auto-columns: 200px;
-  grid-auto-rows: 200px;
-  grid-gap: 20px;
+  // grid-auto-rows: 400px;
+  grid-gap: 30px;
+  justify-content: space-between;
 `;
 
 const SubTitleContainer = styled.div`
@@ -73,19 +77,20 @@ const ThumbnailBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 118px;
+  width: 100%;
+  height: 300px;
 `;
 
 const Thumbnail = styled.img`
-  width: 200px;
-  height: 118px;
+  width: 100%;
+  height: 100%;
 `;
 
 const NoImageBox = styled(ThumbnailBox)`
   border-radius: 10px;
   background: black;
 `;
+
 const NoImage = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,51 +102,36 @@ const NoImage = styled.div`
 const NoIcon = styled(FontAwesomeIcon)`
   font-size: 40px;
 `;
-const ProduceTotalListPresenter = ({ list }) => {
-  const count = list.count;
-  const data = list.results;
+
+const ProduceTotalListPresenter = ({ loading, productions }) => {
+  const count = productions.length;
 
   return (
     <>
-      <TotalWrapper>
-        <TotalTitle>
-          <TitleIcon icon={faGuitar} />
-          <div>전체</div>
-        </TotalTitle>
-        <TotalSubTitleContainer>
-          <SubTitleContainer>
-            <SubTitle>
-              등록된 <Power>컨텐츠</Power>
-            </SubTitle>
-            <CountBox>
-              <Count>{count}</Count>
-            </CountBox>
-          </SubTitleContainer>
-          <WatchBtn to="production/write">글쓰기</WatchBtn>
-        </TotalSubTitleContainer>
-        <TotalList>
-          {data
-            ? data.map(item => (
-                <div key={item.id}>
-                  {item.thumnail ? (
-                    <ThumbnailBox>
-                      <Thumbnail src={item.thumnail} alt="사진" />
-                    </ThumbnailBox>
-                  ) : (
-                    <NoImageBox>
-                      <NoImage>
-                        <NoIcon icon={faExclamationTriangle} />
-                        <div>No Image</div>
-                      </NoImage>
-                    </NoImageBox>
-                  )}
-                  <div>{item.title}</div>
-                  <div>By {item.author}</div>
-                </div>
-              ))
-            : null}
-        </TotalList>
-      </TotalWrapper>
+      {loading ? (
+        <Loading />
+      ) : (
+        <TotalWrapper>
+          <TotalTitle>
+            <TitleIcon icon={faGuitar} />
+            <div>전체</div>
+          </TotalTitle>
+          <TotalSubTitleContainer>
+            <SubTitleContainer>
+              <SubTitle>
+                등록된 <Power>컨텐츠</Power>
+              </SubTitle>
+              <CountBox>
+                <Count>{count}</Count>
+              </CountBox>
+            </SubTitleContainer>
+            <WatchBtn to="production/write">글쓰기</WatchBtn>
+          </TotalSubTitleContainer>
+          <TotalList>
+            <ProduceFeed />
+          </TotalList>
+        </TotalWrapper>
+      )}
     </>
   );
 };
