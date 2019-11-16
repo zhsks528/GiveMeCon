@@ -6,7 +6,8 @@ import ProduceActionsPresenter from "./ProduceActionsPresenter";
 export default function ProduceActionsContainer({
   like,
   isLiked,
-  productionId
+  productionId,
+  comments
 }) {
   const dispatch = useDispatch();
 
@@ -22,6 +23,7 @@ export default function ProduceActionsContainer({
       like={like}
       isLiked={isLiked}
       handleChangeLike={handleChangeLike}
+      comments={comments}
     />
   );
 }
