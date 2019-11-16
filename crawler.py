@@ -69,6 +69,7 @@ def Video_info(video_id):
         channel.name = channel_title
         channel.category = category
         channel.subscribers = subscribeCount
+        channel.url = 'https://www.youtube.com/channel/'+video_data["items"][0]["snippet"]["channelId"]
         channel.save()
 
     try:
