@@ -20,6 +20,13 @@ export const setProduction = productions => {
   };
 };
 
+export const setDetailProduction = detailData => {
+  return {
+    type: actionTypes.SET_DETAIL_PRODUCTION,
+    detailData
+  };
+};
+
 export const doLikeProduction = productionId => {
   return {
     type: actionTypes.LIKE_PRODUCTION,
@@ -41,6 +48,14 @@ export const addComment = (productionId, message) => {
     message
   };
 };
+
+export const deleteComment = commentId => {
+  return {
+    type: actionTypes.DELETE_COMMENT,
+    commentId
+  };
+};
+
 export const getProduction = () => {
   return dispatch => {
     produce
@@ -62,18 +77,33 @@ export const getProduction = () => {
   };
 };
 
+export const getDetailProduction = productionId => {
+  return dispatch => {
+    produce
+      .get(`production/${productionId}/`)
+      .then(response => {
+        const { data } = response;
+        dispatch(setDetailProduction(data));
+      })
+      .catch(error => {
+        if (error.response) {
+          const { status } = error.response;
+
+          switch (status) {
+            case 401:
+              dispatch(logout());
+          }
+        }
+      });
+  };
+};
+
 export const likeProduction = productionId => {
   return dispatch => {
-    // dispatch(doLikeProduction(productionId));
-
     produce
       .post(`production/${productionId}/likes/`)
       .then(response => {
         dispatch(doLikeProduction(productionId));
-        // console.log(response.ok);
-        // if (!response.ok) {
-        //   dispatch(doUnLikeProduction(productionId));
-        // }
       })
       .catch(error => {
         if (error.response) {
@@ -90,15 +120,10 @@ export const likeProduction = productionId => {
 
 export const unlikeProduction = productionId => {
   return dispatch => {
-    // dispatch(doUnLikeProduction(productionId));
-
     produce
       .delete(`production/${productionId}/unlikes/`)
       .then(response => {
         dispatch(doUnLikeProduction(productionId));
-        // if (!response.ok) {
-        //   dispatch(doLikeProduction(productionId));
-        // }
       })
       .catch(error => {
         if (error.response) {
@@ -120,6 +145,30 @@ export const commentProduction = (productionId, message) => {
       .then(response => {
         const { data } = response;
         dispatch(addComment(productionId, data));
+      })
+      .catch(error => {
+        if (error.response) {
+          const { status } = error.response;
+
+          switch (status) {
+            case 401:
+              dispatch(logout());
+          }
+        }
+      });
+  };
+};
+
+export const commentDelete = commentId => {
+  return dispatch => {
+    produce
+      .delete(`production/comments/${commentId}/`)
+      .then(response => {
+        const { status } = response;
+
+        if (status === 204) {
+          dispatch(deleteComment(commentId));
+        }
       })
       .catch(error => {
         if (error.response) {
