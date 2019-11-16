@@ -42,7 +42,6 @@ export const Login = (username, password) => {
 };
 
 export const Registration = (username, password, email, fullname) => {
-  // console.log(username, password, email);
   return dispatch =>
     axios
       .post("http://127.0.0.1:8000/rest-auth/registration/", {
@@ -53,10 +52,9 @@ export const Registration = (username, password, email, fullname) => {
         // fullname: fullname
       })
       .then(response => {
-        console.log(response);
-        // const { data } = response;
-        // if (data.token) {
-        //   dispatch(saveToken(data.token));
-        // }
+        const { data } = response;
+        if (data.token) {
+          dispatch(saveToken(data.token));
+        }
       });
 };
