@@ -116,7 +116,7 @@ const LoginPresenter = ({
               name="username"
               value={username}
               onChange={event => setUsername(event.target.value)}
-              placeholder="ID"
+              placeholder="아이디"
             />
           </InputContainer>
 
@@ -127,7 +127,7 @@ const LoginPresenter = ({
               name="password"
               value={password}
               onChange={event => setPassword(event.target.value)}
-              placeholder="PASSWORD"
+              placeholder="패스워드"
             />
           </InputContainer>
           <Sumbit type="submit" value="로그인" />

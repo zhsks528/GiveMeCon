@@ -16,7 +16,6 @@ export default function Routes() {
 
   let route = null;
 
-  console.log(isLoggedIn);
   if (isLoggedIn) {
     route = <PublicRoutes />;
   } else {

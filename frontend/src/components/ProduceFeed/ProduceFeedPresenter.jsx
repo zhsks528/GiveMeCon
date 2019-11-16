@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import ProduceActions from "components/ProduceActions";
-import ProduceComments from "components/ProduceComments";
-import TimeStamp from "components/TimeStamp";
-import CommentBox from "components/Comments";
+import NotImage from "components/NotImage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const ThumbnailBox = styled.div`
   display: flex;
@@ -19,63 +17,78 @@ const ThumbnailBox = styled.div`
 const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
+  border-radius: 14px;
 `;
 
-const NoImageBox = styled(ThumbnailBox)`
-  border-radius: 10px;
-  background: black;
+const Info = styled.div`
+  margin-top: 10px;
 `;
 
-const NoImage = styled.div`
+const Title = styled(Link)`
+  && {
+    text-decoration: none;
+    color: black;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const ProfileContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: #ffcc00;
 `;
 
-const NoIcon = styled(FontAwesomeIcon)`
-  font-size: 40px;
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+`;
+
+const NoProfile = styled(FontAwesomeIcon)`
+  && {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: #6b6b6b;
+  }
 `;
 
 const ProduceFeedPresenter = ({ productions }) => {
-  // productions.map(item => console.log(item));
   return (
     <>
       {productions
         ? productions.map(item => (
             <div key={item.id}>
-              {item.images.length > 0 ? (
+              {item.thumbnail ? (
                 <ThumbnailBox>
-                  <Thumbnail src={item.images[0].file} alt="썸네일" />
+                  <Thumbnail src={item.thumbnail} alt="썸네일" />
                 </ThumbnailBox>
               ) : (
-                <NoImageBox>
-                  <NoImage>
-                    <NoIcon icon={faExclamationTriangle} />
-                    <div>No Image</div>
-                  </NoImage>
-                </NoImageBox>
+                <NotImage id={item.id} />
               )}
-              <Link to={`/production/board/${item.id}/`}>{item.title}</Link>
-              <div>
+              <Info>
+                <Title to={`/production/board/?id=${item.id}`}>
+                  {item.title}
+                </Title>
+
                 <ProduceActions
                   like={item.likes_count}
                   isLiked={item.is_liked}
                   productionId={item.id}
+                  comments={item.comments_count}
                 />
-                <ProduceComments comments={item.comments} />
-                <TimeStamp time={item.natural_time} />
-                <div>comments = {item.comments_count}</div>
-                <CommentBox productionId={item.id} />
-              </div>
-              <div>
-                {/* <img
-                      src={item.creator.profile_image}
-                      alter="프로필 이미지"
-                    /> */}
-                <div>By {item.creator.username}</div>
-              </div>
+                <ProfileContainer>
+                  {item.creator.profile_image ? (
+                    <Profile src={item.creator.profile_image} alt="프로필" />
+                  ) : (
+                    <NoProfile icon={faUserCircle} />
+                  )}
+                  <div>{item.creator.username}</div>
+                </ProfileContainer>
+              </Info>
             </div>
           ))
         : null}

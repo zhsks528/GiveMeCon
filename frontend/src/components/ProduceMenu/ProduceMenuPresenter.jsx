@@ -49,7 +49,6 @@ const ProduceMenuPresenter = () => {
   const movieIndex = pathname.indexOf("movie");
   const gameIndex = pathname.indexOf("game");
 
-  console.log(pathname);
   return (
     <MenuWrapper>
       <HeaderList>

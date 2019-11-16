@@ -6,13 +6,18 @@ const api = axios.create({
   baseURL: "http://127.0.0.1:8000/"
 });
 
+api.interceptors.request.use(config => {
+  const reqConfig = config;
+  const token = localStorage.getItem("jwt");
+  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
+  return config;
+});
+
 export default function WriteContainer() {
   const [categoryList, setCategoryList] = useState([]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(1);
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
-  const [tags, setTags] = useState([]);
   const [files, setFiles] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
 
@@ -28,14 +33,15 @@ export default function WriteContainer() {
 
     let form = new FormData();
 
+    if (files.length > 0) {
+      form.append("thumbnail", files[0]);
+    }
+
     form.append("title", title);
     form.append("category", category);
-    form.append("thumbnail", files[0]);
-    form.append("creator", author);
     form.append("content", content);
-    form.append("tags", tags.split(","));
 
-    api.post("/production/", form).then(response => console.log(response));
+    api.post("production/", form).then(response => console.log(response));
   };
 
   const handleImageChange = event => {
@@ -57,15 +63,14 @@ export default function WriteContainer() {
   return (
     <WritePresenter
       categoryList={categoryList}
+      category={category}
       handleSubmit={handleSubmit}
       setCategory={setCategory}
       setTitle={setTitle}
       setContent={setContent}
-      setAuthor={setAuthor}
       handleImageChange={handleImageChange}
       files={files}
       imgUrl={imgUrl}
-      setTags={setTags}
     />
   );
 }

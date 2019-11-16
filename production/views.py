@@ -6,6 +6,7 @@ from rest_framework import status
 from notifications import views as notifications_views
 from users import models as users_models
 from users import serializers as users_serializers
+from category import models as category_models
 
 class ProductionFeed(APIView):
 
@@ -25,18 +26,38 @@ class ProductionFeed(APIView):
 
         user = request.user
 
-        print(user)
+        category = request.data['category']
+        category_id = category_models.Category.objects.get(category_id=category)
+        
         serializer = InputProductionSerializer(data=request.data)
-
 
         if serializer.is_valid():
 
-            serializer.save(creator=user)
+            serializer.save(creator=user, category=category_id)
 
-            return Response(data=serializer.data, status=status.HTTP_204_NO_CONTENT)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # def post(self, request, format=None):
+
+    #     user = request.user
+
+    #     print(request)
+    #     # print(request.data['category'])
+
+    #     # category = request.data['category']
+    #     serializer = InputProductionSerializer(data=request.data)
+
+    #     if serializer.is_valid():
+
+    #         serializer.save(creator=user)
+
+    #         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        
+    #     else:
+    #         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProductionDetail(APIView):
 
@@ -191,10 +212,14 @@ class CommentOnProduction(APIView):
 
 class CommentDelete(APIView):
 
+    """ 자기 댓글 삭제 API """
+    
     def delete(self, request, comment_id, format=None):
 
+        user = request.user
+
         try:
-            found_comment = Comment.objects.get(id=comment_id)
+            found_comment = Comment.objects.get(id=comment_id, creator=user)
             found_comment.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         
@@ -222,6 +247,8 @@ class Search(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class ModerateComments(APIView):
+
+    """ 자기가 올린 글에 대한 댓글 삭제 권한 API """
 
     def delete(self, request, item_id, comment_id, format=None):
 

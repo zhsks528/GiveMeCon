@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faUser,
+  faBookmark,
+  faKey
+} from "@fortawesome/free-solid-svg-icons";
 
 const FormContainer = styled.div`
   display: flex;
@@ -121,12 +126,12 @@ const RegistrationPresenter = ({
             />
           </InputContainer>
           <InputContainer>
-            <Icon icon={faUser} />
+            <Icon icon={faBookmark} />
             <Input
               type="text"
               value={fullname}
               onChange={event => setFullName(event.target.value)}
-              placeholder="성명"
+              placeholder="이름"
             />
           </InputContainer>
           <InputContainer>
@@ -135,7 +140,7 @@ const RegistrationPresenter = ({
               type="text"
               value={username}
               onChange={event => setUsername(event.target.value)}
-              placeholder="닉네임"
+              placeholder="아이디"
             />
           </InputContainer>
 

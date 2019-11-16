@@ -4,5 +4,6 @@ import ProduceFeedPresenter from "./ProduceFeedPresenter";
 
 export default function ProduceFeedContainer() {
   const productions = useSelector(state => state.production.productions);
+
   return <ProduceFeedPresenter productions={productions} />;
 }

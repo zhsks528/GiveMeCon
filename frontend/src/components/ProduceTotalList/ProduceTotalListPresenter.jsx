@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGuitar,
-  faExclamationTriangle
-} from "@fortawesome/free-solid-svg-icons";
+import { faCertificate } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Loading from "components/Loading";
 import ProduceFeed from "components/ProduceFeed";
@@ -73,35 +70,6 @@ const SubTitle = styled.div``;
 const Power = styled.span`
   color: #f7323f;
 `;
-const ThumbnailBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 300px;
-`;
-
-const Thumbnail = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const NoImageBox = styled(ThumbnailBox)`
-  border-radius: 10px;
-  background: black;
-`;
-
-const NoImage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #ffcc00;
-`;
-
-const NoIcon = styled(FontAwesomeIcon)`
-  font-size: 40px;
-`;
 
 const ProduceTotalListPresenter = ({ loading, productions }) => {
   const count = productions.length;
@@ -113,7 +81,7 @@ const ProduceTotalListPresenter = ({ loading, productions }) => {
       ) : (
         <TotalWrapper>
           <TotalTitle>
-            <TitleIcon icon={faGuitar} />
+            <TitleIcon icon={faCertificate} />
             <div>전체</div>
           </TotalTitle>
           <TotalSubTitleContainer>

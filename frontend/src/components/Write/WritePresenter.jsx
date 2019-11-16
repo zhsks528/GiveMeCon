@@ -17,11 +17,6 @@ const ColumnContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const ThumbnailBox = styled.div`
-  width: 80%;
-  height: 400px;
-  overflow: auto;
-`;
 const ThumbnailContainer = styled.div`
   display: grid;
   grid-auto-flow: row;
@@ -36,23 +31,24 @@ const Thumbnail = styled.img`
 `;
 const WritePresenter = ({
   categoryList,
+  category,
   handleSubmit,
   setCategory,
   setTitle,
   setContent,
-  setAuthor,
-  setTag,
   handleImageChange,
   files,
-  imgUrl,
-  setTags
+  imgUrl
 }) => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit} method="POST">
         <RowsContainer>
           <Title>유형</Title>
-          <select onChange={event => setCategory(event.target.value)}>
+          <select
+            value={category}
+            onChange={event => setCategory(event.target.value)}
+          >
             {categoryList.map(item => (
               <option key={item.category_id} value={item.category_id}>
                 {item.category_name}
@@ -67,14 +63,6 @@ const WritePresenter = ({
             type="text"
             placeholder="제목을 입력해주세요"
             onChange={event => setTitle(event.target.value)}
-          />
-        </RowsContainer>
-        <RowsContainer>
-          <Title>작성자</Title>
-          <input
-            name="author"
-            type="text"
-            onChange={event => setAuthor(event.target.value)}
           />
         </RowsContainer>
         <ColumnContainer>
@@ -101,14 +89,7 @@ const WritePresenter = ({
             onChange={event => setContent(event.target.value)}
           />
         </ColumnContainer>
-        <ColumnContainer>
-          <div>태그</div>
-          <input
-            name="tag"
-            type="text"
-            onChange={event => setTags(event.target.value)}
-          />
-        </ColumnContainer>
+
         <input type="submit" value="작성" />
       </form>
     </Wrapper>
