@@ -20,8 +20,9 @@ class Production(TimeStampedModel):
     category = models.ForeignKey(category_models.Category, on_delete=models.CASCADE, null=True, related_name='category')
     title = models.CharField(max_length=255)
     creator = models.ForeignKey(user_models.User, on_delete=models.CASCADE, null=True, related_name='production')
+    thumbnail = models.ImageField(blank=True)
     content = models.TextField()
-    tags = TaggableManager(blank = True)
+    tags = TaggableManager(blank=True)
 
     class Meta:
         ordering = ['-created_at']

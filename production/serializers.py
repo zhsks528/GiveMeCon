@@ -69,7 +69,7 @@ class ProductionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Production
-        fields = ("id", 'category', "title", 'creator', 'images', 'content', 'comments', 'likes_count', 'comments_count', 'tags', 'natural_time', 'is_liked')
+        fields = ("id", 'category', "title", 'creator', 'images', 'thumbnail', 'content', 'comments', 'likes_count', 'comments_count', 'tags', 'natural_time', 'is_liked')
 
     def get_is_liked(self, obj):
         if 'request' in self.context:
@@ -87,10 +87,14 @@ class InputProductionSerializer(serializers.ModelSerializer):
 
     creator = FeedUserSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
-    tags = TagListSerializerField()
+    # tags = TagListSerializerField()
     images = ImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Production
-        fields = ('category', 'title', 'creator', 'images', 'content', 'tags')
+        fields = ('category', 'title', 'creator', 'images', 'content', 'thumbnail')
+
+    # def create(self, validated_data):
+    #     images_data = validated_data.pop('images')
+    #     print(images_data)
 
