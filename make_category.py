@@ -70,7 +70,7 @@ categroy_mapping_table_kor = {
     '38' : 'Foreign',
     '39' : '공포',
     '40' : 'Sci-Fi/Fantasy',
-    '41' : '스릴러'',
+    '41' : '스릴러',
     '42' : 'Shorts',
     '43' : 'Shows',
     '44' : 'Trailers'
