@@ -85,6 +85,7 @@ def Video_info(video_id):
         channel=channel,
         video_num=video_data["items"][0]["id"],
         category_id=category_id,
+        url = 'https://www.youtube.com/watch?v='+video_data["items"][0]["id"],
     )
 
 
