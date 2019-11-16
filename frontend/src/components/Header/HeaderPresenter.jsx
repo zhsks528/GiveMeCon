@@ -60,13 +60,12 @@ const LinkItem = styled(Link)`
   }
 `;
 
-const HeaderPresenter = () => {
+const HeaderPresenter = ({ handleLogout }) => {
   const { pathname } = window.location;
 
   const trendIndex = pathname.indexOf("trend");
   const productionIndex = pathname.indexOf("production");
   const introduceIndex = pathname.indexOf("introduce");
-  const loginIndex = pathname.indexOf("login");
 
   return (
     <HeaderWrapper>
@@ -92,10 +91,8 @@ const HeaderPresenter = () => {
               소개
             </LinkItem>
           </ListItem>
-          <ListItem>
-            <LinkItem to="/login" current={loginIndex === 1}>
-              로그인
-            </LinkItem>
+          <ListItem onClick={handleLogout}>
+            <LinkItem to="">로그아웃</LinkItem>
           </ListItem>
         </HeaderList>
       </MainContainer>
