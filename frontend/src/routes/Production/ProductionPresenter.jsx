@@ -16,7 +16,7 @@ const ProductionPresenter = ({ match, location }) => {
     <>
       <Header />
       <ProduceMenu />
-      <Route path={`${match.url}/board/:id`} component={ProduceDetail} />
+      <Route path={`${match.url}/board/`} component={ProduceDetail} />
       <Route exact path={match.url} component={ProduceTotalList} />
       <Route path={`${match.url}/music`} component={ProduceMusicList} />
       <Route path={`${match.url}/sports`} component={ProduceSportsList} />
