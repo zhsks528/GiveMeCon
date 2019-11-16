@@ -17,7 +17,9 @@ from category.models import Category
 # tab of
 #   https://cloud.google.com/console
 # Please ensure that you have enabled the YouTube Data API for your project.
-DEVELOPER_KEY = "AIzaSyBAEqG4C5JcGU8LW3WiQW19QbKWwHbpLOE"
+#DEVELOPER_KEY = "AIzaSyBAEqG4C5JcGU8LW3WiQW19QbKWwHbpLOE"
+DEVELOPER_KEY = "AIzaSyDWz2h2y3h0kuE0c_Mnb3HFxFLC230BYQ4"
+
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
@@ -89,4 +91,4 @@ if __name__ == "__main__":
     try:
         youtube_search(args)
     except HttpError as e:
-        print("An HTTP error %d occurred:\n%s") % (e.resp.status, e.content)
+        print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
