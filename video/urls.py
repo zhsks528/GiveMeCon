@@ -8,5 +8,5 @@ video_router = routers.DefaultRouter()
 video_router.register(r'video', VideoViewSet)
 
 urlpatterns = [
-    path('watch/', VideoDetail.as_view()),
+    path('', include(video_router.urls)),
 ]
