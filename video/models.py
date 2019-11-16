@@ -5,7 +5,6 @@ from category.models import Category
 class Video(models.Model):
     
     title = models.CharField(max_length=100)
-    url = models.CharField(max_length=255, null=True, blank=True)
     view = models.IntegerField(null=True, blank=True)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, null=True, blank=True)
     thumbnail = models.CharField(max_length=255, null=True, blank=True)
@@ -14,6 +13,7 @@ class Video(models.Model):
     video_num = models.CharField(max_length=255, blank=True, null=True)
     topic = models.CharField(max_length=255, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    url = models.CharField(max_length=255, null=True, blank=True, default='https://www.youtube.com/watch?v=')
     
     def __str__(self):
         return self.title
