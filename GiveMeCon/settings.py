@@ -180,3 +180,17 @@ JWT_AUTH = {
 
 # ACCOUNT_AUTHE
 ACCOUNT_LOGOUT_ON_GET = True
+
+SITE_ID = 1
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
