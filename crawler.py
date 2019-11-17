@@ -71,6 +71,7 @@ def Video_info(video_id):
         channel.name = channel_title
         channel.category = category
         channel.subscribers = subscribeCount
+        channel.url = 'https://www.youtube.com/channel/'+video_data["items"][0]["snippet"]["channelId"]
         channel.save()
 
     try:
@@ -85,7 +86,9 @@ def Video_info(video_id):
         view=video_data["items"][0]["statistics"]["viewCount"],
         thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["default"]["url"],
         channel=channel,
-        video_num=video_data["items"][0]["id"]
+        video_num=video_data["items"][0]["id"],
+        category_id=category_id,
+        url = 'https://www.youtube.com/watch?v='+video_data["items"][0]["id"],
     )
 
 
