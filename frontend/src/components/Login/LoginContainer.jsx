@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import LoginPresenter from "./LoginPresenter";
-import { FacebookLogin, Login } from "store/actions/users";
+import { FacebookLogin, login } from "store/actions/users";
 
 export default function LoginContainer({ changeAction }) {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ export default function LoginContainer({ changeAction }) {
   const handleSubmit = event => {
     event.preventDefault();
 
-    dispatch(Login(username, password));
+    dispatch(login(username, password));
   };
 
   // const handelFacebookLogin = response => {

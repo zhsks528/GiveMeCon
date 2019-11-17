@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import RegistrationPresenter from "./RegistrationPresenter";
-import { Registration } from "store/actions/users";
+import { registration } from "store/actions/users";
 
 export default function RegistrationContainer({ changeAction }) {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ export default function RegistrationContainer({ changeAction }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(Registration(username, password, email, fullname));
+    dispatch(registration(username, password, email, fullname));
   };
 
   return (
