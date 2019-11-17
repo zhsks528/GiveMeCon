@@ -110,27 +110,9 @@ const production = (state = initialState, action) => {
       return addComment(state, action);
     case actionTypes.DELETE_COMMENT:
       return deleteComment(state, action);
-
     default:
       return state;
   }
 };
 
 export default production;
-
-// const addComment = (state, action) => {
-//   const { productionId, message } = action;
-
-//   const updatedProductions = state.productions.map(production => {
-//     console.log(production);
-//     if (production.id === productionId) {
-//       return {
-//         ...production,
-//         comments: [...production.comments, message],
-//         comments_count: production.comments_count + 1
-//       };
-//     }
-//     return production;
-//   });
-//   return { ...state, productions: updatedProductions };
-// };

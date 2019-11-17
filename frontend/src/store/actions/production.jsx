@@ -56,6 +56,13 @@ export const deleteComment = commentId => {
   };
 };
 
+export const setUserList = userList => {
+  return {
+    type: actionTypes.SET_USER_LIST,
+    userList
+  };
+};
+
 export const getProduction = () => {
   return dispatch => {
     produce
@@ -71,6 +78,9 @@ export const getProduction = () => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
+            default:
+              break;
           }
         }
       });
@@ -92,6 +102,9 @@ export const getDetailProduction = productionId => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
+            default:
+              break;
           }
         }
       });
@@ -112,6 +125,9 @@ export const likeProduction = productionId => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
+            default:
+              break;
           }
         }
       });
@@ -132,6 +148,9 @@ export const unlikeProduction = productionId => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
+            default:
+              break;
           }
         }
       });
@@ -153,6 +172,9 @@ export const commentProduction = (productionId, message) => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
+            default:
+              break;
           }
         }
       });
@@ -177,6 +199,33 @@ export const commentDelete = commentId => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
+            default:
+              break;
+          }
+        }
+      });
+  };
+};
+
+export const getProductionLikes = productionId => {
+  return dispatch => {
+    produce
+      .get(`production/${productionId}/likes/`)
+      .then(response => {
+        const { data } = response;
+        dispatch(setUserList(data));
+      })
+      .catch(error => {
+        if (error.response) {
+          const { status } = error.response;
+
+          switch (status) {
+            case 401:
+              dispatch(logout());
+              break;
+            default:
+              break;
           }
         }
       });
