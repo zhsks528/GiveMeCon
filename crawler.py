@@ -15,13 +15,14 @@ django.setup()
 from video.models import Video
 from channel.models import Channel
 from category.models import Category
+from topic import check_topic
 
 # Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
 # tab of
 #   https://cloud.google.com/console
 # Please ensure that you have enabled the YouTube Data API for your project.
-#DEVELOPER_KEY = "AIzaSyBAEqG4C5JcGU8LW3WiQW19QbKWwHbpLOE"
 DEVELOPER_KEY = "AIzaSyDWz2h2y3h0kuE0c_Mnb3HFxFLC230BYQ4"
+#DEVELOPER_KEY = "AIzaSyBAEqG4C5JcGU8LW3WiQW19QbKWwHbpLOE"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 #keyword = input("키워드 입력 : ")
@@ -49,7 +50,8 @@ def Video_info(video_id):
     channel_url = f"https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + channel_id + "&key=" + DEVELOPER_KEY
     json_url = urllib.request.urlopen(channel_url).read()
     channel_data = json.loads(json_url)
-
+    # for topic in video_data["items"][0]["topicDetails"]["relevantTopicIds"][0].split(','):
+    #     print(check_topic(topic))
     try:
         subscribeCount = channel_data["items"][0]["statistics"]["subscriberCount"]
     except IndexError:
