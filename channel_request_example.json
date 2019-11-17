@@ -1,0 +1,20 @@
+{
+    'kind': 'youtube#channelListResponse',
+    'etag': '"j6xRRd8dTPVVptg711_CSPADRfg/kuGWEAe0kzczQdWkVorm1Q7adpw"',
+    'pageInfo': {
+        'totalResults': 1,
+        'resultsPerPage': 1
+    },
+    'items': [{
+        'kind': 'youtube#channel',
+        'etag': '"j6xRRd8dTPVVptg711_CSPADRfg/t46aVV7ET0Knc0C9RoxzKOGcD6s"',
+        'id': 'UC2fsxQr6Hcx1enORxXgKpxQ',
+        'statistics': {
+            'viewCount': '806651136',
+            'commentCount': '0',
+            'subscriberCount': '3830000',
+            'hiddenSubscriberCount': False,
+            'videoCount': '541'
+        }
+    }]
+}

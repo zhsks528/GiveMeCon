@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+ROOT_DIR = os.path.dirname(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -25,8 +25,13 @@ SECRET_KEY = "%rmol%al5zdqw!3ry3p__ub5b2w7p8^3ar8n(@s(b*g6k(aq9%"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 AUTH_USER_MODEL = "users.User"
+ALLOWED_HOSTS = [
+        'localhost',
+        '.ap-northeast-2.compute.amazonaws.com',
+        '127.0.0.1',
+]
+
 
 # Application definition
 
@@ -145,7 +150,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 
 # 페이지네이션 추가
 REST_FRAMEWORK = {
