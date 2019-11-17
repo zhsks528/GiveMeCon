@@ -127,7 +127,7 @@ class LikeProduction(APIView):
         
         users = users_models.User.objects.filter(id__in = like_creators_ids)
 
-        serializer = users_serializers.ListUserSerializer(users, many=True)
+        serializer = users_serializers.ListUserSerializer(users, many=True, context={"request": request})
 
         return Response(data= serializer.data, status=status.HTTP_200_OK)
         
