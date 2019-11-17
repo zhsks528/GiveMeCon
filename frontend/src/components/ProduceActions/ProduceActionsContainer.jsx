@@ -7,7 +7,8 @@ export default function ProduceActionsContainer({
   like,
   isLiked,
   productionId,
-  comments
+  comments,
+  handleOpenLikes
 }) {
   const dispatch = useDispatch();
 
@@ -24,6 +25,8 @@ export default function ProduceActionsContainer({
       isLiked={isLiked}
       handleChangeLike={handleChangeLike}
       comments={comments}
+      handleOpenLikes={handleOpenLikes}
+      productionId={productionId}
     />
   );
 }

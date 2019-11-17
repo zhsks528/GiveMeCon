@@ -5,6 +5,7 @@ import ProduceActions from "components/ProduceActions";
 import NotImage from "components/NotImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import UserList from "components/UserList";
 
 const ThumbnailBox = styled.div`
   display: flex;
@@ -56,7 +57,12 @@ const NoProfile = styled(FontAwesomeIcon)`
   }
 `;
 
-const ProduceFeedPresenter = ({ productions }) => {
+const ProduceFeedPresenter = ({
+  productions,
+  seeingLikes,
+  handleOpenLikes,
+  handleCloseLikes
+}) => {
   return (
     <>
       {productions
@@ -79,6 +85,7 @@ const ProduceFeedPresenter = ({ productions }) => {
                   isLiked={item.is_liked}
                   productionId={item.id}
                   comments={item.comments_count}
+                  handleOpenLikes={handleOpenLikes}
                 />
                 <ProfileContainer>
                   {item.creator.profile_image ? (
@@ -92,6 +99,9 @@ const ProduceFeedPresenter = ({ productions }) => {
             </div>
           ))
         : null}
+      {seeingLikes && (
+        <UserList title="Likes" handleCloseLikes={handleCloseLikes} />
+      )}
     </>
   );
 };

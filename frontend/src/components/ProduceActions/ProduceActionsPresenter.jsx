@@ -29,20 +29,23 @@ const ProduceActionsPresenter = ({
   like,
   isLiked,
   handleChangeLike,
-  comments
+  comments,
+  handleOpenLikes,
+  productionId
 }) => {
   return (
     <div>
       <ActionsWrapper>
         <ActionsContainer onClick={handleChangeLike}>
           {isLiked ? <Like icon={faHeart} /> : <Icon icon={faHeart} />}
-          <div>{like} likes</div>
+          <div>{like}</div>
         </ActionsContainer>
         <ActionsContainer>
           <Icon icon={faCommentAlt} />
           <div>{comments}</div>
         </ActionsContainer>
       </ActionsWrapper>
+      <div onClick={() => handleOpenLikes(productionId)}>LIKES</div>
     </div>
   );
 };
