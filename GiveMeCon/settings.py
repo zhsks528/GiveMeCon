@@ -25,11 +25,11 @@ SECRET_KEY = "%rmol%al5zdqw!3ry3p__ub5b2w7p8^3ar8n(@s(b*g6k(aq9%"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = "users.User"
 ALLOWED_HOSTS = [
         'localhost',
         '.ap-northeast-2.compute.amazonaws.com',
         '127.0.0.1',
-
 ]
 
 
@@ -43,17 +43,38 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
-    "corsheaders",  # CORS
+    
+    # CORS
+    "corsheaders",  
+    
     # REST API
-    "rest_framework",
+    
     # API 문서화
     "drf_yasg",
+
     # App
     "video",
     "channel",
     "word_count",
     "production",
     "category",
+    "users",
+    'taggit', # Tags for the Produce
+    'notifications', # 알람
+
+    "rest_framework",
+    'rest_framework.authtoken',
+    'rest_auth',
+    
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    
+    
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
 ]
 
 MIDDLEWARE = [
@@ -137,6 +158,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
 }
 
 CORS_ALLOW_CREDENTILS = True
@@ -150,3 +177,27 @@ MEDIA_URL = "/media/"
 # 업로드된 파일을 저장할 디렉토리 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+TAGGIT_CASE_INSENSITIVE = True # 대문자 소문자 구분 X
+
+REST_USE_JWT = True
+
+JWT_AUTH = {
+    'JWT_VERIFY_EXPIRATION': False
+}
+
+# ACCOUNT_AUTHE
+ACCOUNT_LOGOUT_ON_GET = True
+
+SITE_ID = 1
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

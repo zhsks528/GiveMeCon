@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ProduceTotalListPresenter from "./ProduceTotalListPresenter";
-import axios from "axios";
+import { getProduction } from "store/actions/production";
 
 export default function ProduceTotalListContainer() {
-  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const productions = useSelector(state => state.production.productions);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    callApi();
-  }, []);
+    dispatch(getProduction());
+    setLoading(false);
+  }, [dispatch]);
 
-  const callApi = () => {
-    axios
-      .get("http://127.0.0.1:8000/production/total/")
-      .then(response => {
-        const { data } = response;
-        setList(data);
-      })
-      .catch(error => console.log(error));
-  };
-  
-  return <ProduceTotalListPresenter list={list} />;
+  return (
+    <ProduceTotalListPresenter loading={loading} productions={productions} />
+  );
 }

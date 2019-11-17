@@ -1,17 +1,20 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import ProductionViewSet, ProductionMusicViewSet, ProductionSportsViewSet, ProductionMoviesViewSet, ProductionGameViewSet
+from .views import ProductionFeed, ProductionDetail, LikeProduction, UnLikeProduction, CommentOnProduction, ModerateComments, CommentDelete, Search
 
 app_name = "production"
 
-production_router = routers.DefaultRouter()
-production_router.register(r"total", ProductionViewSet)
-production_router.register(r"music", ProductionMusicViewSet)
-production_router.register(r"sports", ProductionSportsViewSet)
-production_router.register(r"movies", ProductionMoviesViewSet)
-production_router.register(r"games", ProductionGameViewSet)
+# production_router = routers.DefaultRouter()
+# production_router.register(r"total", ProductionViewSet)
 
 
 urlpatterns = [
-    path("", include(production_router.urls))
+    path("", ProductionFeed.as_view()),
+    path('<int:item_id>/', ProductionDetail.as_view()),
+    path('<int:item_id>/likes/', LikeProduction.as_view()),
+    path('<int:item_id>/unlikes/', UnLikeProduction.as_view()),
+    path('<int:item_id>/comments/', CommentOnProduction.as_view()),
+    path('<int:item_id>/comments/<int:comment_id>/', ModerateComments.as_view()),
+    path('comments/<int:comment_id>/', CommentDelete.as_view()),
+    path('search/', Search.as_view()),
 ]

@@ -1,71 +1,76 @@
-import React, {useState, useEffect} from 'react';
-import WritePresenter from './WritePresenter';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import WritePresenter from "./WritePresenter";
+import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000/'
-})
+  baseURL: "http://127.0.0.1:8000/"
+});
 
-export default function WriteContainer(){
+api.interceptors.request.use(config => {
+  const reqConfig = config;
+  const token = localStorage.getItem("jwt");
+  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
+  return config;
+});
 
-    const [categoryList, setCategoryList] = useState([]);
-    const [category, setCategory] = useState("");
-    const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [content, setContent] = useState('');
-    const [tag, setTag] = useState('');
+export default function WriteContainer() {
+  const [categoryList, setCategoryList] = useState([]);
+  const [category, setCategory] = useState(1);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [files, setFiles] = useState([]);
+  const [imgUrl, setImgUrl] = useState([]);
 
-    useEffect(() => {
-        api.get('category/')
-        .then(response => {
-            const {data} = response;
-            setCategoryList(data.results)
-        })
-    }, [])
-    
-    // console.log(categoryList, category, title, author, content, tag)
+  useEffect(() => {
+    api.get("category/").then(response => {
+      const { data } = response;
+      setCategoryList(data.results);
+    });
+  }, []);
 
-    console.log(category)
-    let form = new FormData()
-    form.append('title', title)
-    form.append('author', author)
-    form.append('content', content)
+  const handleSubmit = event => {
+    event.preventDefault();
 
-    // console.log(typeof category)
-    const handleSubmit = (event) => {
-        
-        event.preventDefault();
-        
-        // api.post('production/music/', form)
-        //     .then(response => console.log(response))
-        if(category === "음악"){
-            api.post('production/music/', form)
-            .then(response => console.log(response))
-        }
-        else if(category === "스포츠"){
-            api.post('production/sports/', form)
-            .then(response => console.log(response))
-        }
-        else if(category === "영화"){
-            api.post('production/movies/', form)
-            .then(response => console.log(response))
-        }
-        else if(category === "게임"){
-            api.post('production/games/', form)
-            .then(response => console.log(response))
-        }
-        
+    let form = new FormData();
+
+    if (files.length > 0) {
+      form.append("thumbnail", files[0]);
     }
 
-    return(
-        <WritePresenter 
-            categoryList={categoryList}
-            handleSubmit={handleSubmit}
-            setCategory={setCategory}
-            setTitle={setTitle}
-            setContent={setContent}
-            setAuthor={setAuthor}
-            setTag={setTag}
-        />
-    )
+    form.append("title", title);
+    form.append("category", category);
+    form.append("content", content);
+
+    api.post("production/", form).then(response => console.log(response));
+  };
+
+  const handleImageChange = event => {
+    event.preventDefault();
+
+    let fileList = Array.from(event.target.files);
+    fileList.forEach(file => {
+      let reader = new FileReader();
+
+      reader.onloadend = () => {
+        setFiles(files => files.concat(file));
+        setImgUrl(imgUrl => imgUrl.concat(reader.result));
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  return (
+    <WritePresenter
+      categoryList={categoryList}
+      category={category}
+      handleSubmit={handleSubmit}
+      setCategory={setCategory}
+      setTitle={setTitle}
+      setContent={setContent}
+      handleImageChange={handleImageChange}
+      files={files}
+      imgUrl={imgUrl}
+    />
+  );
 }

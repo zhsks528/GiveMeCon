@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,10 +8,6 @@ import {
   faGift
 } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
-
-const IntroduceWrapper = styled.div`
-  width: 100%;
-`;
 
 const Introduce = styled.div`
   width: 100%;
@@ -130,25 +126,25 @@ const AnimateItem = styled.li`
 `;
 
 const AboutPresenter = () => {
-    const icon = [faThumbsUp, faBell, faHeart, faYoutube, faGift];
+  const icon = [faThumbsUp, faBell, faHeart, faYoutube, faGift];
 
-    return (
-      <Introduce>
-        <AniBox>
-          {icon.map((item,index) => (
-            <AnimateItem key={index}>
-              <FontAwesomeIcon icon={item} />
-            </AnimateItem>
-          ))}
-        </AniBox>
+  return (
+    <Introduce>
+      <AniBox>
+        {icon.map((item, index) => (
+          <AnimateItem key={index}>
+            <FontAwesomeIcon icon={item} />
+          </AnimateItem>
+        ))}
+      </AniBox>
 
-        <TitleContainer>
-          <SubTitle>크리에이터를 위한</SubTitle>
-          <SubTitle>소통의 공간</SubTitle>
-          <Title>기브미콘</Title>
-        </TitleContainer>
-      </Introduce>
-    )
-}
+      <TitleContainer>
+        <SubTitle>크리에이터를 위한</SubTitle>
+        <SubTitle>소통의 공간</SubTitle>
+        <Title>기브미콘</Title>
+      </TitleContainer>
+    </Introduce>
+  );
+};
 
 export default AboutPresenter;

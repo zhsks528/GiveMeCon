@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRunning,
   faExclamationTriangle
 } from "@fortawesome/free-solid-svg-icons";
-
+import { Link } from "react-router-dom";
 
 const TotalWrapper = styled.div`
-    width: 80%;
+  width: 80%;
   margin: 0 auto;
 `;
 const TotalTitle = styled.div`
@@ -43,7 +43,7 @@ const Count = styled.div`
   text-align: center;
 `;
 
-const WatchBtn = styled.div`
+const WatchBtn = styled(Link)`
   cursor: pointer;
   border-radius: 10px;
   padding: 5px;
@@ -53,8 +53,7 @@ const WatchBtn = styled.div`
 
 const TotalList = styled.div`
   display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 200px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-template-rows: 200px;
   grid-auto-columns: 200px;
   grid-auto-rows: 200px;
@@ -74,12 +73,12 @@ const ThumbnailBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  width: 100%;
   height: 118px;
 `;
 
 const Thumbnail = styled.img`
-  width: 200px;
+  width: 100%;
   height: 118px;
 `;
 
@@ -99,7 +98,7 @@ const NoIcon = styled(FontAwesomeIcon)`
   font-size: 40px;
 `;
 
-const ProduceSportsListPresenter = ({list}) => {
+const ProduceSportsListPresenter = ({ list }) => {
   const count = list.count;
   const data = list.results;
   return (
@@ -118,7 +117,7 @@ const ProduceSportsListPresenter = ({list}) => {
               <Count>{count}</Count>
             </CountBox>
           </SubTitleContainer>
-          <WatchBtn>둘러보기</WatchBtn>
+          <WatchBtn to="write">글쓰기</WatchBtn>
         </TotalSubTitleContainer>
         <TotalList>
           {data
@@ -144,7 +143,7 @@ const ProduceSportsListPresenter = ({list}) => {
         </TotalList>
       </TotalWrapper>
     </>
-  )
-}
+  );
+};
 
-export default ProduceSportsListPresenter
+export default ProduceSportsListPresenter;
