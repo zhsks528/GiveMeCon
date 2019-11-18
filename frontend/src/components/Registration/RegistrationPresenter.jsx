@@ -14,8 +14,15 @@ const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 500px;
-  border: 2px solid;
+
   padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #f5f5f5;
+  border-radius: 14px;
 `;
 
 const Header = styled.div`
