@@ -157,7 +157,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # 페이지네이션 추가
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
+    "PAGE_SIZE": 30,
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
