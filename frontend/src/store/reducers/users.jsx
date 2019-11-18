@@ -6,7 +6,9 @@ const initialState = {
 };
 
 const saveToken = (state, action) => {
-  localStorage.setItem("jwt", action.token);
+  const { token, username } = action;
+  localStorage.setItem("jwt", token);
+  localStorage.setItem("username", username);
   return {
     ...state,
     isLoggedIn: true,
@@ -16,6 +18,7 @@ const saveToken = (state, action) => {
 
 const logout = (state, action) => {
   localStorage.removeItem("jwt");
+  localStorage.removeItem("username");
   return {
     ...state,
     isLoggedIn: false

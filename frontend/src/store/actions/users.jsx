@@ -16,9 +16,10 @@ usersToken.interceptors.request.use(config => {
   return config;
 });
 
-export const saveToken = token => ({
+export const saveToken = (token, username) => ({
   type: actionTypes.SAVE_TOKEN,
-  token
+  token,
+  username
 });
 
 export const logout = () => ({
@@ -114,8 +115,9 @@ export const login = (username, password) => {
       })
       .then(response => {
         const { data } = response;
+        const username = data.user.username;
         if (data.token) {
-          dispatch(saveToken(data.token));
+          dispatch(saveToken(data.token, username));
         }
       });
 };
@@ -132,8 +134,9 @@ export const registration = (username, password, email, fullname) => {
       })
       .then(response => {
         const { data } = response;
+        const username = data.user.username;
         if (data.token) {
-          dispatch(saveToken(data.token));
+          dispatch(saveToken(data.token, username));
         }
       });
 };

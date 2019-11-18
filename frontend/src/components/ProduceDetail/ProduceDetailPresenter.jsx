@@ -3,102 +3,117 @@ import styled from "styled-components";
 import NotImage from "components/NotImage";
 import ProduceComments from "components/ProduceComments";
 import CommentBox from "components/Comments";
+import TitleBox from "components/TitleBox";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFlag, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faCommentAlt,
+  faUserCircle
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
-  // display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
   width: 80%;
   margin: 0 auto;
 `;
-
-const Thumbnail = styled.div`
-  grid-column: 1 / 3;
-  grid-row: 1/3;
-  border: 2px solid;
-`;
-
-const Info = styled.div`
-  border: 2px solid;
-`;
-
-const Profile = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-`;
-
-const Content = styled.div`
-  grid-column: 1 / 4;
-  border: 2px solid;
-`;
-
-const Tags = styled.div`
-  grid-column: 1 / 4;
-  border: 2px solid;
-`;
-
-const Comments = styled.div`
-  grid-column: 1 / 4;
-  border: 2px solid;
-`;
-
-const TotalTitle = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  font-size: 36px;
-  color: #6b6b6b;
-`;
-
-const TitleIcon = styled(FontAwesomeIcon)`
-  margin-right: 10px;
-`;
-
-const TotalSubTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 20px;
 `;
 
-const WatchBtn = styled(Link)`
+const Button = styled(Link)`
   cursor: pointer;
   border-radius: 10px;
   padding: 5px;
   background: #f7323f;
   color: white;
+  text-decoration: none;
 `;
 
-const ProfileContainer = styled.div`
+const Body = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 20%;
+  grid-template-columns: 400px 1fr;
+  grid-template-rows: 450px;
+`;
+
+const ThumbnailContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
-const Time = styled.div`
+const Thumbnail = styled.img`
+  width: 70%;
+  height: 70%;
+`;
+
+const Title = styled.div`
   display: flex;
-  justify-content: flex-end;
-  color: #a9a9a9;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 36px;
+`;
+
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
 `;
 
 const NoProfile = styled(FontAwesomeIcon)`
   && {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    margin-right: 10px;
     color: #6b6b6b;
+    margin-right: 10px;
   }
 `;
-const ProduceDetailPresenter = ({ detailData }) => {
-  console.log(detailData);
 
+const Comments = styled.div`
+  overflow-y: auto;
+`;
+
+const InfoRows = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const Item = styled.span`
+  min-width: 100px;
+  margin-right: 20px;
+  color: #6b6b6b;
+`;
+
+const IconContainer = styled.div`
+  margin-right: 20px;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  && {
+    margin-right: 5px;
+  }
+`;
+
+const Like = styled(Icon)`
+  color: red;
+`;
+
+const Content = styled.div`
+  margin-top: 20px;
+  height: 220px;
+  overflow-y: auto;
+  word-break: break-all;
+`;
+
+const ProduceDetailPresenter = ({ detailData }) => {
   let categoryValue,
     username,
     profile = null;
@@ -114,41 +129,62 @@ const ProduceDetailPresenter = ({ detailData }) => {
 
   return (
     <Wrapper>
-      <TotalTitle>
-        <TitleIcon icon={faFlag} />
-        <div>{detailData.title}</div>
-      </TotalTitle>
-      <TotalSubTitleContainer>
-        <ProfileContainer>
-          {profile ? (
-            <Profile src={profile} alt="프로필" />
+      <TitleBox title="DETAIL" />
+
+      <ButtonContainer>
+        <Button to="/production">나가기</Button>
+      </ButtonContainer>
+
+      <Body>
+        <ThumbnailContainer>
+          {detailData.thumbnail ? (
+            <Thumbnail src={detailData.thumbnail} alt="썸네일" />
           ) : (
-            <NoProfile icon={faUserCircle} />
+            <NotImage />
           )}
+        </ThumbnailContainer>
 
-          <div>{username}</div>
-        </ProfileContainer>
-        <WatchBtn to="/production">나가기</WatchBtn>
-      </TotalSubTitleContainer>
-      <Time>{detailData.natural_time}</Time>
-      <Thumbnail>
-        {detailData.thumbnail ? (
-          <img src={detailData.thumbnail} alt="썸네일" />
-        ) : (
-          <NotImage />
-        )}
-      </Thumbnail>
+        <div>
+          <Title>{detailData.title}</Title>
+          <InfoRows>
+            <Item>작성자</Item>
+            {profile ? (
+              <Profile src={profile} alt="프로필" />
+            ) : (
+              <NoProfile icon={faUserCircle} />
+            )}
 
-      <Info>
-        <div>Like : {detailData.likes_count} </div>
-        <div>유형 : {categoryValue}</div>
-      </Info>
+            <span>{username}</span>
+          </InfoRows>
 
-      <Content>
-        <div>내용</div>
-        <div>{detailData.content}</div>
-      </Content>
-      <Tags>Tags</Tags>
+          <InfoRows>
+            <Item>유형</Item>
+            <span>{categoryValue}</span>
+          </InfoRows>
+
+          <InfoRows>
+            <Item>작성시간</Item>
+            <span>{detailData.natural_time}</span>
+          </InfoRows>
+
+          <InfoRows>
+            <IconContainer>
+              {detailData.is_liked ? (
+                <Like icon={faHeart} />
+              ) : (
+                <Icon icon={faHeart} />
+              )}
+              <span>{detailData.likes_count}</span>
+            </IconContainer>
+            <IconContainer>
+              <Icon icon={faCommentAlt} />
+              <span>{detailData.comments_count}</span>
+            </IconContainer>
+          </InfoRows>
+
+          <Content>{detailData.content}</Content>
+        </div>
+      </Body>
       <CommentBox productionId={detailData.id} />
       <Comments>
         <ProduceComments comments={detailData.comments} />

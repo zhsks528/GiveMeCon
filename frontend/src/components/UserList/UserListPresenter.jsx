@@ -30,6 +30,7 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid lightgrey;
+  position: relative;
 `;
 
 const Title = styled.div`
@@ -49,15 +50,26 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
+const IconContainer = styled.div`
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: #f7323f;
+  }
+`;
+
 const UserListPresenter = ({ loading, title, handleCloseLikes }) => {
   return (
     <Container>
       <Box>
         <Header>
           <Title>{title}</Title>
-          <span onClick={handleCloseLikes}>
+          <IconContainer onClick={handleCloseLikes}>
             <FontAwesomeIcon icon={faTimes} />
-          </span>
+          </IconContainer>
         </Header>
         <Content>{loading ? <Loading /> : <UserRow />}</Content>
       </Box>

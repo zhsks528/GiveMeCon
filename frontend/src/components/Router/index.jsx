@@ -28,9 +28,6 @@ export const PrivateRoutes = () => {
   return (
     <Switch>
       <Route path="/" component={Auth} />
-      {/* <Route path="/trend" component={Trend} />
-      <Route path="/production" component={Production} />
-      <Route exact path="/introduce" component={Introduce} /> */}
       <Redirect from="*" to="/" />
     </Switch>
   );

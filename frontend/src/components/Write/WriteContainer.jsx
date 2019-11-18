@@ -42,6 +42,8 @@ export default function WriteContainer() {
     form.append("content", content);
 
     api.post("production/", form).then(response => console.log(response));
+
+    window.location.href = "/production";
   };
 
   const handleImageChange = event => {

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import UserList from "components/UserList";
 
-const ThumbnailBox = styled.div`
+const ThumbnailContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,14 +21,22 @@ const Thumbnail = styled.img`
   border-radius: 14px;
 `;
 
-const Info = styled.div`
+const InfoContainer = styled.div`
   margin-top: 10px;
 `;
 
 const Title = styled(Link)`
   && {
-    text-decoration: none;
+    display: -webkit-box;
     color: black;
+    max-height: 3.2rem;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    text-decoration: none;
+    height: 50px;
   }
   &:hover {
     text-decoration: underline;
@@ -69,17 +77,13 @@ const ProduceFeedPresenter = ({
         ? productions.map(item => (
             <div key={item.id}>
               {item.thumbnail ? (
-                <ThumbnailBox>
+                <ThumbnailContainer>
                   <Thumbnail src={item.thumbnail} alt="썸네일" />
-                </ThumbnailBox>
+                </ThumbnailContainer>
               ) : (
                 <NotImage id={item.id} />
               )}
-              <Info>
-                <Title to={`/production/board/?id=${item.id}`}>
-                  {item.title}
-                </Title>
-
+              <InfoContainer>
                 <ProduceActions
                   like={item.likes_count}
                   isLiked={item.is_liked}
@@ -87,6 +91,10 @@ const ProduceFeedPresenter = ({
                   comments={item.comments_count}
                   handleOpenLikes={handleOpenLikes}
                 />
+                <Title to={`/production/board/?id=${item.id}`}>
+                  {item.title}
+                </Title>
+
                 <ProfileContainer>
                   {item.creator.profile_image ? (
                     <Profile src={item.creator.profile_image} alt="프로필" />
@@ -95,7 +103,7 @@ const ProduceFeedPresenter = ({
                   )}
                   <div>{item.creator.username}</div>
                 </ProfileContainer>
-              </Info>
+              </InfoContainer>
             </div>
           ))
         : null}

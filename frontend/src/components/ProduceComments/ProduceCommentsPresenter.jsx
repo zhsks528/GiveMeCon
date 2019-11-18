@@ -10,7 +10,6 @@ const ListContainer = styled.ul`
 const List = styled.li`
   list-style: none;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
   padding: 0 20px;
@@ -18,7 +17,6 @@ const List = styled.li`
 
 const UserContainer = styled.div`
   display: flex;
-  align-items: center;
 `;
 
 const Profile = styled.img`
@@ -53,6 +51,8 @@ const Message = styled.span`
   word-break: break-all;
 `;
 const ProduceCommentsPresenter = ({ comments, handleDelete }) => {
+  const username = localStorage.getItem("username");
+
   return (
     <>
       <ListContainer>
@@ -71,7 +71,12 @@ const ProduceCommentsPresenter = ({ comments, handleDelete }) => {
                     <Message>{comment.message}</Message>
                   </div>
                 </UserContainer>
-                <Icon onClick={() => handleDelete(comment.id)} icon={faTimes} />
+                {username === comment.creator.username ? (
+                  <Icon
+                    onClick={() => handleDelete(comment.id)}
+                    icon={faTimes}
+                  />
+                ) : null}
               </List>
             ))
           : null}

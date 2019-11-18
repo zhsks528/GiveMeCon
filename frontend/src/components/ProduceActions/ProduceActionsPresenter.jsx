@@ -3,11 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCommentAlt } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
-const ActionsWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  cursor: pointer;
+  justify-content: flex-start;
 `;
 
 const ActionsContainer = styled.div`
@@ -19,12 +18,19 @@ const ActionsContainer = styled.div`
 const Icon = styled(FontAwesomeIcon)`
   && {
     margin-right: 5px;
+    cursor: pointer;
   }
 `;
 
 const Like = styled(Icon)`
   color: red;
 `;
+
+const LikesList = styled.div`
+  color: #6b6b6b;
+  cursor: pointer;
+`;
+
 const ProduceActionsPresenter = ({
   like,
   isLiked,
@@ -35,7 +41,7 @@ const ProduceActionsPresenter = ({
 }) => {
   return (
     <div>
-      <ActionsWrapper>
+      <Wrapper>
         <ActionsContainer onClick={handleChangeLike}>
           {isLiked ? <Like icon={faHeart} /> : <Icon icon={faHeart} />}
           <div>{like}</div>
@@ -44,8 +50,8 @@ const ProduceActionsPresenter = ({
           <Icon icon={faCommentAlt} />
           <div>{comments}</div>
         </ActionsContainer>
-      </ActionsWrapper>
-      <div onClick={() => handleOpenLikes(productionId)}>LIKES</div>
+      </Wrapper>
+      <LikesList onClick={() => handleOpenLikes(productionId)}>LIKES</LikesList>
     </div>
   );
 };
