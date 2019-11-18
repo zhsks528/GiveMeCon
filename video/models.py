@@ -1,6 +1,7 @@
 from django.db import models
 from channel.models import Channel
 from category.models import Category
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class Video(models.Model):
     
@@ -17,3 +18,7 @@ class Video(models.Model):
     
     def __str__(self):
         return self.title
+
+    @property
+    def natural_time(self):
+        return  naturaltime(self.created_at)
