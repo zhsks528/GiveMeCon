@@ -9,3 +9,4 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const SET_USER_LIST = "SET_USER_LIST";
 export const FOLLOW_USER = "FOLLOW_USER";
 export const UNFOLLOW_USER = "UNFOLLOW_USER";
+export const SET_TREND = "SET_TREND";
