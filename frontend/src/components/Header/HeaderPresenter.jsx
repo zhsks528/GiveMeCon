@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "components/asset/images/logo.png";
+import Popover from "@material-ui/core/Popover";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -52,6 +55,7 @@ const ListItem = styled.li`
   padding: 0 20px;
   color: #6b6b6b;
   cursor: pointer;
+  list-style: none;
 `;
 
 const LinkItem = styled(Link)`
@@ -62,7 +66,47 @@ const LinkItem = styled(Link)`
   }
 `;
 
-const HeaderPresenter = ({ handleLogout, isLoggedIn }) => {
+const Login = styled(LinkItem)`
+  font-size: 20px;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 140px;
+  cursor: pointer;
+`;
+
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+`;
+
+const Username = styled.div`
+  color: #6b6b6b;
+`;
+
+const NoProfile = styled(FontAwesomeIcon)`
+  && {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: #6b6b6b;
+  }
+`;
+
+const HeaderPresenter = ({
+  handleLogout,
+  isLoggedIn,
+  profile,
+  anchorEl,
+  handleClick,
+  handleClose
+}) => {
   const { pathname } = window.location;
 
   return (
@@ -89,18 +133,45 @@ const HeaderPresenter = ({ handleLogout, isLoggedIn }) => {
               소개
             </LinkItem>
           </ListItem>
-          {isLoggedIn ? (
-            <ListItem onClick={handleLogout}>
-              <LinkItem to="">로그아웃</LinkItem>
-            </ListItem>
-          ) : (
-            <ListItem>
-              <LinkItem to="/auth" current={pathname === "/auth"}>
-                로그인
-              </LinkItem>
-            </ListItem>
-          )}
         </HeaderList>
+
+        {isLoggedIn ? (
+          <>
+            <ProfileContainer onClick={handleClick}>
+              {profile.profile_image ? (
+                <>
+                  <Profile src={profile.profile_image} alt="프로필" />
+                </>
+              ) : (
+                <NoProfile icon={faUserCircle} />
+              )}
+              <Username>{profile.username}</Username>
+            </ProfileContainer>
+            <Popover
+              open={anchorEl}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+            >
+              <LinkItem to="" onClick={handleLogout}>
+                로그아웃
+              </LinkItem>
+            </Popover>
+          </>
+        ) : (
+          <ListItem>
+            <Login to="/auth" current={pathname === "/auth"}>
+              로그인
+            </Login>
+          </ListItem>
+        )}
       </MainContainer>
     </HeaderWrapper>
   );
