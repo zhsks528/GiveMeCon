@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   isLoggedIn: localStorage.getItem("token") ? true : false,
-  userList: []
+  userList: [],
+  profile: []
 };
 
 const saveToken = (state, action) => {
@@ -67,6 +68,15 @@ const unfollowUser = (state, action) => {
   };
 };
 
+const setProfile = (state, action) => {
+  const { profileData } = action;
+
+  return {
+    ...state,
+    profile: profileData
+  };
+};
+
 const users = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_TOKEN:
@@ -79,6 +89,8 @@ const users = (state = initialState, action) => {
       return followUser(state, action);
     case actionTypes.UNFOLLOW_USER:
       return unfollowUser(state, action);
+    case actionTypes.SET_PROFILE:
+      return setProfile(state, action);
     default:
       return state;
   }
