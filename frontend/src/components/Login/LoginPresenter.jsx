@@ -57,7 +57,7 @@ const Button = styled.button`
   border: none;
   outline: none;
   background: #f7323f;
-  border-radius: 14px;
+  border-radius: 4px;
   padding: 5px 10px;
   color: white;
   font-weight: bold;
@@ -72,23 +72,42 @@ const InputContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+const IconContainer = styled.div`
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: #3498db;
+  border-radius: 4px 0px 0px 4px;
+`;
+
+const PwdContainer = styled(IconContainer)`
+  background: #f55656;
+`;
+
 const Icon = styled(FontAwesomeIcon)`
   && {
-    width: 30px;
-    height: 30px;
-    padding: 10px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  height: 100%;
+  font-size: 18px;
+  outline: none;
+  padding: 0px 10px;
+  border-style: none;
+  border-radius: 0px 4px 4px 0px;
 `;
 
 const Sumbit = styled.input`
   border: none;
-  border-radius: 14px;
-  background: #15933a;
+  border-radius: 4px;
+  background: #28b279;
   color: white;
   padding: 10px;
   font-size: 20px;
@@ -96,6 +115,11 @@ const Sumbit = styled.input`
   margin-bottom: 20px;
   cursor: pointer;
   outline: none;
+  transition: 0.3s;
+
+  &:hover {
+    background: #15933a;
+  }
 `;
 
 const LoginPresenter = ({
@@ -116,7 +140,9 @@ const LoginPresenter = ({
       <Body>
         <Form onSubmit={handleSubmit}>
           <InputContainer>
-            <Icon icon={faUser} />
+            <IconContainer>
+              <Icon icon={faUser} />
+            </IconContainer>
             <Input
               type="text"
               name="username"
@@ -127,7 +153,9 @@ const LoginPresenter = ({
           </InputContainer>
 
           <InputContainer>
-            <Icon icon={faKey} />
+            <PwdContainer>
+              <Icon icon={faKey} />
+            </PwdContainer>
             <Input
               type="password"
               name="password"
