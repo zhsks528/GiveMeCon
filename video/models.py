@@ -16,9 +16,12 @@ class Video(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     url = models.CharField(max_length=255, null=True, blank=True, default='https://www.youtube.com/watch?v=')
     
+    
+    
     def __str__(self):
         return self.title
 
     @property
     def natural_time(self):
         return  naturaltime(self.created_at)
+    
