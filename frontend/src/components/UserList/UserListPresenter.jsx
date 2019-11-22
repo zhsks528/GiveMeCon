@@ -48,6 +48,22 @@ const Content = styled.div`
   height: 300px;
   min-height: 300px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 14px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+    border-radius: 4px;
+  }
 `;
 
 const IconContainer = styled.div`
