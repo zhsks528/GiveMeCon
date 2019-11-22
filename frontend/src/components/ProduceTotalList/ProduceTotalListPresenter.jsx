@@ -45,7 +45,7 @@ const Btn = styled.div`
 `;
 const TotalList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-columns: repeat(auto-fill, 220px);
   // grid-template-rows: 400px;
   grid-auto-columns: 200px;
   // grid-auto-rows: 400px;

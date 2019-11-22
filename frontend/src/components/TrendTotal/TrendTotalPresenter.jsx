@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   display: ${props => (props.count > 0 ? "grid" : "block")}
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-columns: repeat(auto-fill, 220px);
   grid-gap: 20px;
   justify-content: space-between;
 `;

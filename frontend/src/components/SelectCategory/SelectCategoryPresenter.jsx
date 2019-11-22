@@ -24,10 +24,10 @@ const Select = styled.select`
   cursor: pointer;
   transition: 0.3s;
 
-  &:hover {
-    background: #f7323f;
-    color: yellow;
-  }
+  // &:hover {
+  //   background: #f7323f;
+  //   color: yellow;
+  // }
 `;
 
 const Btn = styled.button`
