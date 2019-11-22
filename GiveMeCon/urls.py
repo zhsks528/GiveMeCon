@@ -4,7 +4,8 @@ from django.urls import path, include
 from rest_framework import permissions
 from django.conf.urls.static import static
 from django.conf import settings
-from rest_framework_jwt.views import obtain_jwt_token
+# from rest_framework_jwt.views import obtain_jwt_token
+from django.contrib.auth import views as auth_views
 
 # API 문서화
 from drf_yasg.views import get_schema_view
@@ -27,7 +28,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("rest-auth/", include('rest_auth.urls')),
     path("rest-auth/registration/", include('rest_auth.registration.urls')),
-    path("", include("video.urls", namespace="videos")),
+    path("video/", include("video.urls", namespace="videos")),
     path("", include("channel.urls", namespace="channels")),
     path("users/", include("users.urls", namespace="users")),
     path("production/", include("production.urls", namespace="productions")),

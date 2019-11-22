@@ -27,9 +27,9 @@ DEBUG = True
 
 AUTH_USER_MODEL = "users.User"
 ALLOWED_HOSTS = [
-        'localhost',
-        '.ap-northeast-2.compute.amazonaws.com',
-        '127.0.0.1',
+    "localhost",
+    ".ap-northeast-2.compute.amazonaws.com",
+    "127.0.0.1",
 ]
 
 
@@ -43,15 +43,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
-    
     # CORS
-    "corsheaders",  
-    
-    # REST API
-    
+    "corsheaders",
     # API 문서화
     "drf_yasg",
-
     # App
     "video",
     "channel",
@@ -59,22 +54,18 @@ INSTALLED_APPS = [
     "production",
     "category",
     "users",
-    'taggit', # Tags for the Produce
-    'notifications', # 알람
-
+    "taggit",  # Tags for the Produce
+    "notifications",  # 알람
     "rest_framework",
-    'rest_framework.authtoken',
-    'rest_auth',
-    
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
-    
-    
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    "rest_framework.authtoken",
+    "rest_auth",
+    "rest_auth.registration",
+    "django.contrib.sites",
 
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.facebook",
 ]
 
 MIDDLEWARE = [
@@ -150,20 +141,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 
 # 페이지네이션 추가
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ),
+    "PAGE_SIZE": 30,
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
+    # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    #     'rest_framework_jwt.authentication.SessionAuthentication',
+    #     'rest_framework_jwt.authentication.BasicAuthentication',
+    # ),
 }
 
 CORS_ALLOW_CREDENTILS = True
@@ -171,33 +168,38 @@ CORS_ALLOW_CREDENTILS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_URL = "/static/"
+
 # 각 media 파일에 대한 URL Prefix
 MEDIA_URL = "/media/"
 
 # 업로드된 파일을 저장할 디렉토리 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-TAGGIT_CASE_INSENSITIVE = True # 대문자 소문자 구분 X
+TAGGIT_CASE_INSENSITIVE = True  # 대문자 소문자 구분 X
 
-REST_USE_JWT = True
+# REST_USE_JWT = True
 
-JWT_AUTH = {
-    'JWT_VERIFY_EXPIRATION': False
-}
+# JWT_AUTH = {
+#     'JWT_VERIFY_EXPIRATION': False
+# }
 
 # ACCOUNT_AUTHE
 ACCOUNT_LOGOUT_ON_GET = True
 
 SITE_ID = 1
 
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
-            'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
-        }
-    },
-}
+# SWAGGER_SETTINGS = {
+#     'SECURITY_DEFINITIONS': {
+#         'api_key': {
+#             'type': 'apiKey',
+#             'in': 'header',
+#             'name': 'Authorization'
+#         }
+#     },
+# }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+REST_AUTH_SERIALIZERS = {
+    "TOKEN_SERIALIZER": "users.serializers.TokenSerializer",
+}

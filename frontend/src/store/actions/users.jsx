@@ -11,8 +11,8 @@ const usersToken = axios.create({
 
 usersToken.interceptors.request.use(config => {
   const reqConfig = config;
-  const token = localStorage.getItem("jwt");
-  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
+  const token = localStorage.getItem("token");
+  reqConfig.headers.Authorization = token ? `Token ${token}` : "";
   return config;
 });
 
@@ -115,9 +115,13 @@ export const login = (username, password) => {
       })
       .then(response => {
         const { data } = response;
+        console.log(data);
+
         const username = data.user.username;
-        if (data.token) {
-          dispatch(saveToken(data.token, username));
+
+        if (data.key) {
+          dispatch(saveToken(data.key, username));
+          window.location.href = "/";
         }
       });
 };
@@ -135,8 +139,12 @@ export const registration = (username, password, email, fullname) => {
       .then(response => {
         const { data } = response;
         const username = data.user.username;
-        if (data.token) {
-          dispatch(saveToken(data.token, username));
+        // if (data.token) {
+        //   dispatch(saveToken(data.token, username));
+        // }
+        if (data.key) {
+          dispatch(saveToken(data.key, username));
+          window.location.href = "/";
         }
       });
 };

@@ -1,13 +1,13 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  isLoggedIn: localStorage.getItem("jwt") ? true : false,
+  isLoggedIn: localStorage.getItem("token") ? true : false,
   userList: []
 };
 
 const saveToken = (state, action) => {
   const { token, username } = action;
-  localStorage.setItem("jwt", token);
+  localStorage.setItem("token", token);
   localStorage.setItem("username", username);
   return {
     ...state,
@@ -17,7 +17,7 @@ const saveToken = (state, action) => {
 };
 
 const logout = (state, action) => {
-  localStorage.removeItem("jwt");
+  localStorage.removeItem("token");
   localStorage.removeItem("username");
   return {
     ...state,

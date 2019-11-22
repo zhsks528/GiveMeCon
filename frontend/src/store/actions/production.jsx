@@ -8,8 +8,8 @@ const produce = axios.create({
 
 produce.interceptors.request.use(config => {
   const reqConfig = config;
-  const token = localStorage.getItem("jwt");
-  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
+  const token = localStorage.getItem("token");
+  reqConfig.headers.Authorization = token ? `Token ${token}` : "";
   return config;
 });
 
@@ -72,17 +72,18 @@ export const getProduction = () => {
         dispatch(setProduction(data));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
@@ -96,17 +97,18 @@ export const getDetailProduction = productionId => {
         dispatch(setDetailProduction(data));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
@@ -119,17 +121,18 @@ export const likeProduction = productionId => {
         dispatch(doLikeProduction(productionId));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
@@ -142,17 +145,18 @@ export const unlikeProduction = productionId => {
         dispatch(doUnLikeProduction(productionId));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
@@ -166,6 +170,7 @@ export const commentProduction = (productionId, message) => {
         dispatch(addComment(productionId, data));
       })
       .catch(error => {
+        console.log(error);
         if (error.response) {
           const { status } = error.response;
 
@@ -217,17 +222,30 @@ export const getProductionLikes = productionId => {
         dispatch(setUserList(data));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
+  };
+};
+
+export const produceWrite = form => {
+  return dispatch => {
+    produce.post("production/", form).then(response => {
+      const { status } = response;
+      if (status === 201) {
+        window.location.href = "/production";
+      }
+      console.log(response);
+    });
   };
 };
