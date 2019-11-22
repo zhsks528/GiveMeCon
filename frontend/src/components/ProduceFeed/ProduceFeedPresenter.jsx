@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import ProduceActions from "components/ProduceActions";
 import NotImage from "components/NotImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import UserList from "components/UserList";
+import ProduceDetail from "components/ProduceDetail";
 
 const ThumbnailContainer = styled.div`
   display: flex;
@@ -13,19 +12,26 @@ const ThumbnailContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: 300px;
+  overflow: hidden;
+  border-radius: 14px;
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 14px;
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: inset 0 0 10px #000000;
+    // transform: scale(1.3);
+  }
 `;
 
 const InfoContainer = styled.div`
   margin-top: 10px;
 `;
 
-const Title = styled(Link)`
+const Title = styled.div`
   && {
     display: -webkit-box;
     color: black;
@@ -37,6 +43,7 @@ const Title = styled(Link)`
     -webkit-line-clamp: 2;
     text-decoration: none;
     height: 50px;
+    cursor: pointer;
   }
   &:hover {
     text-decoration: underline;
@@ -67,48 +74,45 @@ const NoProfile = styled(FontAwesomeIcon)`
 
 const ProduceFeedPresenter = ({
   productions,
-  seeingLikes,
-  handleOpenLikes,
-  handleCloseLikes
+  seeingDetail,
+  handleOpenDetail,
+  handleCloseDetail
 }) => {
   return (
     <>
-      {productions
-        ? productions.map(item => (
-            <div key={item.id}>
-              {item.thumbnail ? (
-                <ThumbnailContainer>
-                  <Thumbnail src={item.thumbnail} alt="썸네일" />
-                </ThumbnailContainer>
-              ) : (
-                <NotImage id={item.id} />
-              )}
-              <InfoContainer>
-                <ProduceActions
-                  like={item.likes_count}
-                  isLiked={item.is_liked}
-                  productionId={item.id}
-                  comments={item.comments_count}
-                  handleOpenLikes={handleOpenLikes}
-                />
-                <Title to={`/production/board/?id=${item.id}`}>
-                  {item.title}
-                </Title>
+      {productions.map(item => (
+        <div key={item.id}>
+          {item.thumbnail ? (
+            <ThumbnailContainer>
+              <Thumbnail src={item.thumbnail} alt="썸네일" />
+            </ThumbnailContainer>
+          ) : (
+            <NotImage id={item.id} />
+          )}
+          <InfoContainer>
+            <ProduceActions
+              like={item.likes_count}
+              isLiked={item.is_liked}
+              productionId={item.id}
+              comments={item.comments_count}
+            />
+            <Title onClick={() => handleOpenDetail(item.id)}>
+              {item.title}
+            </Title>
 
-                <ProfileContainer>
-                  {item.creator.profile_image ? (
-                    <Profile src={item.creator.profile_image} alt="프로필" />
-                  ) : (
-                    <NoProfile icon={faUserCircle} />
-                  )}
-                  <div>{item.creator.username}</div>
-                </ProfileContainer>
-              </InfoContainer>
-            </div>
-          ))
-        : null}
-      {seeingLikes && (
-        <UserList title="Likes" handleCloseLikes={handleCloseLikes} />
+            <ProfileContainer>
+              {item.creator.profile_image ? (
+                <Profile src={item.creator.profile_image} alt="프로필" />
+              ) : (
+                <NoProfile icon={faUserCircle} />
+              )}
+              <div>{item.creator.username}</div>
+            </ProfileContainer>
+          </InfoContainer>
+        </div>
+      ))}
+      {seeingDetail && (
+        <ProduceDetail title="Detail" handleCloseDetail={handleCloseDetail} />
       )}
     </>
   );

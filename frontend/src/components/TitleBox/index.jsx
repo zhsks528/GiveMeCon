@@ -5,7 +5,7 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 40px 0;
+  margin: 100px 0 40px 0;
 `;
 
 const Line = styled.div`
@@ -16,34 +16,14 @@ const Line = styled.div`
 
 const LineTitle = styled.div`
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 28px;
 `;
 
-const CountBox = styled.div`
-  display: inline-block;
-  width: 60px;
-  border-radius: 10px;
-  background: #f7323f;
-  border: none;
-  outline: none;
-`;
-
-const Count = styled.div`
-  color: yellow;
-  text-align: center;
-  padding: 0 10px;
-`;
-
-const TitleBox = ({ title, count }) => {
+const TitleBox = ({ title }) => {
   return (
     <Header>
       <Line />
       <LineTitle>{title}</LineTitle>
-      {count > 0 ? (
-        <CountBox>
-          <Count>{count}</Count>
-        </CountBox>
-      ) : null}
     </Header>
   );
 };

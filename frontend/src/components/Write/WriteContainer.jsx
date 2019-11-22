@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategory } from "store/actions/trend";
+import { produceWrite } from "store/actions/production";
+
 import WritePresenter from "./WritePresenter";
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
-});
-
-api.interceptors.request.use(config => {
-  const reqConfig = config;
-  const token = localStorage.getItem("jwt");
-  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
-  return config;
-});
 
 export default function WriteContainer() {
-  const [categoryList, setCategoryList] = useState([]);
+  const categoryList = useSelector(state => state.trend.categoryList);
   const [category, setCategory] = useState(1);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    api.get("category/").then(response => {
-      const { data } = response;
-      setCategoryList(data.results);
-    });
-  }, []);
+    dispatch(getCategory());
+  }, [dispatch]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -41,9 +32,7 @@ export default function WriteContainer() {
     form.append("category", category);
     form.append("content", content);
 
-    api.post("production/", form).then(response => console.log(response));
-
-    window.location.href = "/production";
+    dispatch(produceWrite(form));
   };
 
   const handleImageChange = event => {

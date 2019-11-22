@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import About from "components/About";
 import Header from "components/Header";
 import TitleBox from "components/TitleBox";
 
@@ -55,11 +54,6 @@ const ContentsContainer = styled.div`
   margin-bottom: 100px;
 `;
 
-const ContentsTitle = styled.h3`
-  font-size: 36px;
-  margin: 0 0 20px 0;
-`;
-
 const FirstContents = styled.div`
   text-align: center;
 `;
@@ -69,10 +63,6 @@ const Contents = styled.div``;
 const Power = styled.span`
   font-size: 24px;
   color: #f7323f;
-`;
-
-const StrongPower = styled(Power)`
-  font-size: 36px;
 `;
 
 const LowerPower = styled(Power)`
@@ -131,12 +121,10 @@ const IntroducePresenter = () => {
           </Message>
         </Cover>
       </Wrapper>
-      {/* <About /> */}
 
       <Main>
         <ContentsContainer>
           <TitleBox title="GIVE ME CON" />
-          {/* <ContentsTitle>기브미콘이란</ContentsTitle> */}
           <FirstContents>
             <Power>Give Me Contents</Power> 를 줄인 말로 써 크리에이터에게
             도움을 주는 플랫폼입니다.
@@ -145,9 +133,6 @@ const IntroducePresenter = () => {
 
         <ContentsContainer>
           <TitleBox title="SERVICES" />
-          {/* <ContentsTitle>
-            기브미콘의 <StrongPower>서비스</StrongPower>
-          </ContentsTitle> */}
           <Contents>
             <ContentsItemLeft>
               <img src={Youtube} alt="유튜브 사진" />
@@ -189,9 +174,6 @@ const IntroducePresenter = () => {
 
         <ContentsContainer>
           <TitleBox title="CONTACT US" />
-          {/* <ContentsTitle>
-            기브미콘의 <StrongPower>연락수단</StrongPower>
-          </ContentsTitle> */}
           <SNSContainer>
             <ItemContainer>
               <ContentsItem>

@@ -20,6 +20,7 @@ const Column = styled.div`
 const Profile = styled.img`
   width: 44px;
   height: 44px;
+  border-radius: 50%;
 `;
 
 const User = styled.div`

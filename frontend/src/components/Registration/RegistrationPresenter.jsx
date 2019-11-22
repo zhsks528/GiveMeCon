@@ -13,10 +13,8 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 500px;
-
+  width: 400px;
   padding: 20px;
-
   position: absolute;
   top: 50%;
   left: 50%;

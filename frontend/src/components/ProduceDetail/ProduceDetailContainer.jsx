@@ -1,32 +1,30 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductionLikes } from "store/actions/production";
 import ProduceDetailPresenter from "./ProduceDetailPresenter";
-import { getDetailProduction } from "store/actions/production";
 
-export default function ProduceDetailContainer() {
+export default function ProduceDetailContainer({ title, handleCloseDetail }) {
+  const [seeingLikes, setSeeingLikes] = useState(false);
+  const detailData = useSelector(state => state.production.detailData);
   const dispatch = useDispatch();
 
-  const detailData = useSelector(state => state.production.detailData);
-
-  /* URL에서 params 받아오기 */
-  const getUrlParams = () => {
-    const params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
-      str,
-      key,
-      value
-    ) {
-      params[key] = value;
-    });
-
-    return params;
+  const handleOpenLikes = productionId => {
+    setSeeingLikes(true);
+    dispatch(getProductionLikes(productionId));
   };
 
-  useEffect(() => {
-    const params = getUrlParams();
-    let productionId = params.id;
-    dispatch(getDetailProduction(productionId));
-  }, [dispatch]);
+  const handleCloseLikes = () => {
+    setSeeingLikes(false);
+  };
 
-  return <ProduceDetailPresenter detailData={detailData} />;
+  return (
+    <ProduceDetailPresenter
+      detailData={detailData}
+      title={title}
+      handleCloseDetail={handleCloseDetail}
+      seeingLikes={seeingLikes}
+      handleOpenLikes={handleOpenLikes}
+      handleCloseLikes={handleCloseLikes}
+    />
+  );
 }

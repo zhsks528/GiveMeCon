@@ -7,8 +7,6 @@ import ProduceMusicList from "components/ProduceMusicList";
 import ProduceSportsList from "components/ProduceSportsList";
 import ProduceMoviesList from "components/ProduceMoviesList";
 import ProduceGamesList from "components/ProduceGamesList";
-import ProduceDetail from "components/ProduceDetail";
-
 import Write from "components/Write";
 
 const ProductionPresenter = ({ match, location }) => {
@@ -16,7 +14,6 @@ const ProductionPresenter = ({ match, location }) => {
     <>
       <Header />
       {/* <ProduceMenu /> */}
-      <Route path={`${match.url}/board/`} component={ProduceDetail} />
       <Route exact path={match.url} component={ProduceTotalList} />
       <Route path={`${match.url}/music`} component={ProduceMusicList} />
       <Route path={`${match.url}/sports`} component={ProduceSportsList} />

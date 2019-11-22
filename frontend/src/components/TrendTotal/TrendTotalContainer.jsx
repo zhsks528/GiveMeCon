@@ -10,7 +10,11 @@ export default function TrendTotalContainer() {
 
   useEffect(() => {
     dispatch(getTrend());
+    window.addEventListener("scroll", onScroll);
   }, [dispatch]);
 
+  const onScroll = event => {
+    // console.log(event.srcElement.scrollingElement.scrollTop);
+  };
   return <TrendTotalPresenter trends={trends} />;
 }
