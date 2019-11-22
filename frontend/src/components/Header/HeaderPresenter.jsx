@@ -20,9 +20,10 @@ const MainContainer = styled.div`
   margin: 0 auto;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   display: flex;
   align-items: center;
+  text-decoration: none;
   cursor: pointer;
 `;
 
@@ -35,6 +36,7 @@ const LogoIcon = styled.img`
 const Title = styled.h3`
   color: #f7323f;
   font-size: 20px;
+  margin: 0;
 `;
 
 const HeaderList = styled.ul`
@@ -60,40 +62,44 @@ const LinkItem = styled(Link)`
   }
 `;
 
-const HeaderPresenter = ({ handleLogout }) => {
+const HeaderPresenter = ({ handleLogout, isLoggedIn }) => {
   const { pathname } = window.location;
-
-  const trendIndex = pathname.indexOf("trend");
-  const productionIndex = pathname.indexOf("production");
-  const introduceIndex = pathname.indexOf("introduce");
 
   return (
     <HeaderWrapper>
       <MainContainer>
-        <LogoContainer>
+        <LogoContainer to="/">
           <LogoIcon src={Logo} alt="로고" />
           <Title>기브미콘</Title>
         </LogoContainer>
 
         <HeaderList>
           <ListItem>
-            <LinkItem to="/trend" current={trendIndex === 1}>
+            <LinkItem to="/" current={pathname === "/"}>
               트렌드
             </LinkItem>
           </ListItem>
           <ListItem>
-            <LinkItem to="/production" current={productionIndex === 1}>
+            <LinkItem to="/production" current={pathname === "/production"}>
               프로듀싱
             </LinkItem>
           </ListItem>
           <ListItem>
-            <LinkItem to="/introduce" current={introduceIndex === 1}>
+            <LinkItem to="/introduce" current={pathname === "/introduce"}>
               소개
             </LinkItem>
           </ListItem>
-          <ListItem onClick={handleLogout}>
-            <LinkItem to="">로그아웃</LinkItem>
-          </ListItem>
+          {isLoggedIn ? (
+            <ListItem onClick={handleLogout}>
+              <LinkItem to="">로그아웃</LinkItem>
+            </ListItem>
+          ) : (
+            <ListItem>
+              <LinkItem to="/auth" current={pathname === "/auth"}>
+                로그인
+              </LinkItem>
+            </ListItem>
+          )}
         </HeaderList>
       </MainContainer>
     </HeaderWrapper>
