@@ -141,13 +141,13 @@ const IntroducePresenter = () => {
                   컨텐츠 <LowerPower>추천 및 순위 서비스</LowerPower>
                 </ItemTitle>
                 <div>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged.
+                  지금 우리는 따라가기 힘들 정도로 많은 양의 콘텐츠가 쏟아지는
+                  정보화 시대에 살고 있습니다. 급속도로 변화하는 트렌드에 대해서
+                  너무 걱정하지 마세요. 저희 기브미콘의 콘텐츠 서비스는 최신
+                  트렌드에 맞춰 생성된 콘텐츠들을 순위별로 사용자분들이 쉽고
+                  편하게 보실 수 있게끔 하는 서비스를 제공하고 있습니다.. 보다
+                  좋은 서비스 제공을 위하여 여러분이 직접 기준을 정하여 보고
+                  싶은 키워드의 영상들을 입맛대로 골라보실 수 있습니다.
                 </div>
               </div>
             </ContentsItemLeft>
@@ -158,13 +158,11 @@ const IntroducePresenter = () => {
                   컨텐츠 <LowerPower>프로듀싱 서비스</LowerPower>
                 </ItemTitle>
                 <div>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged.
+                  저희는 크리에이터들이 영상을 제작하는데에 있어 트랜드 뿐만
+                  아니라 시청자들이 컨텐츠 제작 방향에 대한 아이디어를 공유할 수
+                  있는 "컨텐츠 프로듀싱 서비스"(빨간색으로)를 제공하고자 합니다.
+                  본 서비스로 인해 한 시청자 머릿속의 작은 아이디어로 제작 된
+                  영상이 10만, 100만의 시청자들이 보는 영상이 될 수 있습니다.
                 </div>
               </div>
               <img src={Producing} alt="프로듀싱 사진" />
