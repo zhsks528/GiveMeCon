@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Login from "components/Login";
 import Registration from "components/Registration";
-
-// **** Images
+import Header from "components/Header";
 import Intro from "components/asset/images/Intro.jpg";
 
 const Wrapper = styled.div`
@@ -15,7 +14,7 @@ const Wrapper = styled.div`
 
 const Cover = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 92vh;
   background: rgba(0, 0, 0, 0.7);
 `;
 
@@ -30,6 +29,7 @@ const AuthPresenter = ({ action, changeAction }) => {
 
   return (
     <Wrapper>
+      <Header />
       <Cover>{changeForm}</Cover>
     </Wrapper>
   );
