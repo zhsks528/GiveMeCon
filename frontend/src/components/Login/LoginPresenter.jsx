@@ -9,7 +9,7 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 500px;
+  width: 400px;
   padding: 20px;
 
   position: absolute;
@@ -138,9 +138,9 @@ const LoginPresenter = ({
           </InputContainer>
           <Sumbit type="submit" value="로그인" />
         </Form>
-        {/* <div>or</div> */}
+        {/* <div>or</div>
 
-        {/* <FacebookLogin
+        <FacebookLogin
           appId="2588720784553549"
           autoLoad={false}
           fields="name,email,picture"
