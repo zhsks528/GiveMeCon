@@ -5,16 +5,24 @@ const users = axios.create({
   baseURL: "http://127.0.0.1:8000/"
 });
 
-const usersToken = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
+const userSever = axios.create({
+  baseURL:
+    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
 
-usersToken.interceptors.request.use(config => {
-  const reqConfig = config;
-  const token = localStorage.getItem("token");
-  reqConfig.headers.Authorization = token ? `Token ${token}` : "";
-  return config;
-});
+// usersToken.interceptors.request.use(config => {
+//   const reqConfig = config;
+//   const token = localStorage.getItem("token");
+//   reqConfig.headers.Authorization = token ? `Token ${token}` : "";
+//   return config;
+// });
+
+// userSever.interceptors.request.use(config => {
+//   const reqConfig = config;
+//   const token = localStorage.getItem("token");
+//   reqConfig.headers.Authorization = token ? `Basic ${token}` : "";
+//   return config;
+// });
 
 export const saveToken = (token, username) => ({
   type: actionTypes.SAVE_TOKEN,
@@ -36,9 +44,14 @@ export const setUnfollowUser = userId => ({
   userId
 });
 
+export const setProfile = profileData => ({
+  type: actionTypes.SET_PROFILE,
+  profileData
+});
+
 export const followUser = userId => {
   return dispatch => {
-    usersToken
+    userSever
       .post(`users/${userId}/follow/`)
       .then(response => {
         const { status } = response;
@@ -65,7 +78,7 @@ export const followUser = userId => {
 
 export const unfollowUser = userId => {
   return dispatch => {
-    usersToken
+    userSever
       .post(`users/${userId}/unfollow/`)
       .then(response => {
         const { status } = response;
@@ -92,7 +105,7 @@ export const unfollowUser = userId => {
 
 export const FacebookLogin = access_token => {
   return dispatch => {
-    users
+    userSever
       .post("users/login/facebook/", {
         access_token: access_token
       })
@@ -108,12 +121,13 @@ export const FacebookLogin = access_token => {
  */
 export const login = (username, password) => {
   return dispatch =>
-    users
+    userSever
       .post("rest-auth/login/", {
         username: username,
         password: password
       })
       .then(response => {
+        console.log(response);
         const { data } = response;
         console.log(data);
 
@@ -128,7 +142,7 @@ export const login = (username, password) => {
 
 export const registration = (username, password, email, fullname) => {
   return dispatch =>
-    users
+    userSever
       .post("rest-auth/registration/", {
         username,
         password1: password,
@@ -147,4 +161,12 @@ export const registration = (username, password, email, fullname) => {
           window.location.href = "/";
         }
       });
+};
+
+export const getProfile = username => {
+  return dispatch =>
+    userSever.get(`users/${username}/`).then(response => {
+      const { data } = response;
+      dispatch(setProfile(data));
+    });
 };

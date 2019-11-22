@@ -2,11 +2,17 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { logout } from "./users";
 
-const produce = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
+// const produce = axios.create({
+//   baseURL:
+//     "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
+// });
+
+const produceServer = axios.create({
+  baseURL:
+    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
 
-produce.interceptors.request.use(config => {
+produceServer.interceptors.request.use(config => {
   const reqConfig = config;
   const token = localStorage.getItem("token");
   reqConfig.headers.Authorization = token ? `Token ${token}` : "";
@@ -63,11 +69,13 @@ export const setUserList = userList => {
   };
 };
 
+//
 export const getProduction = () => {
   return dispatch => {
-    produce
+    produceServer
       .get("production/")
       .then(response => {
+        console.log(response);
         const { data } = response;
         dispatch(setProduction(data));
       })
@@ -88,9 +96,10 @@ export const getProduction = () => {
   };
 };
 
+//
 export const getDetailProduction = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .get(`production/${productionId}/`)
       .then(response => {
         const { data } = response;
@@ -115,7 +124,7 @@ export const getDetailProduction = productionId => {
 
 export const likeProduction = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .post(`production/${productionId}/likes/`)
       .then(response => {
         dispatch(doLikeProduction(productionId));
@@ -139,7 +148,7 @@ export const likeProduction = productionId => {
 
 export const unlikeProduction = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .delete(`production/${productionId}/unlikes/`)
       .then(response => {
         dispatch(doUnLikeProduction(productionId));
@@ -163,7 +172,7 @@ export const unlikeProduction = productionId => {
 
 export const commentProduction = (productionId, message) => {
   return dispatch => {
-    produce
+    produceServer
       .post(`production/${productionId}/comments/`, { message })
       .then(response => {
         const { data } = response;
@@ -188,7 +197,7 @@ export const commentProduction = (productionId, message) => {
 
 export const commentDelete = commentId => {
   return dispatch => {
-    produce
+    produceServer
       .delete(`production/comments/${commentId}/`)
       .then(response => {
         const { status } = response;
@@ -213,9 +222,10 @@ export const commentDelete = commentId => {
   };
 };
 
+//
 export const getProductionLikes = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .get(`production/${productionId}/likes/`)
       .then(response => {
         const { data } = response;
@@ -240,7 +250,7 @@ export const getProductionLikes = productionId => {
 
 export const produceWrite = form => {
   return dispatch => {
-    produce.post("production/", form).then(response => {
+    produceServer.post("production/", form).then(response => {
       const { status } = response;
       if (status === 201) {
         window.location.href = "/production";
