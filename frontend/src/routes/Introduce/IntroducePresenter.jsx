@@ -59,8 +59,6 @@ const FirstContents = styled.div`
   text-align: center;
 `;
 
-const Contents = styled.div``;
-
 const Power = styled.span`
   font-size: 24px;
   color: #f7323f;
@@ -102,13 +100,8 @@ const Icon = styled.img`
 `;
 
 const SNSContainer = styled.div`
-  padding-left: 40px;
   display: flex;
-`;
-
-const ItemContainer = styled.div``;
-const Logo = styled.img`
-  margin-left: 400px;
+  justify-content: space-around;
 `;
 
 const Text = styled.div`
@@ -130,6 +123,7 @@ const Text = styled.div`
     border-radius: 4px;
   }
 `;
+
 const IntroducePresenter = () => {
   return (
     <IntroduceWrapper>
@@ -154,7 +148,7 @@ const IntroducePresenter = () => {
 
         <ContentsContainer>
           <TitleBox title="SERVICES" />
-          <Contents>
+          <div>
             <ContentsItemLeft>
               <img src={Youtube} alt="유튜브 사진" />
               <div>
@@ -195,13 +189,13 @@ const IntroducePresenter = () => {
               </div>
               <img src={Producing} alt="프로듀싱 사진" />
             </ContentsItemRight>
-          </Contents>
+          </div>
         </ContentsContainer>
 
         <ContentsContainer>
           <TitleBox title="CONTACT US" />
           <SNSContainer>
-            <ItemContainer>
+            <div>
               <ContentsItem>
                 <Icon src={Instargram} alt="인스타그램 아이콘" />
                 <div>인스타그램@인스타그램</div>
@@ -214,8 +208,8 @@ const IntroducePresenter = () => {
                 <Icon src={Mail} alt="메일 아이콘" />
                 <div>메일메일메일@메일메일메일</div>
               </ContentsItem>
-            </ItemContainer>
-            <Logo src={FullLogo} alt="풀로고 사진" />
+            </div>
+            <img src={FullLogo} alt="풀로고 사진" />
           </SNSContainer>
         </ContentsContainer>
       </Main>

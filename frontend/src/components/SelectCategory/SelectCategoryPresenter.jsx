@@ -12,6 +12,7 @@ const Wrapper = styled.form`
 
 const Select = styled.select`
   min-width: 200px;
+  min-height: 40px;
   padding: 5px 10px;
   margin-right: 20px;
   font-size: 18px;
@@ -23,16 +24,11 @@ const Select = styled.select`
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
-
-  // &:hover {
-  //   background: #f7323f;
-  //   color: yellow;
-  // }
 `;
 
 const Btn = styled.button`
-  min-width: 35px;
-  min-height: 35px;
+  min-width: 40px;
+  min-height: 40px;
   border: none;
   border-radius: 12px;
   font-weight: bold;
