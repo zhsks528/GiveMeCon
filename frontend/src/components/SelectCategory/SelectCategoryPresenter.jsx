@@ -58,10 +58,13 @@ const SelectCategoryPresenter = ({
           value={categoryId}
           onChange={event => setCategoryId(event.target.value)}
         >
+          <option value={"0"}>카테고리 검색</option>
           {categoryList.map(item => (
-            <option key={item.category_id} value={item.category_id}>
-              {item.category_name}
-            </option>
+            <>
+              <option key={item.category_id} value={item.category_id}>
+                {item.category_name}
+              </option>
+            </>
           ))}
         </Select>
         <Btn onClick={handleReset}>
