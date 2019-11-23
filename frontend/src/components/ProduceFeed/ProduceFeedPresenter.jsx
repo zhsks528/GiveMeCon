@@ -7,6 +7,32 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import ProduceDetail from "components/ProduceDetail";
 import SearchProfile from "components/SearchProfile";
 
+const Figcaption = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: all 0.3s linear;
+`;
+
+const Category = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Thumbnail = styled.img`
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+`;
+
 const ThumbnailContainer = styled.div`
   display: flex;
   align-items: center;
@@ -15,15 +41,13 @@ const ThumbnailContainer = styled.div`
   height: 300px;
   overflow: hidden;
   border-radius: 14px;
-`;
+  position: relative;
 
-const Thumbnail = styled.img`
-  width: 100%;
-  height: 100%;
-  transition: 0.3s;
+  &:hover ${Figcaption} {
+    opacity: 1;
+  }
 
-  &:hover {
-    box-shadow: inset 0 0 10px #000000;
+  &:hover ${Thumbnail} {
     transform: scale(1.3);
   }
 `;
@@ -43,7 +67,6 @@ const Title = styled.div`
     white-space: normal;
     -webkit-line-clamp: 2;
     text-decoration: none;
-    height: 50px;
     cursor: pointer;
   }
   &:hover {
@@ -87,6 +110,7 @@ const ProduceFeedPresenter = ({
   handleOpenProfile,
   handleCloseProfile
 }) => {
+  productions.map(item => console.log(item));
   return (
     <>
       {productions.map(item => (
@@ -97,6 +121,9 @@ const ProduceFeedPresenter = ({
             ) : (
               <NotImage id={item.id} />
             )}
+            <Figcaption>
+              <Category>{item.category.category_name}</Category>
+            </Figcaption>
           </ThumbnailContainer>
           <InfoContainer>
             <ProduceActions

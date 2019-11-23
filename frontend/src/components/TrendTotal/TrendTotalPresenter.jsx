@@ -18,20 +18,40 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const ThumbnailContainer = styled.div`
+const Figcaption = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 300px;
-  border-radius: 14px;
-  overflow: hidden;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: all 0.3s linear;
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
   height: 300px;
-  transition: 0.3s;
+  transition: all 0.3s linear;
+`;
 
-  &:hover {
-    box-shadow: inset 0 0 10px #000000;
+const ThumbnailContainer = styled.div`
+  width: 100%;
+  height: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+
+  &:hover ${Figcaption} {
+    opacity: 1;
+  }
+
+  &:hover ${Thumbnail} {
     transform: scale(1.3);
   }
 `;
@@ -46,7 +66,6 @@ const Title = styled.a`
   white-space: normal;
   -webkit-line-clamp: 2;
   text-decoration: none;
-  height: 50px;
   margin-bottom: 10px;
 
   &:hover {
@@ -54,9 +73,7 @@ const Title = styled.a`
   }
 `;
 
-const Category = styled.div`
-  color: #6b6b6b;
-`;
+const Category = styled.div``;
 
 const ProfileContainer = styled.div`
   display: flex;
@@ -91,7 +108,14 @@ const NoProfile = styled(FontAwesomeIcon)`
 const ViewContainer = styled.div`
   display: flex;
   align-items: center;
-  color: #6b6b6b;
+  margin-bottom: 10px;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
 `;
 
 const TrendTotalPresenter = ({ trends }) => {
@@ -108,23 +132,25 @@ const TrendTotalPresenter = ({ trends }) => {
             <div key={trend.id}>
               <ThumbnailContainer>
                 <Thumbnail src={trend.thumbnail} />
+                <Figcaption>
+                  <Category>{trend.category.category_name}</Category>
+                  <ViewContainer>
+                    <Icon icon={faEye} />
+                    <span>{trend.view}</span>
+                  </ViewContainer>
+                </Figcaption>
               </ThumbnailContainer>
 
               <Title href={trend.url} target="_blank">
                 {trend.title}
               </Title>
-              <Category>{trend.category.category_name}</Category>
+
               <ProfileContainer>
                 <NoProfile icon={faUserCircle} />
                 <UserLink href={trend.channel.url} target="_blank">
                   {trend.channel.name}
                 </UserLink>
               </ProfileContainer>
-
-              <ViewContainer>
-                <NoProfile icon={faEye} />
-                <span>{trend.view}</span>
-              </ViewContainer>
             </div>
           ))
         ) : (
