@@ -5,6 +5,7 @@ import NotImage from "components/NotImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import ProduceDetail from "components/ProduceDetail";
+import SearchProfile from "components/SearchProfile";
 
 const ThumbnailContainer = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const Thumbnail = styled.img`
 
   &:hover {
     box-shadow: inset 0 0 10px #000000;
-    // transform: scale(1.3);
+    transform: scale(1.3);
   }
 `;
 
@@ -53,9 +54,14 @@ const Title = styled.div`
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: #3897f0;
+  }
 `;
 
-const Profile = styled.img`
+const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -76,19 +82,22 @@ const ProduceFeedPresenter = ({
   productions,
   seeingDetail,
   handleOpenDetail,
-  handleCloseDetail
+  handleCloseDetail,
+  seeingProfile,
+  handleOpenProfile,
+  handleCloseProfile
 }) => {
   return (
     <>
       {productions.map(item => (
         <div key={item.id}>
-          {item.thumbnail ? (
-            <ThumbnailContainer>
+          <ThumbnailContainer>
+            {item.thumbnail ? (
               <Thumbnail src={item.thumbnail} alt="썸네일" />
-            </ThumbnailContainer>
-          ) : (
-            <NotImage id={item.id} />
-          )}
+            ) : (
+              <NotImage id={item.id} />
+            )}
+          </ThumbnailContainer>
           <InfoContainer>
             <ProduceActions
               like={item.likes_count}
@@ -100,9 +109,11 @@ const ProduceFeedPresenter = ({
               {item.title}
             </Title>
 
-            <ProfileContainer>
+            <ProfileContainer
+              onClick={() => handleOpenProfile(item.creator.username)}
+            >
               {item.creator.profile_image ? (
-                <Profile src={item.creator.profile_image} alt="프로필" />
+                <ProfileImg src={item.creator.profile_image} alt="프로필" />
               ) : (
                 <NoProfile icon={faUserCircle} />
               )}
@@ -113,6 +124,9 @@ const ProduceFeedPresenter = ({
       ))}
       {seeingDetail && (
         <ProduceDetail title="Detail" handleCloseDetail={handleCloseDetail} />
+      )}
+      {seeingProfile && (
+        <SearchProfile title="프로필" handleCloseProfile={handleCloseProfile} />
       )}
     </>
   );

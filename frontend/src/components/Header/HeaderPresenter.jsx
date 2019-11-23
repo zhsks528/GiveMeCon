@@ -4,7 +4,8 @@ import styled from "styled-components";
 import Logo from "components/asset/images/logo.png";
 import Popover from "@material-ui/core/Popover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import ProfilePage from "components/Profile";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -76,6 +77,11 @@ const ProfileContainer = styled.div`
   justify-content: flex-end;
   min-width: 140px;
   cursor: pointer;
+  color: #6b6b6b;
+
+  &:hover {
+    color: #3897f0;
+  }
 `;
 
 const Profile = styled.img`
@@ -85,27 +91,39 @@ const Profile = styled.img`
   margin-right: 10px;
 `;
 
-const Username = styled.div`
+const PopItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
   color: #6b6b6b;
+  cursor: pointer;
+
+  &:hover {
+    background: #3897f0;
+    color: white;
+  }
 `;
 
-const NoProfile = styled(FontAwesomeIcon)`
+const Icon = styled(FontAwesomeIcon)`
   && {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     margin-right: 10px;
-    color: #6b6b6b;
   }
 `;
 
 const HeaderPresenter = ({
   handleLogout,
   isLoggedIn,
-  profile,
+  myProfile,
+  open,
   anchorEl,
   handleClick,
-  handleClose
+  handleClose,
+  seeingProfile,
+  handleOpenProfile,
+  handleCloseProfile
 }) => {
   const { pathname } = window.location;
 
@@ -138,17 +156,15 @@ const HeaderPresenter = ({
         {isLoggedIn ? (
           <>
             <ProfileContainer onClick={handleClick}>
-              {profile.profile_image ? (
-                <>
-                  <Profile src={profile.profile_image} alt="프로필" />
-                </>
+              {myProfile.profile_image ? (
+                <Profile src={myProfile.profile_image} alt="프로필" />
               ) : (
-                <NoProfile icon={faUserCircle} />
+                <Icon icon={faUserCircle} />
               )}
-              <Username>{profile.username}</Username>
+              <div>{myProfile.username}</div>
             </ProfileContainer>
             <Popover
-              open={anchorEl}
+              open={open}
               anchorEl={anchorEl}
               onClose={handleClose}
               anchorOrigin={{
@@ -160,9 +176,14 @@ const HeaderPresenter = ({
                 horizontal: "right"
               }}
             >
-              <LinkItem to="" onClick={handleLogout}>
-                로그아웃
-              </LinkItem>
+              <PopItemContainer>
+                <Icon icon={faUserCircle} />
+                <div onClick={handleOpenProfile}>프로필</div>
+              </PopItemContainer>
+              <PopItemContainer>
+                <Icon icon={faPowerOff} />
+                <div onClick={handleLogout}>로그아웃</div>
+              </PopItemContainer>
             </Popover>
           </>
         ) : (
@@ -173,6 +194,7 @@ const HeaderPresenter = ({
           </ListItem>
         )}
       </MainContainer>
+      {seeingProfile && <ProfilePage handleCloseProfile={handleCloseProfile} />}
     </HeaderWrapper>
   );
 };

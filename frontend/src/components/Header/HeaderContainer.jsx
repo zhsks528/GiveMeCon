@@ -5,8 +5,10 @@ import { logout, getProfile } from "store/actions/users";
 
 export default function HeaderContainer() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [seeingProfile, setSeeingProfile] = useState(false);
+
   const isLoggedIn = useSelector(state => state.users.isLoggedIn);
-  const profile = useSelector(state => state.users.profile);
+  const myProfile = useSelector(state => state.users.myProfile);
 
   const dispatch = useDispatch();
 
@@ -31,14 +33,29 @@ export default function HeaderContainer() {
     setAnchorEl(null);
   };
 
+  const handleOpenProfile = () => {
+    setSeeingProfile(true);
+    setAnchorEl(null);
+  };
+
+  const handleCloseProfile = () => {
+    setSeeingProfile(false);
+  };
+
+  const open = Boolean(anchorEl);
+
   return (
     <HeaderPresenter
       handleLogout={handleLogout}
       isLoggedIn={isLoggedIn}
-      profile={profile}
+      myProfile={myProfile}
+      open={open}
       anchorEl={anchorEl}
       handleClick={handleClick}
       handleClose={handleClose}
+      seeingProfile={seeingProfile}
+      handleOpenProfile={handleOpenProfile}
+      handleCloseProfile={handleCloseProfile}
     />
   );
 }
