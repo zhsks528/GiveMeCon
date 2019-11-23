@@ -75,6 +75,7 @@ const ProductionContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 220px);
   grid-gap: 5%;
+  height: 450px;
   overflow-y: auto;
 
   &::-webkit-scrollbar-track {
