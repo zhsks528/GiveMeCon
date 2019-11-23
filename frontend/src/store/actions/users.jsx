@@ -6,6 +6,7 @@ const users = axios.create({
 });
 
 const userSever = axios.create({
+  // baseURL: "http://127.0.0.1:8000/"
   baseURL:
     "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
@@ -47,6 +48,11 @@ export const setUnfollowUser = userId => ({
 export const setProfile = profileData => ({
   type: actionTypes.SET_PROFILE,
   profileData
+});
+
+export const searchUserProfile = searchProfileData => ({
+  type: actionTypes.SEARCH_USER_PROFILE,
+  searchProfileData
 });
 
 export const followUser = userId => {
@@ -168,5 +174,13 @@ export const getProfile = username => {
     userSever.get(`users/${username}/`).then(response => {
       const { data } = response;
       dispatch(setProfile(data));
+    });
+};
+
+export const searchProfile = username => {
+  return dispatch =>
+    userSever.get(`users/${username}/`).then(response => {
+      const { data } = response;
+      dispatch(searchUserProfile(data));
     });
 };

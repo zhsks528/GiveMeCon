@@ -12,3 +12,4 @@ export const UNFOLLOW_USER = "UNFOLLOW_USER";
 export const SET_TREND = "SET_TREND";
 export const SET_CATEGORY_LIST = "SET_CATEGORY_LIST";
 export const SET_PROFILE = "SET_PROFILE";
+export const SEARCH_USER_PROFILE = "SEARCH_USER_PROFILE";
