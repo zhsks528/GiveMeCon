@@ -87,7 +87,7 @@ def Video_info(video_id):
         topic=topicDetails,
         title=video_data["items"][0]["snippet"]["title"],
         view=video_data["items"][0]["statistics"]["viewCount"],
-        thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["default"]["url"],
+        thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["high"]["url"],
         channel=channel,
         video_num=video_data["items"][0]["id"],
         category_id=category_id,
