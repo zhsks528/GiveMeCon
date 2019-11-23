@@ -72,6 +72,7 @@ const ProduceTotalListPresenter = ({
   loading,
   productions,
   isLoggedIn,
+  open,
   anchorEl,
   handleClick,
   handleClose
@@ -92,7 +93,7 @@ const ProduceTotalListPresenter = ({
             <Btn onClick={handleClick}>글쓰기</Btn>
           </ButtonContainer>
           <Popover
-            open={anchorEl}
+            open={open}
             anchorEl={anchorEl}
             onClose={handleClose}
             anchorOrigin={{

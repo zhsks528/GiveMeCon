@@ -58,6 +58,7 @@ const ProduceActionsPresenter = ({
   handleChangeLike,
   comments,
   isLoggedIn,
+  open,
   anchorEl,
   handleClick,
   handleClose
@@ -87,7 +88,7 @@ const ProduceActionsPresenter = ({
               </ActionsHover>
             </ActionsContainer>
             <Popover
-              open={anchorEl}
+              open={open}
               anchorEl={anchorEl}
               onClose={handleClose}
               anchorOrigin={{

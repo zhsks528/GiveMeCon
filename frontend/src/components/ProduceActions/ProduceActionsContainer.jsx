@@ -29,6 +29,8 @@ export default function ProduceActionsContainer({
     setAnchorEl(null);
   };
 
+  const open = Boolean(anchorEl);
+
   return (
     <ProduceActionsPresenter
       like={like}
@@ -36,6 +38,7 @@ export default function ProduceActionsContainer({
       handleChangeLike={handleChangeLike}
       comments={comments}
       isLoggedIn={isLoggedIn}
+      open={open}
       anchorEl={anchorEl}
       handleClick={handleClick}
       handleClose={handleClose}

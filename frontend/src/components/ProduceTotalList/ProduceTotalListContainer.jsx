@@ -25,11 +25,14 @@ export default function ProduceTotalListContainer() {
     setAnchorEl(null);
   };
 
+  const open = Boolean(anchorEl);
+
   return (
     <ProduceTotalListPresenter
       loading={loading}
       productions={productions}
       isLoggedIn={isLoggedIn}
+      open={open}
       anchorEl={anchorEl}
       handleClick={handleClick}
       handleClose={handleClose}
