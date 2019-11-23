@@ -21,7 +21,7 @@ class VideoDetail(APIView):
 class VideoSearchView(APIView):
 
     def get(self, request, category_id):
-        video = Video.objects.filter(category__category_id=category_id)
+        video = Video.objects.filter(category__category_id=category_id).order_by('-view')
 
         serializer = VideoSerializer(video, many=True)
 
