@@ -9,11 +9,10 @@ const ThumbnailBox = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 300px;
+  height: 100%;
 `;
 
 const NoImageBox = styled(ThumbnailBox)`
-  border-radius: 10px;
   background: black;
 `;
 
@@ -29,7 +28,7 @@ const NoIcon = styled(FontAwesomeIcon)`
   font-size: 40px;
 `;
 
-const NotImage = ({ id }) => {
+const NotImage = () => {
   return (
     <NoImageBox>
       <NoImage>

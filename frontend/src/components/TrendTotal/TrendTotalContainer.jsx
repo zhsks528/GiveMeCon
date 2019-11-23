@@ -10,7 +10,7 @@ export default function TrendTotalContainer() {
 
   useEffect(() => {
     dispatch(getTrend());
-    window.addEventListener("scroll", onScroll);
+    // window.addEventListener("scroll", onScroll);
   }, [dispatch]);
 
   const onScroll = event => {

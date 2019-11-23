@@ -65,6 +65,15 @@ const ProfileContainer = styled.div`
 `;
 
 const UserLink = styled.a`
+  display: -webkit-box;
+  color: black;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   text-decoration: none;
   color: black;
 `;

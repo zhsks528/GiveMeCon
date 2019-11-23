@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Router, Route, Redirect, Switch } from "react-router-dom";
 import { createBrowserHistory as createHistory } from "history";
 import Auth from "components/Auth";
@@ -10,15 +9,7 @@ import Introduce from "routes/Introduce";
 const history = createHistory();
 
 export default function Routes() {
-  // const isLoggedIn = useSelector(state => state.users.isLoggedIn);
-
   let route = null;
-
-  // if (isLoggedIn) {
-  //   route = <PrivateRoutes />;
-  // } else {
-  //   route = <PublicRoutes />;
-  // }
   route = (
     <Switch>
       <Route exact path="/" component={Trend} />
@@ -28,34 +19,6 @@ export default function Routes() {
       <Redirect from="*" to="/" />
     </Switch>
   );
+
   return <Router history={history}>{route}</Router>;
 }
-
-// export const PrivateRoutes = () => {
-//   return (
-//     <Switch>
-//       <Route path="/auth" component={Auth} />
-//       <Route exact path="/trend" component={Trend} />
-//       <Route path="/production" component={Production} />
-//       <Route exact path="/introduce" component={Introduce} />
-//       <Redirect from="*" to="/trend" />
-//       {/* <Redirect from="*" to="/" /> */}
-//     </Switch>
-//   );
-// };
-
-// export const PublicRoutes = () => {
-//   return (
-//     <Switch>
-//       <Route path="/auth" component={Auth} />
-//       <Route exact path="/trend" component={Trend} />
-//       <Route path="/production" component={Production} />
-//       <Route exact path="/introduce" component={Introduce} />
-//       <Redirect from="*" to="/trend" />
-//       {/* <Route exact path="/trend" component={Trend} />
-//       <Route path="/production" component={Production} />
-//       <Route exact path="/introduce" component={Introduce} />
-//       <Redirect from="*" to="/trend" /> */}
-//     </Switch>
-//   );
-// };

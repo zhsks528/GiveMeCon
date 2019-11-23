@@ -111,8 +111,13 @@ const Thumbnail = styled.img`
 `;
 
 const ContentsTitle = styled.div`
-  display: flex;
-  align-items: center;
+  display: -webkit-box;
+  color: black;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
   margin-bottom: 10px;
   font-size: 1.5rem;
 `;

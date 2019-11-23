@@ -21,18 +21,19 @@ const Wrapper = styled.div`
 `;
 
 const Cover = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 400px;
   background: rgba(0, 0, 0, 0.4);
 `;
 
 const Message = styled.div`
-  position: absolute;
-  top: 23%;
-  left: 20%;
   color: white;
   font-size: 36px;
   line-height: 50px;
+  text-align: center;
 `;
 
 const String = styled.div`
@@ -110,6 +111,25 @@ const Logo = styled.img`
   margin-left: 400px;
 `;
 
+const Text = styled.div`
+  max-height: 130px;
+  overflow: auto;
+
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+    border-radius: 4px;
+  }
+`;
 const IntroducePresenter = () => {
   return (
     <IntroduceWrapper>
@@ -117,7 +137,8 @@ const IntroducePresenter = () => {
       <Wrapper>
         <Cover>
           <Message>
-            크리에이터와 <br /> 의사소통 공간 <br /> <String>기브미콘</String>
+            크리에이터와 구독자의 <br /> 컨텐츠 소통 공간 <br />{" "}
+            <String>기브미콘</String>
           </Message>
         </Cover>
       </Wrapper>
@@ -140,15 +161,20 @@ const IntroducePresenter = () => {
                 <ItemTitle>
                   컨텐츠 <LowerPower>추천 및 순위 서비스</LowerPower>
                 </ItemTitle>
-                <div>
-                  지금 우리는 따라가기 힘들 정도로 많은 양의 콘텐츠가 쏟아지는
-                  정보화 시대에 살고 있습니다. 급속도로 변화하는 트렌드에 대해서
-                  너무 걱정하지 마세요. 저희 기브미콘의 콘텐츠 서비스는 최신
-                  트렌드에 맞춰 생성된 콘텐츠들을 순위별로 사용자분들이 쉽고
-                  편하게 보실 수 있게끔 하는 서비스를 제공하고 있습니다.. 보다
-                  좋은 서비스 제공을 위하여 여러분이 직접 기준을 정하여 보고
-                  싶은 키워드의 영상들을 입맛대로 골라보실 수 있습니다.
-                </div>
+
+                <Text>
+                  급속도로 변화하는 트렌드에 대해서 너무 걱정하지 마세요.
+                  <br />
+                  기브미콘은{" "}
+                  <LowerPower>
+                    최신 트렌드에 맞춰 콘텐츠들을 순위별로
+                  </LowerPower>{" "}
+                  사용자분들이 쉽고 편하게 보실 수 있게끔 하는 서비스를 제공하고
+                  있습니다. <br />
+                  보다 좋은 서비스 제공을 위하여 여러분이 직접 기준을 정하여
+                  보고 싶은 키워드의 영상들을 입맛대로 골라보실 수 있습니다.
+                  <br />
+                </Text>
               </div>
             </ContentsItemLeft>
 
@@ -157,13 +183,15 @@ const IntroducePresenter = () => {
                 <ItemTitle>
                   컨텐츠 <LowerPower>프로듀싱 서비스</LowerPower>
                 </ItemTitle>
-                <div>
-                  저희는 크리에이터들이 영상을 제작하는데에 있어 트랜드 뿐만
-                  아니라 시청자들이 컨텐츠 제작 방향에 대한 아이디어를 공유할 수
-                  있는 "컨텐츠 프로듀싱 서비스"(빨간색으로)를 제공하고자 합니다.
-                  본 서비스로 인해 한 시청자 머릿속의 작은 아이디어로 제작 된
-                  영상이 10만, 100만의 시청자들이 보는 영상이 될 수 있습니다.
-                </div>
+                <Text>
+                  시청자들이 보고싶어하는 컨텐츠를 해주는 건 어떨까요?
+                  <br />
+                  기브미콘은 시청자들이 컨텐츠 제작 방향에 대한 아이디어를
+                  공유할 수 있는 <LowerPower>컨텐츠 프로듀싱 서비스</LowerPower>
+                  를 제공하고 있습니다. <br /> 본 서비스로 인해 한 시청자
+                  머릿속의 작은 아이디어로 제작 된 영상이 10만, 100만의
+                  시청자들이 보는 영상이 될 수 있습니다.
+                </Text>
               </div>
               <img src={Producing} alt="프로듀싱 사진" />
             </ContentsItemRight>
