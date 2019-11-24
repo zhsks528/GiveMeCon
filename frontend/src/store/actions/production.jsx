@@ -2,14 +2,20 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { logout } from "./users";
 
-const produce = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
+// const produce = axios.create({
+//   baseURL:
+//     "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
+// });
+
+const produceServer = axios.create({
+  baseURL:
+    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
 
-produce.interceptors.request.use(config => {
+produceServer.interceptors.request.use(config => {
   const reqConfig = config;
-  const token = localStorage.getItem("jwt");
-  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
+  const token = localStorage.getItem("token");
+  reqConfig.headers.Authorization = token ? `Token ${token}` : "";
   return config;
 });
 
@@ -63,109 +69,116 @@ export const setUserList = userList => {
   };
 };
 
+//
 export const getProduction = () => {
   return dispatch => {
-    produce
+    produceServer
       .get("production/")
       .then(response => {
         const { data } = response;
         dispatch(setProduction(data));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
 
+//
 export const getDetailProduction = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .get(`production/${productionId}/`)
       .then(response => {
         const { data } = response;
         dispatch(setDetailProduction(data));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
 
 export const likeProduction = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .post(`production/${productionId}/likes/`)
       .then(response => {
         dispatch(doLikeProduction(productionId));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
 
 export const unlikeProduction = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .delete(`production/${productionId}/unlikes/`)
       .then(response => {
         dispatch(doUnLikeProduction(productionId));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
   };
 };
 
 export const commentProduction = (productionId, message) => {
   return dispatch => {
-    produce
+    produceServer
       .post(`production/${productionId}/comments/`, { message })
       .then(response => {
         const { data } = response;
         dispatch(addComment(productionId, data));
       })
       .catch(error => {
+        console.log(error);
         if (error.response) {
           const { status } = error.response;
 
@@ -183,7 +196,7 @@ export const commentProduction = (productionId, message) => {
 
 export const commentDelete = commentId => {
   return dispatch => {
-    produce
+    produceServer
       .delete(`production/comments/${commentId}/`)
       .then(response => {
         const { status } = response;
@@ -208,26 +221,40 @@ export const commentDelete = commentId => {
   };
 };
 
+//
 export const getProductionLikes = productionId => {
   return dispatch => {
-    produce
+    produceServer
       .get(`production/${productionId}/likes/`)
       .then(response => {
         const { data } = response;
         dispatch(setUserList(data));
       })
       .catch(error => {
-        if (error.response) {
-          const { status } = error.response;
+        console.log(error);
+        // if (error.response) {
+        //   const { status } = error.response;
 
-          switch (status) {
-            case 401:
-              dispatch(logout());
-              break;
-            default:
-              break;
-          }
-        }
+        //   switch (status) {
+        //     case 401:
+        //       dispatch(logout());
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       });
+  };
+};
+
+export const produceWrite = form => {
+  return dispatch => {
+    produceServer.post("production/", form).then(response => {
+      const { status } = response;
+      if (status === 201) {
+        window.location.href = "/production";
+      }
+      console.log(response);
+    });
   };
 };

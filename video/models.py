@@ -20,7 +20,8 @@ class Video(models.Model):
     
     def __str__(self):
         return self.title
-    
+
     @property
     def natural_time(self):
         return  naturaltime(self.created_at)
+    

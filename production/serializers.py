@@ -26,13 +26,13 @@ class CountImageSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Production
-        fields = ('id', 'images', 'comments_count', 'likes_count')
+        fields = ('id', 'images', 'thumbnail', 'title', 'comments_count', 'likes_count')
 
 class FeedUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = user_models.User
-        fields = ('username', 'profile_image')
+        fields = ('id', 'username', 'profile_image')
 
 
 class CommentSerializer(serializers.ModelSerializer):

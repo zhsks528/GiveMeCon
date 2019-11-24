@@ -5,7 +5,10 @@ import { getProduction } from "store/actions/production";
 
 export default function ProduceTotalListContainer() {
   const [loading, setLoading] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const productions = useSelector(state => state.production.productions);
+  const isLoggedIn = useSelector(state => state.users.isLoggedIn);
 
   const dispatch = useDispatch();
 
@@ -14,7 +17,25 @@ export default function ProduceTotalListContainer() {
     setLoading(false);
   }, [dispatch]);
 
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
   return (
-    <ProduceTotalListPresenter loading={loading} productions={productions} />
+    <ProduceTotalListPresenter
+      loading={loading}
+      productions={productions}
+      isLoggedIn={isLoggedIn}
+      open={open}
+      anchorEl={anchorEl}
+      handleClick={handleClick}
+      handleClose={handleClose}
+    />
   );
 }

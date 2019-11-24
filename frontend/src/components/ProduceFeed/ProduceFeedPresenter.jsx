@@ -1,34 +1,73 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import ProduceActions from "components/ProduceActions";
 import NotImage from "components/NotImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import UserList from "components/UserList";
+import ProduceDetail from "components/ProduceDetail";
+import SearchProfile from "components/SearchProfile";
 
-const ThumbnailBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const Figcaption = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 300px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: all 0.3s linear;
+`;
+
+const Category = styled.div`
+  margin-bottom: 10px;
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 14px;
+  transition: 0.3s;
 `;
 
-const Info = styled.div`
+const ThumbnailContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 14px;
+  position: relative;
+
+  &:hover ${Figcaption} {
+    opacity: 1;
+  }
+
+  &:hover ${Thumbnail} {
+    transform: scale(1.3);
+  }
+`;
+
+const InfoContainer = styled.div`
   margin-top: 10px;
 `;
 
-const Title = styled(Link)`
+const Title = styled.div`
   && {
-    text-decoration: none;
+    display: -webkit-box;
     color: black;
+    max-height: 3.2rem;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    text-decoration: none;
+    cursor: pointer;
   }
   &:hover {
     text-decoration: underline;
@@ -38,9 +77,14 @@ const Title = styled(Link)`
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: #3897f0;
+  }
 `;
 
-const Profile = styled.img`
+const ProfileImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -59,48 +103,56 @@ const NoProfile = styled(FontAwesomeIcon)`
 
 const ProduceFeedPresenter = ({
   productions,
-  seeingLikes,
-  handleOpenLikes,
-  handleCloseLikes
+  seeingDetail,
+  handleOpenDetail,
+  handleCloseDetail,
+  seeingProfile,
+  handleOpenProfile,
+  handleCloseProfile
 }) => {
   return (
     <>
-      {productions
-        ? productions.map(item => (
-            <div key={item.id}>
-              {item.thumbnail ? (
-                <ThumbnailBox>
-                  <Thumbnail src={item.thumbnail} alt="썸네일" />
-                </ThumbnailBox>
-              ) : (
-                <NotImage id={item.id} />
-              )}
-              <Info>
-                <Title to={`/production/board/?id=${item.id}`}>
-                  {item.title}
-                </Title>
+      {productions.map(item => (
+        <div key={item.id}>
+          <ThumbnailContainer>
+            {item.thumbnail ? (
+              <Thumbnail src={item.thumbnail} alt="썸네일" />
+            ) : (
+              <NotImage id={item.id} />
+            )}
+            <Figcaption>
+              <Category>{item.category.category_name}</Category>
+            </Figcaption>
+          </ThumbnailContainer>
+          <InfoContainer>
+            <ProduceActions
+              like={item.likes_count}
+              isLiked={item.is_liked}
+              productionId={item.id}
+              comments={item.comments_count}
+            />
+            <Title onClick={() => handleOpenDetail(item.id)}>
+              {item.title}
+            </Title>
 
-                <ProduceActions
-                  like={item.likes_count}
-                  isLiked={item.is_liked}
-                  productionId={item.id}
-                  comments={item.comments_count}
-                  handleOpenLikes={handleOpenLikes}
-                />
-                <ProfileContainer>
-                  {item.creator.profile_image ? (
-                    <Profile src={item.creator.profile_image} alt="프로필" />
-                  ) : (
-                    <NoProfile icon={faUserCircle} />
-                  )}
-                  <div>{item.creator.username}</div>
-                </ProfileContainer>
-              </Info>
-            </div>
-          ))
-        : null}
-      {seeingLikes && (
-        <UserList title="Likes" handleCloseLikes={handleCloseLikes} />
+            <ProfileContainer
+              onClick={() => handleOpenProfile(item.creator.username)}
+            >
+              {item.creator.profile_image ? (
+                <ProfileImg src={item.creator.profile_image} alt="프로필" />
+              ) : (
+                <NoProfile icon={faUserCircle} />
+              )}
+              <div>{item.creator.username}</div>
+            </ProfileContainer>
+          </InfoContainer>
+        </div>
+      ))}
+      {seeingDetail && (
+        <ProduceDetail title="Detail" handleCloseDetail={handleCloseDetail} />
+      )}
+      {seeingProfile && (
+        <SearchProfile title="프로필" handleCloseProfile={handleCloseProfile} />
       )}
     </>
   );

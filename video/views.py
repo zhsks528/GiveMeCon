@@ -17,3 +17,12 @@ class VideoDetail(APIView):
         video = get_object_or_404(Video, video_num=query_result)
         serializer = VideoSerializer(video)
         return Response(serializer.data, status=200)
+
+class VideoSearchView(APIView):
+
+    def get(self, request, category_id):
+        video = Video.objects.filter(category__category_id=category_id).order_by('-view')
+
+        serializer = VideoSerializer(video, many=True)
+
+        return Response(serializer.data, status=200)

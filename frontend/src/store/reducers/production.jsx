@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   productions: [],
-  detailData: {}
+  detailData: []
 };
 
 const setProduction = (state, action) => {

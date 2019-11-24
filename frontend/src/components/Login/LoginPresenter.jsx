@@ -2,16 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
-// import FacebookLogin from "react-facebook-login";
 
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 500px;
-  border: 2px solid;
+  width: 400px;
   padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #f5f5f5;
+  border-radius: 14px;
 `;
 
 const Header = styled.div`
@@ -51,7 +56,7 @@ const Button = styled.button`
   border: none;
   outline: none;
   background: #f7323f;
-  border-radius: 14px;
+  border-radius: 4px;
   padding: 5px 10px;
   color: white;
   font-weight: bold;
@@ -66,23 +71,42 @@ const InputContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+const IconContainer = styled.div`
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: #3498db;
+  border-radius: 4px 0px 0px 4px;
+`;
+
+const PwdContainer = styled(IconContainer)`
+  background: #f55656;
+`;
+
 const Icon = styled(FontAwesomeIcon)`
   && {
-    width: 30px;
-    height: 30px;
-    padding: 10px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  height: 100%;
+  font-size: 18px;
+  outline: none;
+  padding: 0px 10px;
+  border-style: none;
+  border-radius: 0px 4px 4px 0px;
 `;
 
 const Sumbit = styled.input`
   border: none;
-  border-radius: 14px;
-  background: #15933a;
+  border-radius: 4px;
+  background: #28b279;
   color: white;
   padding: 10px;
   font-size: 20px;
@@ -90,6 +114,11 @@ const Sumbit = styled.input`
   margin-bottom: 20px;
   cursor: pointer;
   outline: none;
+  transition: 0.3s;
+
+  &:hover {
+    background: #15933a;
+  }
 `;
 
 const LoginPresenter = ({
@@ -99,7 +128,6 @@ const LoginPresenter = ({
   password,
   setPassword,
   handleSubmit
-  // handelFacebookLogin
 }) => {
   return (
     <FormContainer>
@@ -110,7 +138,9 @@ const LoginPresenter = ({
       <Body>
         <Form onSubmit={handleSubmit}>
           <InputContainer>
-            <Icon icon={faUser} />
+            <IconContainer>
+              <Icon icon={faUser} />
+            </IconContainer>
             <Input
               type="text"
               name="username"
@@ -121,7 +151,9 @@ const LoginPresenter = ({
           </InputContainer>
 
           <InputContainer>
-            <Icon icon={faKey} />
+            <PwdContainer>
+              <Icon icon={faKey} />
+            </PwdContainer>
             <Input
               type="password"
               name="password"
@@ -132,16 +164,6 @@ const LoginPresenter = ({
           </InputContainer>
           <Sumbit type="submit" value="로그인" />
         </Form>
-        <div>or</div>
-
-        {/* <FacebookLogin
-          appId="2588720784553549"
-          autoLoad={false}
-          fields="name,email,picture"
-          callback={handelFacebookLogin}
-          cssClass="my-facebook-button-class"
-          icon="fa-facebook"
-        /> */}
       </Body>
       <ChangeForm>
         <div>회원이 아니신가요?</div>

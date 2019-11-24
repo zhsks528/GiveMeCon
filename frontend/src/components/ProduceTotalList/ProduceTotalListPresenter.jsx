@@ -1,106 +1,127 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCertificate } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Loading from "components/Loading";
 import ProduceFeed from "components/ProduceFeed";
+import TitleBox from "components/TitleBox";
+import Popover from "@material-ui/core/Popover";
 
 const TotalWrapper = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
 
-const TotalTitle = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  font-size: 36px;
-  color: #6b6b6b;
-`;
-
-const TitleIcon = styled(FontAwesomeIcon)`
-  margin-right: 10px;
-`;
-
-const TotalSubTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 40px;
 `;
 
-const CountBox = styled.div`
-  display: inline-block;
-  border: 1px solid #6b6b6b;
-  width: 60px;
-  border-radius: 10px;
-  margin-left: 10px;
-`;
-
-const Count = styled.div`
-  color: #6b6b6b;
-  text-align: center;
-`;
-
-const WatchBtn = styled(Link)`
+const WriteBtn = styled(Link)`
   cursor: pointer;
   border-radius: 10px;
-  padding: 5px;
   background: #f7323f;
   color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+
+  &:hover {
+    color: yellow;
+  }
 `;
 
+const Btn = styled.div`
+  cursor: pointer;
+  border-radius: 10px;
+  background: #f7323f;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+
+  &:hover {
+    color: yellow;
+  }
+`;
 const TotalList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-template-columns: repeat(auto-fill, 220px);
   // grid-template-rows: 400px;
   grid-auto-columns: 200px;
   // grid-auto-rows: 400px;
-  grid-gap: 30px;
+  grid-gap: 20px;
   justify-content: space-between;
 `;
 
-const SubTitleContainer = styled.div`
-  display: flex;
+const Message = styled.div`
+  padding: 10px;
+  font-size: 14px;
 `;
 
-const SubTitle = styled.div``;
+const LoginLink = styled(Link)`
+  padding: 0 10px;
+  color: #065fd5;
+  text-decoration: none;
 
-const Power = styled.span`
-  color: #f7323f;
+  &:hover {
+    color: #f7323f;
+  }
 `;
 
-const ProduceTotalListPresenter = ({ loading, productions }) => {
+const ProduceTotalListPresenter = ({
+  loading,
+  productions,
+  isLoggedIn,
+  open,
+  anchorEl,
+  handleClick,
+  handleClose
+}) => {
   const count = productions.length;
 
   return (
-    <>
+    <TotalWrapper>
+      <TitleBox title="PRODUCTION" count={count} />
+
+      {isLoggedIn ? (
+        <ButtonContainer>
+          <WriteBtn to="production/write">글쓰기</WriteBtn>
+        </ButtonContainer>
+      ) : (
+        <>
+          <ButtonContainer>
+            <Btn onClick={handleClick}>글쓰기</Btn>
+          </ButtonContainer>
+          <Popover
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right"
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right"
+            }}
+          >
+            <div>
+              <Message>컨텐츠를 제공하고 싶나요?</Message>
+              <Message>로그인하여 컨텐츠를 남겨주세요! </Message>
+            </div>
+            <LoginLink to="/auth">로그인</LoginLink>
+          </Popover>
+        </>
+      )}
+
       {loading ? (
         <Loading />
       ) : (
-        <TotalWrapper>
-          <TotalTitle>
-            <TitleIcon icon={faCertificate} />
-            <div>전체</div>
-          </TotalTitle>
-          <TotalSubTitleContainer>
-            <SubTitleContainer>
-              <SubTitle>
-                등록된 <Power>컨텐츠</Power>
-              </SubTitle>
-              <CountBox>
-                <Count>{count}</Count>
-              </CountBox>
-            </SubTitleContainer>
-            <WatchBtn to="production/write">글쓰기</WatchBtn>
-          </TotalSubTitleContainer>
-          <TotalList>
-            <ProduceFeed />
-          </TotalList>
-        </TotalWrapper>
+        <TotalList>
+          <ProduceFeed />
+        </TotalList>
       )}
-    </>
+    </TotalWrapper>
   );
 };
 

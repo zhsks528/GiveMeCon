@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import LoginPresenter from "./LoginPresenter";
-import { FacebookLogin, login } from "store/actions/users";
+import { login } from "store/actions/users";
 
 export default function LoginContainer({ changeAction }) {
   const [username, setUsername] = useState("");
@@ -15,10 +15,6 @@ export default function LoginContainer({ changeAction }) {
     dispatch(login(username, password));
   };
 
-  // const handelFacebookLogin = response => {
-  //   dispatch(FacebookLogin(response.accessToken));
-  // };
-
   return (
     <LoginPresenter
       changeAction={changeAction}
@@ -27,7 +23,6 @@ export default function LoginContainer({ changeAction }) {
       password={password}
       setPassword={setPassword}
       handleSubmit={handleSubmit}
-      // handelFacebookLogin={handelFacebookLogin}
     />
   );
 }

@@ -30,6 +30,7 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid lightgrey;
+  position: relative;
 `;
 
 const Title = styled.div`
@@ -47,6 +48,33 @@ const Content = styled.div`
   height: 300px;
   min-height: 300px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 14px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+    border-radius: 4px;
+  }
+`;
+
+const IconContainer = styled.div`
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: #f7323f;
+  }
 `;
 
 const UserListPresenter = ({ loading, title, handleCloseLikes }) => {
@@ -55,9 +83,9 @@ const UserListPresenter = ({ loading, title, handleCloseLikes }) => {
       <Box>
         <Header>
           <Title>{title}</Title>
-          <span onClick={handleCloseLikes}>
+          <IconContainer onClick={handleCloseLikes}>
             <FontAwesomeIcon icon={faTimes} />
-          </span>
+          </IconContainer>
         </Header>
         <Content>{loading ? <Loading /> : <UserRow />}</Content>
       </Box>

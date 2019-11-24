@@ -20,6 +20,7 @@ const Column = styled.div`
 const Profile = styled.img`
   width: 44px;
   height: 44px;
+  border-radius: 50%;
 `;
 
 const User = styled.div`
@@ -56,7 +57,7 @@ const UserRowPresenter = ({ userList, handleClick }) => {
   return (
     <>
       {userList.map(user => (
-        <Container>
+        <Container key={user.id}>
           <Column>
             {user.profile_image ? (
               <Profile src={user.profile_image} alt="프로필" />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserListPresenter from "./UserListPresenter";
 
 export default function UserListContainer({ title, handleCloseLikes }) {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   return (
     <UserListPresenter

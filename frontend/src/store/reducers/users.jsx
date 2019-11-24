@@ -1,12 +1,16 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  isLoggedIn: localStorage.getItem("jwt") ? true : false,
-  userList: []
+  isLoggedIn: localStorage.getItem("token") ? true : false,
+  userList: [],
+  myProfile: [],
+  userProfile: []
 };
 
 const saveToken = (state, action) => {
-  localStorage.setItem("jwt", action.token);
+  const { token, username } = action;
+  localStorage.setItem("token", token);
+  localStorage.setItem("username", username);
   return {
     ...state,
     isLoggedIn: true,
@@ -15,7 +19,8 @@ const saveToken = (state, action) => {
 };
 
 const logout = (state, action) => {
-  localStorage.removeItem("jwt");
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
   return {
     ...state,
     isLoggedIn: false
@@ -64,6 +69,23 @@ const unfollowUser = (state, action) => {
   };
 };
 
+const setProfile = (state, action) => {
+  const { profileData } = action;
+
+  return {
+    ...state,
+    myProfile: profileData
+  };
+};
+
+const searchUserProfile = (state, action) => {
+  const { searchProfileData } = action;
+  return {
+    ...state,
+    userProfile: searchProfileData
+  };
+};
+
 const users = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_TOKEN:
@@ -76,6 +98,11 @@ const users = (state = initialState, action) => {
       return followUser(state, action);
     case actionTypes.UNFOLLOW_USER:
       return unfollowUser(state, action);
+    case actionTypes.SET_PROFILE:
+      return setProfile(state, action);
+    case actionTypes.SEARCH_USER_PROFILE:
+      return searchUserProfile(state, action);
+
     default:
       return state;
   }
