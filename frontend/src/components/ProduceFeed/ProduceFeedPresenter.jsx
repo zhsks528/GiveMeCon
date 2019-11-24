@@ -110,7 +110,6 @@ const ProduceFeedPresenter = ({
   handleOpenProfile,
   handleCloseProfile
 }) => {
-  productions.map(item => console.log(item));
   return (
     <>
       {productions.map(item => (

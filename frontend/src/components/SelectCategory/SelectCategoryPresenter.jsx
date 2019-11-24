@@ -33,6 +33,7 @@ const Btn = styled.button`
   border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
+  outline: none;
   transition: 0.3s;
 
   &:hover {

@@ -1,10 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
-const users = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
-});
-
 const userSever = axios.create({
   // baseURL: "http://127.0.0.1:8000/"
   baseURL:
@@ -72,6 +68,7 @@ export const followUser = userId => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
             default:
               dispatch(setUnfollowUser(userId));
               break;
@@ -99,6 +96,7 @@ export const unfollowUser = userId => {
           switch (status) {
             case 401:
               dispatch(logout());
+              break;
             default:
               dispatch(setFollowUser(userId));
               break;
@@ -133,9 +131,7 @@ export const login = (username, password) => {
         password: password
       })
       .then(response => {
-        console.log(response);
         const { data } = response;
-        console.log(data);
 
         const username = data.user.username;
 
@@ -159,9 +155,7 @@ export const registration = (username, password, email, fullname) => {
       .then(response => {
         const { data } = response;
         const username = data.user.username;
-        // if (data.token) {
-        //   dispatch(saveToken(data.token, username));
-        // }
+
         if (data.key) {
           dispatch(saveToken(data.key, username));
           window.location.href = "/";

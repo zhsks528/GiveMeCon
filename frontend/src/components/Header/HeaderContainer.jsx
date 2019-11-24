@@ -23,7 +23,7 @@ export default function HeaderContainer() {
     if (username !== null) {
       dispatch(getProfile(username));
     }
-  }, []);
+  }, [dispatch]);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);

@@ -75,7 +75,6 @@ export const getProduction = () => {
     produceServer
       .get("production/")
       .then(response => {
-        console.log(response);
         const { data } = response;
         dispatch(setProduction(data));
       })

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
-// import FacebookLogin from "react-facebook-login";
 
 const FormContainer = styled.div`
   display: flex;
@@ -129,7 +128,6 @@ const LoginPresenter = ({
   password,
   setPassword,
   handleSubmit
-  // handelFacebookLogin
 }) => {
   return (
     <FormContainer>
@@ -166,16 +164,6 @@ const LoginPresenter = ({
           </InputContainer>
           <Sumbit type="submit" value="로그인" />
         </Form>
-        {/* <div>or</div>
-
-        <FacebookLogin
-          appId="2588720784553549"
-          autoLoad={false}
-          fields="name,email,picture"
-          callback={handelFacebookLogin}
-          cssClass="my-facebook-button-class"
-          icon="fa-facebook"
-        /> */}
       </Body>
       <ChangeForm>
         <div>회원이 아니신가요?</div>

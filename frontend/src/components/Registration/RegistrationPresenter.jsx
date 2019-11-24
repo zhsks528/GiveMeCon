@@ -1,12 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faUser,
-  faBookmark,
-  faKey
-} from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 
 const FormContainer = styled.div`
   display: flex;
@@ -82,11 +77,6 @@ const Icon = styled(FontAwesomeIcon)`
     // padding: 10px;
   }
 `;
-
-// const Input = styled.input`
-//   width: 100%;
-//   padding: 10px;
-// `;
 
 const Sumbit = styled.input`
   border: none;
