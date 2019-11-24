@@ -38,7 +38,7 @@ print(insert_day)
 
 
 def Video_info(video_id):
-    url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet,topicDetails,statistics&id={video_id}&key={DEVELOPER_KEY}"
+    url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet,topicDetails,statistics&regionCode=KR&id={video_id}&key={DEVELOPER_KEY}"
     req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     json_url = urllib.request.urlopen(req)
     video_data = json.loads(json_url.read())
@@ -58,7 +58,7 @@ def Video_info(video_id):
         subscribeCount = channel_data["items"][0]["statistics"]["subscriberCount"]
     except IndexError:
         subscribeCount = 0
-        
+
     try:
         thumbnail=channel_data["items"][0]["snippet"]["thumbnails"]["high"]["url"]
     except IndexError:
@@ -95,7 +95,7 @@ def Video_info(video_id):
         thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["high"]["url"],
         channel=channel,
         video_num=video_data["items"][0]["id"],
-        category_id=category_id,
+        category= category,
         url = 'https://www.youtube.com/watch?v='+video_data["items"][0]["id"],
     )
 
