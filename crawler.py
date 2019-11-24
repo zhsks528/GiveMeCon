@@ -48,13 +48,13 @@ def Video_info(video_id):
     channel_title = video_data["items"][0]["snippet"]["channelTitle"]
     category_id = video_data["items"][0]["snippet"]["categoryId"]
 
-    channel_url = f"https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + channel_id + "&key=" + DEVELOPER_KEY
+    channel_url = f"https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=" + channel_id + "&key=" + DEVELOPER_KEY
     json_url = urllib.request.urlopen(channel_url).read()
     channel_data = json.loads(json_url)
     
     # for topic in video_data["items"][0]["topicDetails"]["relevantTopicIds"][0].split(','):
     #     print(check_topic(topic))
-    
+    thumbnail=channel_data["items"][0]["snippet"]["thumbnails"]["high"]["url"]
     try:
         subscribeCount = channel_data["items"][0]["statistics"]["subscriberCount"]
     except IndexError:
@@ -75,6 +75,7 @@ def Video_info(video_id):
         channel.category = category
         channel.subscribers = subscribeCount
         channel.url = 'https://www.youtube.com/channel/'+video_data["items"][0]["snippet"]["channelId"]
+        channel.thumbnail = thumbnail
         channel.save()
 
     try:
@@ -87,7 +88,7 @@ def Video_info(video_id):
         topic=topicDetails,
         title=video_data["items"][0]["snippet"]["title"],
         view=video_data["items"][0]["statistics"]["viewCount"],
-        thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["default"]["url"],
+        thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["high"]["url"],
         channel=channel,
         video_num=video_data["items"][0]["id"],
         category_id=category_id,
@@ -97,7 +98,7 @@ def Video_info(video_id):
 
 
     print("제목:" + video_data["items"][0]["snippet"]["title"])
-    print("썸네일: " + video_data["items"][0]["snippet"]["thumbnails"]["default"]["url"])
+    print("썸네일: " + video_data["items"][0]["snippet"]["thumbnails"]["high"]["url"])
     print("조회수:" + video_data["items"][0]["statistics"]["viewCount"] + "\n\n")
     print("\n상세내용:\n"+video_data["items"][0]["snippet"]["description"])
 
