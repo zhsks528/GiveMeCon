@@ -97,6 +97,13 @@ const UserLink = styled.a`
   color: black;
 `;
 
+const Profile = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+`;
+
 const NoProfile = styled(FontAwesomeIcon)`
   && {
     width: 20px;
@@ -154,7 +161,12 @@ const TrendTotalPresenter = ({
               </Title>
 
               <ProfileContainer>
-                <NoProfile icon={faUserCircle} />
+                {trend.channel.thumbnail ? (
+                  <Profile src={trend.channel.thumbnail} alt="썸네일" />
+                ) : (
+                  <NoProfile icon={faUserCircle} />
+                )}
+
                 <UserLink href={trend.channel.url} target="_blank">
                   {trend.channel.name}
                 </UserLink>
