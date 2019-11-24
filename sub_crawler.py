@@ -53,17 +53,12 @@ def Video_info(video_id):
     
     # for topic in video_data["items"][0]["topicDetails"]["relevantTopicIds"][0].split(','):
     #     print(check_topic(topic))
-    #thumbnail=channel_data["items"][0]["snippet"]["thumbnails"]["high"]["url"]
+    thumbnail=channel_data["items"][0]["snippet"]["thumbnails"]["high"]["url"]
     try:
         subscribeCount = channel_data["items"][0]["statistics"]["subscriberCount"]
     except IndexError:
         subscribeCount = 0
     
-    try:
-        thumbnail=channel_data["items"][0]["snippet"]["thumbnails"]["high"]["url"]
-    except IndexError:
-        thumbnail = 0
-        
     print("채널 구독자수: ", subscribeCount)
 
     # # 채널을 만든다.
@@ -95,7 +90,7 @@ def Video_info(video_id):
         thumbnail=video_data["items"][0]["snippet"]["thumbnails"]["high"]["url"],
         channel=channel,
         video_num=video_data["items"][0]["id"],
-        category_id=category_id,
+        category= category,
         url = 'https://www.youtube.com/watch?v='+video_data["items"][0]["id"],
     )
 
