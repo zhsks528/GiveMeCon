@@ -10,11 +10,12 @@ const Wrapper = styled.div`
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 `;
 
 const Cover = styled.div`
   width: 100%;
-  height: 92vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.7);
 `;
 
