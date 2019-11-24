@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
-import { logout } from "./users";
+// import { logout } from "./users";
 
 const trend = axios.create({
   baseURL:
@@ -14,9 +14,10 @@ const trend = axios.create({
 //   return config;
 // });
 
-export const setTrend = data => ({
+export const setTrend = (data, count) => ({
   type: actionTypes.SET_TREND,
-  data
+  data,
+  count
 });
 
 export const setCategory = category => ({
@@ -24,13 +25,13 @@ export const setCategory = category => ({
   category
 });
 
-export const getTrend = () => {
+export const getTrend = current => {
   return dispatch => {
     trend
-      .get("video/")
+      .get(`video/?page=${current}`)
       .then(response => {
         const { data } = response;
-        dispatch(setTrend(data.results));
+        dispatch(setTrend(data.results, data.count));
       })
       .catch(error => {
         console.log(error);
@@ -80,7 +81,7 @@ export const getFilterTrends = categoryId => {
       .get(`video/${categoryId}/search/`)
       .then(response => {
         const { data } = response;
-
+        console.log(response);
         dispatch(setTrend(data));
       })
       .catch(error => {

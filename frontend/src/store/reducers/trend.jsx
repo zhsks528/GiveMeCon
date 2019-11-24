@@ -2,14 +2,16 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   trends: [],
+  totalCount: 0,
   categoryList: []
 };
 
 const setTrend = (state, action) => {
-  const { data } = action;
+  const { data, count } = action;
   return {
     ...state,
-    trends: data
+    trends: data,
+    totalCount: count
   };
 };
 

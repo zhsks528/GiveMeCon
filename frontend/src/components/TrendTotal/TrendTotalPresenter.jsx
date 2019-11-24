@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faEye } from "@fortawesome/free-solid-svg-icons";
 import SelectCategory from "components/SelectCategory";
 import NotData from "components/NotData";
+import Pagination from "rc-pagination";
+import "rc-pagination/assets/index.css";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -118,14 +120,20 @@ const Icon = styled(FontAwesomeIcon)`
   margin-right: 10px;
 `;
 
-const TrendTotalPresenter = ({ trends }) => {
+const TrendTotalPresenter = ({
+  trends,
+  current,
+  setCurrent,
+  totalCount,
+  handlePageChange
+}) => {
   const count = trends.length;
 
   return (
     <Wrapper>
       <TitleBox title="TRENDS" count={count} />
+      <SelectCategory setCurrent={setCurrent} />
 
-      <SelectCategory />
       <Container count={count}>
         {count > 0 ? (
           trends.map(trend => (
@@ -157,6 +165,19 @@ const TrendTotalPresenter = ({ trends }) => {
           <NotData />
         )}
       </Container>
+      <Pagination
+        onChange={handlePageChange}
+        current={current}
+        total={totalCount}
+        defaultPageSize={30}
+        style={{
+          margin: "60px 0px",
+          fontWeight: "bold",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      />
     </Wrapper>
   );
 };
