@@ -157,7 +157,13 @@ const HeaderPresenter = ({
           <>
             <ProfileContainer onClick={handleClick}>
               {myProfile.profile_image ? (
-                <Profile src={myProfile.profile_image} alt="프로필" />
+                <Profile
+                  src={
+                    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/" +
+                    myProfile.profile_image
+                  }
+                  alt="프로필"
+                />
               ) : (
                 <Icon icon={faUserCircle} />
               )}

@@ -78,6 +78,7 @@ const ProductionContainer = styled.div`
   grid-gap: 5%;
   height: 450px;
   overflow-y: auto;
+  align-items: flex-start;
 
   &::-webkit-scrollbar-track {
     background-color: #f5f5f5;
@@ -199,7 +200,13 @@ const ProfilePresenter = ({ handleCloseProfile, myProfile }) => {
           <Profile>
             <ThumbnailContainer>
               {myProfile.profile_image ? (
-                <ProfileImage src={myProfile.profile_image} alt="프로필" />
+                <ProfileImage
+                  src={
+                    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000" +
+                    myProfile.profile_image
+                  }
+                  alt="프로필"
+                />
               ) : (
                 <NotImage />
               )}
@@ -221,7 +228,12 @@ const ProfilePresenter = ({ handleCloseProfile, myProfile }) => {
                   <div key={item.id}>
                     <ThumbnailContainer>
                       {item.thumbnail ? (
-                        <Thumbnail src={item.thumbnail} />
+                        <Thumbnail
+                          src={
+                            "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000" +
+                            item.thumbnail
+                          }
+                        />
                       ) : (
                         <NotImage />
                       )}
