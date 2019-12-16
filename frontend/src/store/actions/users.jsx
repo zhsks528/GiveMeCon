@@ -2,24 +2,10 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
 const userSever = axios.create({
-  // baseURL: "http://127.0.0.1:8000/"
-  baseURL:
-    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
+  baseURL: "http://127.0.0.1:8000/"
+  // baseURL:
+  //   "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
-
-// usersToken.interceptors.request.use(config => {
-//   const reqConfig = config;
-//   const token = localStorage.getItem("token");
-//   reqConfig.headers.Authorization = token ? `Token ${token}` : "";
-//   return config;
-// });
-
-// userSever.interceptors.request.use(config => {
-//   const reqConfig = config;
-//   const token = localStorage.getItem("token");
-//   reqConfig.headers.Authorization = token ? `Basic ${token}` : "";
-//   return config;
-// });
 
 export const saveToken = (token, username) => ({
   type: actionTypes.SAVE_TOKEN,

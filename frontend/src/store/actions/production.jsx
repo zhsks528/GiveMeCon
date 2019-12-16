@@ -2,14 +2,10 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { logout } from "./users";
 
-// const produce = axios.create({
-//   baseURL:
-//     "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
-// });
-
 const produceServer = axios.create({
-  baseURL:
-    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
+  baseURL: "http://127.0.0.1:8000/"
+  // baseURL:
+  //   "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
 
 produceServer.interceptors.request.use(config => {
