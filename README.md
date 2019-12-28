@@ -8,7 +8,7 @@
 ## Install
 
 ### Backend
-DB를 생성하고 적용하고 서버를 실행하는 방법입니다.
+DB를 생성 및 적용하고 서버를 실행하는 방법입니다.
 ```sh
 pip install -r requirement.txt
 python manage.py makemigrations
@@ -17,7 +17,7 @@ python manage.py runserver
 ```
 
 ### Frontend
-필요한 패키지를 다운받습니다.
+필요한 패키지를 다운받는 방법입니다.
 ```sh
 cd frontend/
 npm install
@@ -37,7 +37,7 @@ npm run start
 ```
 
 ## Run tests
-프로젝트를 테스틑 하는 방법입니다.
+프로젝트를 테스트 하는 방법입니다.
 ```sh
 npm run test
 ```
