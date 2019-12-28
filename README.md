@@ -8,36 +8,36 @@
 ## Install
 
 ### Backend
-
+DB를 생성하고 적용하고 서버를 실행하는 방법입니다.
 ```sh
 pip install -r requirement.txt
-python manage.py makemirations
+python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
 
 ### Frontend
-
+필요한 패키지를 다운받습니다.
 ```sh
 cd frontend/
 npm install
 ```
 
 ## Import Youtube Dataset
-
+Crawler를 통해 Youtube API에서 Metadata를 가져오는 방법입니다.
 ```sh
 python make_category.py
 python crawler.py
 ```
 
 ## Usage
-
+프로젝트를 실행하는 방법입니다.
 ```sh
 npm run start
 ```
 
 ## Run tests
-
+프로젝트를 테스틑 하는 방법입니다.
 ```sh
 npm run test
 ```
