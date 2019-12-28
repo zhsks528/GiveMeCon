@@ -74,6 +74,13 @@ npm run test
 
 - Github: [@Parkmoojae](https://github.com/Parkmoojae)
 
+👤 **Tae-Hyeong Song**
+- Github: [@Ussu1112](https://github.com/Ussu1112)
+
+## Adviser
+👤 **Min-Gi Pak**
+- Github: [@min-ki](https://github.com/min-ki)
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
