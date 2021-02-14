@@ -3,7 +3,7 @@ import axios from "axios";
 import { logout } from "./users";
 
 const produceServer = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
+  baseURL: "http://127.0.0.1:8000/",
   // baseURL:
   //   "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
@@ -11,7 +11,7 @@ const produceServer = axios.create({
 produceServer.interceptors.request.use(config => {
   const reqConfig = config;
   const token = localStorage.getItem("token");
-  reqConfig.headers.Authorization = token ? `Token ${token}` : "";
+  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
   return config;
 });
 

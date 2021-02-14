@@ -7,6 +7,13 @@ const userSever = axios.create({
   //   "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000/"
 });
 
+userSever.interceptors.request.use(config => {
+  const reqConfig = config;
+  const token = localStorage.getItem("token");
+  reqConfig.headers.Authorization = token ? `JWT ${token}` : "";
+  return config;
+});
+
 export const saveToken = (token, username) => ({
   type: actionTypes.SAVE_TOKEN,
   token,
@@ -117,18 +124,19 @@ export const login = (username, password) => {
         password: password
       })
       .then(response => {
+        
         const { data } = response;
-
+        
         const username = data.user.username;
 
-        if (data.key) {
-          dispatch(saveToken(data.key, username));
+        if (data.token) {
+          dispatch(saveToken(data.token, username));
           window.location.href = "/";
         }
       });
 };
 
-export const registration = (username, password, email, fullname) => {
+export const registration = (username, password, email) => {
   return dispatch =>
     userSever
       .post("rest-auth/registration/", {
@@ -136,17 +144,17 @@ export const registration = (username, password, email, fullname) => {
         password1: password,
         password2: password,
         email: email
-        // fullname: fullname
       })
       .then(response => {
         const { data } = response;
         const username = data.user.username;
 
-        if (data.key) {
-          dispatch(saveToken(data.key, username));
+        if (data.token) {
+          dispatch(saveToken(data.token, username));
           window.location.href = "/";
         }
-      });
+      })
+      .catch(error => console.log(error))
 };
 
 export const getProfile = username => {
