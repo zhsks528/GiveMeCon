@@ -7,7 +7,7 @@ from rest_auth.models import TokenModel
 
 class ListUserSerializer(serializers.ModelSerializer):
 
-    # following = serializers.SerializerMethodField()
+    following = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -16,7 +16,7 @@ class ListUserSerializer(serializers.ModelSerializer):
             "profile_image",
             "username",
             "name",
-            # "following"
+            "following"
         )
 
     def get_following(self, obj):
