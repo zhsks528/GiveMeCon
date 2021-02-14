@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -147,27 +148,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # 페이지네이션 추가
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.BasicAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-    ],
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 30,
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
-    # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    #     'rest_framework_jwt.authentication.SessionAuthentication',
-    #     'rest_framework_jwt.authentication.BasicAuthentication',
-    # ),
 }
 
+# CORS 
 CORS_ALLOW_CREDENTILS = True
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-STATIC_URL = "/static/"
 
 # 각 media 파일에 대한 URL Prefix
 MEDIA_URL = "/media/"
@@ -177,14 +169,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 TAGGIT_CASE_INSENSITIVE = True  # 대문자 소문자 구분 X
 
-# REST_USE_JWT = True
 
-# JWT_AUTH = {
-#     'JWT_VERIFY_EXPIRATION': False
-# }
+# JWT
+JWT_AUTH = {
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
+}
 
-# ACCOUNT_AUTHE
+REST_USE_JWT = True
 ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = None
 
 SITE_ID = 1
 

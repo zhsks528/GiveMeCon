@@ -13,14 +13,14 @@ from notifications import views as notifications_views
 from users import models as users_models
 from users import serializers as users_serializers
 from category import models as category_models
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated, AllowAny
-
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 
 class ProductionFeed(APIView):
 
     """ 프로듀싱에 올라온 전체 글을 가져옴 """
 
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    
     def get(self, request, format=None):
 
         all_production = Production.objects.all()
@@ -50,28 +50,10 @@ class ProductionFeed(APIView):
 
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    # def post(self, request, format=None):
-
-    #     user = request.user
-
-    #     print(request)
-    #     # print(request.data['category'])
-
-    #     # category = request.data['category']
-    #     serializer = InputProductionSerializer(data=request.data)
-
-    #     if serializer.is_valid():
-
-    #         serializer.save(creator=user)
-
-    #         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-
-    #     else:
-    #         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+            
 class ProductionDetail(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def find_own_production(self, item_id, user):
         try:
             production = Production.objects.get(id=item_id, creator=user)
@@ -130,8 +112,9 @@ class ProductionDetail(APIView):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 class LikeProduction(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request, item_id, format=None):
 
         likes = Like.objects.filter(post__id=item_id)
@@ -173,8 +156,10 @@ class LikeProduction(APIView):
 
             return Response(status=status.HTTP_201_CREATED)
 
-
 class UnLikeProduction(APIView):
+    
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def delete(self, request, item_id, format=None):
         user = request.user
 
@@ -195,8 +180,10 @@ class UnLikeProduction(APIView):
 
             return Response(status=status.HTTP_304_NOT_MODIFIED)
 
-
 class CommentOnProduction(APIView):
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def post(self, request, item_id, format=None):
 
         user = request.user
@@ -225,8 +212,9 @@ class CommentOnProduction(APIView):
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class CommentDelete(APIView):
+
+    permission_classes = [IsAuthenticated]
 
     """ 자기 댓글 삭제 API """
 
@@ -242,8 +230,10 @@ class CommentDelete(APIView):
         except Comment.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-
 class Search(APIView):
+
+    permission_classes = [AllowAny]
+
     def get(self, request, format=None):
 
         hashtags = request.query_params.get("hashtags", None)
@@ -262,9 +252,9 @@ class Search(APIView):
 
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
 class ModerateComments(APIView):
 
+    permission_classes = [IsAuthenticated]
     """ 자기가 올린 글에 대한 댓글 삭제 권한 API """
 
     def delete(self, request, item_id, comment_id, format=None):

@@ -6,8 +6,13 @@ from rest_framework import status
 from notifications import views as notifications_views
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated
 
 class ExploreUsers(APIView):
+
+    """ 사용자 찾기 API """
+
+    permission_classes = [AllowAny]
 
     def get(self, request, format=None):
 
@@ -18,10 +23,13 @@ class ExploreUsers(APIView):
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-
 class FollowUser(APIView):
 
-    def post(self, request, user_id, forma=None):
+    """ 팔로우 API """
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, user_id, format=None):
 
         user = request.user
 
@@ -41,7 +49,11 @@ class FollowUser(APIView):
 
 class UnFollowUser(APIView):
 
-    def post(self, request, user_id, forma=None):
+    """ 팔로우 해제 API """
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def post(self, request, user_id, format=None):
         
         user = request.user
 
@@ -58,6 +70,10 @@ class UnFollowUser(APIView):
         return Response(status=status.HTTP_200_OK)
 
 class UserProfile(APIView):
+
+    """ 사용자 프로필 확인 API """
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_user(self, username):
 
@@ -105,6 +121,8 @@ class UserProfile(APIView):
     
 class UserFollowers(APIView):
     
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request, username, format=None):
 
         try:
@@ -121,6 +139,8 @@ class UserFollowers(APIView):
 
 class UserFollowing(APIView):
     
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request, username, format=None):
 
         try:
@@ -137,6 +157,8 @@ class UserFollowing(APIView):
 
 class Search(APIView):
 
+    permission_classes = [AllowAny]
+    
     def get(self, request, format=None):
 
         username = request.query_params.get('username', None)
