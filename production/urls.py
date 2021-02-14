@@ -4,10 +4,6 @@ from .views import ProductionFeed, ProductionDetail, LikeProduction, UnLikeProdu
 
 app_name = "production"
 
-# production_router = routers.DefaultRouter()
-# production_router.register(r"total", ProductionViewSet)
-
-
 urlpatterns = [
     path("", ProductionFeed.as_view()),
     path('<int:item_id>/', ProductionDetail.as_view()),

@@ -205,10 +205,7 @@ const SearchProfilePresenter = ({ handleCloseProfile, userProfile }) => {
             <ThumbnailContainer>
               {userProfile.profile_image ? (
                 <ProfileImage
-                  src={
-                    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000" +
-                    userProfile.profile_image
-                  }
+                  src={userProfile.profile_image}
                   alt="프로필"
                 />
               ) : (
@@ -234,7 +231,7 @@ const SearchProfilePresenter = ({ handleCloseProfile, userProfile }) => {
                       {item.thumbnail ? (
                         <Thumbnail
                           src={
-                            "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000" +
+                            
                             item.thumbnail
                           }
                         />

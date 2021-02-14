@@ -201,10 +201,7 @@ const ProfilePresenter = ({ handleCloseProfile, myProfile }) => {
             <ThumbnailContainer>
               {myProfile.profile_image ? (
                 <ProfileImage
-                  src={
-                    "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000" +
-                    myProfile.profile_image
-                  }
+                  src={myProfile.profile_image}
                   alt="프로필"
                 />
               ) : (
@@ -229,11 +226,7 @@ const ProfilePresenter = ({ handleCloseProfile, myProfile }) => {
                     <ThumbnailContainer>
                       {item.thumbnail ? (
                         <Thumbnail
-                          src={
-                            "http://ec2-54-180-109-107.ap-northeast-2.compute.amazonaws.com:8000" +
-                            item.thumbnail
-                          }
-                        />
+                          src={item.thumbnail}/>
                       ) : (
                         <NotImage />
                       )}

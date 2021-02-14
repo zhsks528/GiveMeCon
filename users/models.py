@@ -29,7 +29,6 @@ class User(AbstractUser):
 
     @property
     def post_count(self):
-        print(self)
         return self.production.all().count()
 
     @property

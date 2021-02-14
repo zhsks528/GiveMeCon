@@ -75,7 +75,6 @@ export const getFilterTrends = categoryId => {
       .get(`video/${categoryId}/search/`)
       .then(response => {
         const { data } = response;
-        console.log(response);
         dispatch(setTrend(data));
       })
       .catch(error => {

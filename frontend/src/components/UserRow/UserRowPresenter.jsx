@@ -54,6 +54,7 @@ const Button = styled.button`
   font-weight: bold;
 `;
 const UserRowPresenter = ({ userList, handleClick }) => {
+
   return (
     <>
       {userList.map(user => (
