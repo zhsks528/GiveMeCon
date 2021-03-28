@@ -9,6 +9,29 @@
 
 ![result](https://github.com/zhsks528/GiveMeCon/blob/master/resources/result.png)
 
+
+## 기술스택
+
+![tech](https://github.com/zhsks528/GiveMeCon/blob/master/resources/tech.png)
+
+## 팀원
+
+👤 **Seong-Min Han**
+
+- Github: [@zhsks528](https://github.com/zhsks528)
+
+👤 **Ji-Hae Yoon**
+
+- Github: [@ji-hae](https://github.com/YOONJIHAE)
+
+👤 **Mi-na Yu**
+
+- Github: [@Yumina9](https://github.com/Yumina9)
+
+👤 **Moo-Jae Park**
+
+- Github: [@Parkmoojae](https://github.com/Parkmoojae)
+
 ## 설치 및 실행방법
 
 ### Backend
@@ -45,29 +68,6 @@ npm run start
 ```sh
 npm run test
 ```
-
-## 기술스택
-
-![tech](https://github.com/zhsks528/GiveMeCon/blob/master/resources/tech.png)
-
-## 팀원
-
-👤 **Seong-Min Han**
-
-- Github: [@zhsks528](https://github.com/zhsks528)
-
-👤 **Ji-Hae Yoon**
-
-- Github: [@ji-hae](https://github.com/YOONJIHAE)
-
-👤 **Mi-na Yu**
-
-- Github: [@Yumina9](https://github.com/Yumina9)
-
-👤 **Moo-Jae Park**
-
-- Github: [@Parkmoojae](https://github.com/Parkmoojae)
-
 ## Show your support
 
 Give a ⭐️ if this project helped you!
