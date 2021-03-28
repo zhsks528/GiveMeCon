@@ -9,7 +9,7 @@
 
 ![result](https://github.com/zhsks528/GiveMeCon/blob/master/resources/result.png)
 
-## 설치 및 
+## 설치 및 실행방법
 
 ### Backend
 DB를 생성 및 적용하고 서버를 실행하는 방법입니다.
