@@ -3,9 +3,13 @@
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> 기브미콘은 유튜브 API를 크롤링하여 컨텐츠를 추천 및 트렌드를 분석하는 플랫폼입니다.
+> 기브미콘은 유튜브 API를 크롤링을 통해 컨텐츠 추천 및 기획을 도 웹 애플리케이션입니다.
 
-## Install
+## 결과물
+
+![result](https://github.com/zhsks528/GiveMeCon/blob/master/resources/result.png)
+
+## 설치 및 
 
 ### Backend
 DB를 생성 및 적용하고 서버를 실행하는 방법입니다.
@@ -42,21 +46,11 @@ npm run start
 npm run test
 ```
 
-## Dependency
+## 기술스택
 
-### Frontend
+![tech](https://github.com/zhsks528/GiveMeCon/blob/master/resources/tech.png)
 
-- React
-- Redux
-
-### Backend
-
-- Python 3.6.5
-- Django
-- Django Restframework
-- Django Rest Swagger
-
-## Developer
+## 팀원
 
 👤 **Seong-Min Han**
 
@@ -73,13 +67,6 @@ npm run test
 👤 **Moo-Jae Park**
 
 - Github: [@Parkmoojae](https://github.com/Parkmoojae)
-
-👤 **Tae-Hyeong Song**
-- Github: [@Ussu1112](https://github.com/Ussu1112)
-
-## Adviser
-👤 **Min-Gi Pak**
-- Github: [@min-ki](https://github.com/min-ki)
 
 ## Show your support
 
